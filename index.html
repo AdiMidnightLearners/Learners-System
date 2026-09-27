@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Circle — Learning Space</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
+:root{--bg:#f6f4ef;--ink:#171716;--muted:#74716a;--line:#ddd9d0;--card:#fffdf8;--green:#163d35;--pale:#e2ece5;--shadow:0 14px 42px rgba(30,27,20,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px "DM Sans",sans-serif}a{text-decoration:none;color:inherit}.app{width:min(1100px,100%);margin:auto;padding:0 28px}
+header{height:78px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font-weight:700}.mark{width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:11px}
+.hero{padding:75px 0 35px;display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center}.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:700}.hero h1{font:500 clamp(52px,7vw,82px)/.95 "Playfair Display",serif;letter-spacing:-.05em;margin:14px 0 20px}.hero p{color:var(--muted);line-height:1.75;max-width:560px}.side{border-left:1px solid var(--line);padding-left:32px}.side h2{font:500 30px "Playfair Display",serif;margin:8px 0}.side p{font-size:12px;color:var(--muted);line-height:1.7}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:35px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:28px}.card h2{font:500 28px "Playfair Display",serif;margin:0 0 8px}.card p{font-size:11px;color:var(--muted);line-height:1.65;min-height:38px}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--card);padding:11px 16px;border-radius:999px;white-space:nowrap;font-size:12px}.btn.dark{background:var(--green);color:#fff;border-color:var(--green)}.btn.full{width:100%;margin-top:14px}
+footer{padding:42px 0 30px;text-align:center;color:var(--muted);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:700px){.app{padding:0 16px}.hero{grid-template-columns:1fr;padding:48px 0 20px;gap:28px}.hero h1{font-size:56px}.side{border:0;border-top:1px solid var(--line);padding:22px 0 0}.grid{grid-template-columns:1fr;margin-top:22px}.card{padding:23px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><span class="mark">C</span>Circle · Learning Space</div>
+</header>
+
+<main>
+<section class="hero">
+  <div>
+    <div class="eyebrow">A shared learning circle</div>
+    <h1>Learn together.<br>Keep it simple.</h1>
+    <p>Choose your space to continue. Students can explore the shared learning space, while mentors can manage classes, students, topics and the community.</p>
+  </div>
+  <div class="side">
+    <div class="eyebrow">One circle · two spaces</div>
+    <h2>Welcome in.</h2>
+    <p>This page is the starting point for everyone. Select the space that belongs to you and continue to the appropriate module.</p>
+  </div>
+</section>
+
+<section class="grid">
+  <div class="card">
+    <div class="eyebrow">For learners</div>
+    <h2>Student Space</h2>
+    <p>View your classes, students, learning directions and the shared WhatsApp group. Your student module is read-only.</p>
+    <a class="btn dark full" href="circle_student_space_logout(2).html">Enter Student Space ↗</a>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">For mentors</div>
+    <h2>Mentor Admin</h2>
+    <p>Manage classes, student records, learning topics and the shared WhatsApp group from your private mentor space.</p>
+    <a class="btn dark full" href="circle_mentor_admin_logout(2).html">Enter Mentor Admin ↗</a>
+  </div>
+</section>
+</main>
+
+<footer>Circle · Learning Space</footer>
+</div>
+</body>
+</html>
