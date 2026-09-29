@@ -1,0 +1,243 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Circle — Mentor Admin</title><style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
+:root{--bg:#f6f4ef;--ink:#171716;--muted:#74716a;--line:#ddd9d0;--card:#fffdf8;--green:#163d35;--pale:#e2ece5;--red:#8b3434;--shadow:0 14px 42px rgba(30,27,20,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px "DM Sans",sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.app{width:min(1250px,100%);margin:auto;padding:0 28px}
+header{height:78px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;font-weight:700}.mark{width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:11px}nav{display:flex;gap:3px}nav button,.menu{border:0;background:transparent;color:var(--muted);padding:9px 12px;border-radius:999px}nav button.active,nav button:hover{background:var(--card);color:var(--ink)}.right{display:flex;align-items:center;gap:8px}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#cbd8cb;font-size:10px;font-weight:700}.menu{display:none}
+.page{display:none}.page.active{display:block;animation:fade .2s}@keyframes fade{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}
+.hero{padding:55px 0 35px;display:grid;grid-template-columns:1.2fr .8fr;gap:35px}.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:700}.hero h1{font:500 clamp(45px,6vw,72px)/.98 "Playfair Display",serif;letter-spacing:-.05em;margin:13px 0 18px}.hero p{color:var(--muted);line-height:1.7;max-width:610px}.hero-side{border-left:1px solid var(--line);padding-left:26px}.hero-side h2{font:500 27px "Playfair Display",serif;margin:7px 0}.hero-side p{font-size:12px;line-height:1.65;color:var(--muted)}.small{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.grid{display:grid;gap:13px}.stats{grid-template-columns:repeat(4,1fr)}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);min-width:0}.pad{padding:20px}.stat{padding:19px}.stat strong{display:block;font:500 29px "Playfair Display",serif}.stat span{font-size:10px;color:var(--muted)}.section{padding:38px 0}.head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:15px}.head h2{font:500 30px "Playfair Display",serif;margin:0}.head p{font-size:11px;color:var(--muted);margin:4px 0 0}.two{grid-template-columns:1.25fr .75fr}.three{grid-template-columns:repeat(3,1fr)}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--card);padding:10px 14px;border-radius:999px;white-space:nowrap}.btn.dark{background:var(--green);color:#fff;border-color:var(--green)}.btn.red{color:var(--red);border-color:#d5aaaa;background:#f7e8e8;font-weight:700}.btn.full{width:100%}.field{width:100%;border:1px solid var(--line);background:var(--card);border-radius:11px;padding:10px 12px;outline:0}.field:focus{border-color:#8d958b}.form{display:grid;gap:10px}.toolbar{display:flex;gap:8px;margin-bottom:13px}
+.session{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:13px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.session:last-child{border:0}.date{text-align:center}.date b{font:500 25px "Playfair Display",serif}.date small{display:block;font-size:9px;color:var(--muted);text-transform:uppercase}.session-main{min-width:0}.session-main b{font-size:13px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:10px;color:var(--muted);margin-top:3px}.tag{display:inline-block;margin-top:5px;padding:4px 7px;border-radius:99px;background:var(--pale);color:var(--green);font-size:9px;font-weight:700}
+.topic{padding:13px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.topic:last-child{border:0}.topic b{font-size:12px}.topic small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.member{padding:18px}.student-actions{display:flex;gap:7px;margin-top:12px}.student-actions .btn{flex:1}.member-top{display:flex;justify-content:space-between}.member h3{font:500 22px "Playfair Display",serif;margin:12px 0 3px}.member small{color:var(--muted)}.chips{display:flex;gap:5px;flex-wrap:wrap;margin:13px 0}.chip{border:1px solid var(--line);border-radius:99px;padding:4px 7px;font-size:9px}
+.notice{background:#e2eee7}.notice h3{font:500 24px "Playfair Display",serif;margin:0 0 6px}.notice p{font-size:11px;color:#5d6c62;line-height:1.65}.notice-preview{white-space:pre-wrap;background:rgba(255,255,255,.65);border:1px solid rgba(22,61,53,.12);padding:13px;border-radius:12px;font-size:11px;line-height:1.6;margin:12px 0}.warning{font-size:10px;color:var(--muted);line-height:1.5}
+.modal{position:fixed;inset:0;background:rgba(15,15,13,.5);backdrop-filter:blur(6px);display:none;place-items:center;padding:18px;z-index:20}.modal.open{display:grid}.box{width:min(510px,100%);max-height:88vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:22px}.box h3{font:500 27px "Playfair Display",serif;margin:0 0 16px}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.login{min-height:100vh;display:grid;place-items:center;padding:20px}.login-card{width:min(430px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow)}.login-card h1{font:500 42px "Playfair Display",serif;margin:10px 0}.login-card p{color:var(--muted);line-height:1.6;font-size:12px}.hidden{display:none!important}.error{color:var(--red);font-size:11px;min-height:16px}
+.toast{position:fixed;right:18px;bottom:18px;background:var(--green);color:#fff;padding:11px 14px;border-radius:10px;font-size:11px;opacity:0;transform:translateY(10px);transition:.2s;z-index:30}.toast.show{opacity:1;transform:none}
+@media(max-width:900px){.app{padding:0 18px}.hero{grid-template-columns:1fr}.hero-side{border:0;border-top:1px solid var(--line);padding:20px 0 0}.stats{grid-template-columns:1fr 1fr}.two,.three{grid-template-columns:1fr}.hero h1{font-size:55px}}
+@media(max-width:650px){.session-actions{grid-column:2;align-items:flex-start;min-width:0;width:100%}.session-actions .meet-done-row{padding-right:0;justify-content:flex-start}.session-actions .done-row{padding-right:0;justify-content:flex-start}.remove-class-btn{top:-4px;right:0}header{height:70px}nav{display:none}nav.open{display:flex;position:absolute;top:64px;left:18px;right:18px;z-index:10;background:var(--bg);padding:8px;border:1px solid var(--line);border-radius:15px;flex-direction:column;box-shadow:var(--shadow)}.menu{display:block}.right .btn:not(.logout-btn),.right .avatar{display:none}.app{padding:0 14px}.stats{gap:8px}.session{grid-template-columns:45px 1fr}.session .btn{grid-column:2;justify-self:start}.three{grid-template-columns:1fr}}
+
+.progress-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
+.cal-head{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:center;padding:5px}
+.cal-day{min-height:78px;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:8px;position:relative}
+.cal-day.empty{background:transparent;border-color:transparent}
+.cal-day.today{border-color:var(--green)}
+.cal-day.done{background:var(--pale)}
+.cal-day b{font-size:12px}
+.cal-day small{display:block;color:var(--muted);font-size:9px;line-height:1.35;margin-top:5px}
+.done-badge{display:inline-block;margin-top:5px;font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:var(--green);font-weight:700}
+.mentor-note{font-size:11px;color:var(--muted);line-height:1.6}
+.btn.disabled,.btn[aria-disabled="true"]{opacity:.42;cursor:not-allowed;pointer-events:none}
+.done-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}.class-session{position:relative}.session-actions{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:220px}.meet-done-row{display:flex;align-items:center;justify-content:flex-end;gap:6px}.remove-class-btn{position:absolute;right:0;top:-2px;width:30px;height:30px;padding:0;border-radius:50%;font-size:18px;line-height:1}.session-actions .meet-done-row{padding-right:38px}.session-actions .done-row{width:100%;justify-content:flex-end;padding-right:38px}
+.mentor-sign{font-size:10px;color:var(--muted);margin-top:10px}
+@media(max-width:650px){.progress-calendar{gap:4px}.cal-day{min-height:64px;padding:6px}.cal-day small{font-size:8px}}
+
+.year-calendar-rail{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;padding:2px 2px 10px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.month-card{flex:0 0 min(310px,82vw);scroll-snap-align:start;border:1px solid var(--line);background:var(--card);border-radius:16px;padding:12px}
+.month-title{display:flex;align-items:center;justify-content:space-between;font:500 18px "Playfair Display",serif;margin-bottom:9px}
+.month-title span{font:600 9px "DM Sans",sans-serif;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.month-head{font-size:7px;text-align:center;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:3px 0}
+.month-day{min-height:42px;border:1px solid transparent;border-radius:8px;padding:4px 4px;font-size:9px;position:relative;background:transparent}
+.month-day.empty{background:transparent}
+.month-day.today{border-color:var(--green)}
+.month-day.done{background:var(--pale);color:var(--green)}
+.month-day.has-class{border-color:var(--line);background:#fffefa}
+.month-day b{display:block}
+.month-day .learned{display:block;margin-top:3px;font-size:7px;line-height:1.2;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.month-day.done .learned{color:var(--green)}
+.year-hint{font-size:9px;color:var(--muted);margin-top:7px}
+@media(max-width:650px){.month-card{flex-basis:calc(100vw - 54px)}.month-day{min-height:44px}.month-day .learned{font-size:7px}}
+
+/* Learning calendar — full horizontal month cards */
+.learning-calendar-shell{width:100%}
+.year-calendar-rail{display:flex;gap:18px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:5px 2px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.month-card{flex:0 0 100%;min-width:100%;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--shadow)}
+.month-title{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
+.month-title strong{font:500 34px "Playfair Display",serif;letter-spacing:-.03em}
+.month-title span{font:600 10px "DM Sans",sans-serif;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.month-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.month-head{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:4px;text-align:left}
+.month-day{min-height:62px;border:1px solid #e6e2d9;border-radius:12px;background:#faf9f5;padding:8px;position:relative;overflow:hidden}
+.month-day.empty{background:transparent;border-color:transparent}
+.month-day.today{border-color:var(--green);box-shadow:inset 0 0 0 1px rgba(22,61,53,.08)}
+.month-day.has-class{min-height:104px;background:#fffdf8;border-color:#d6d1c7}
+.month-day.done{background:var(--pale);border-color:#c5d9cb}
+.month-day b{display:block;font-size:12px;margin-bottom:7px}
+.month-day .class-dot{position:absolute;top:9px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--green)}
+.month-day .learning-label{display:block;font-size:7px;line-height:1;text-transform:uppercase;letter-spacing:.12em;color:var(--green);font-weight:700;margin-bottom:5px}
+.month-day .learned{display:block;font-size:10px;line-height:1.35;color:var(--ink);white-space:normal;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.month-day .class-name{display:block;font-size:8px;color:var(--muted);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.month-day.done .learned{color:var(--green)}
+.calendar-caption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;font-size:10px;color:var(--muted)}
+.calendar-caption .swipe{white-space:nowrap}
+.mentor-identity{display:flex;align-items:center;gap:14px;padding:18px 0 2px;margin-top:18px;border-top:1px solid var(--line)}
+.mentor-seal{width:46px;height:46px;border:1px solid var(--green);border-radius:50%;display:grid;place-items:center;color:var(--green);font:500 21px "Playfair Display",serif}
+.mentor-identity .label{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.mentor-identity .name{font:500 31px "Playfair Display",serif;letter-spacing:-.03em;line-height:1.05}
+.mentor-identity .role{font-size:9px;color:var(--green);margin-top:3px;letter-spacing:.08em;text-transform:uppercase}
+.class-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.meet-btn{min-width:126px;padding:11px 16px}
+.completion-line{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px;padding-top:9px;border-top:1px solid var(--line)}
+.completion-label{font-size:9px;color:var(--muted)}
+.done-control{font-size:9px;padding:8px 12px}
+
+@media(max-width:650px){.month-card{flex-basis:100%;min-width:100%;padding:17px;border-radius:20px}.month-title strong{font-size:28px}.month-grid{gap:4px}.month-day{min-height:58px;padding:6px}.month-day.has-class{min-height:92px}.month-day .learned{font-size:8px}.month-day .class-name{font-size:7px}.calendar-caption{align-items:flex-start;flex-direction:column}}
+
+.daily-grid{display:grid;gap:10px}
+.grade-row{display:grid;grid-template-columns:minmax(0,1fr) 110px 90px;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.grade-row:last-child{border-bottom:0}
+.grade-name{font-weight:600;font-size:12px}
+.grade-meta{font-size:9px;color:var(--muted);margin-top:3px}
+.grade-input{width:100%;border:1px solid var(--line);background:var(--card);border-radius:11px;padding:9px 10px;outline:0}
+.grade-input:focus{border-color:#8d958b}
+.leader-row{display:grid;grid-template-columns:38px minmax(0,1fr) 70px;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.leader-row:last-child{border-bottom:0}
+.rank{font:500 18px "Playfair Display",serif;color:var(--muted)}
+.leader-score{font:600 14px "DM Sans",sans-serif;text-align:right}
+.top-score{background:var(--pale);border:1px solid #c5d9cb;border-radius:14px;padding:12px;margin:0}
+.history-day{border-top:1px solid var(--line);padding:14px 0}
+.history-day:first-child{border-top:0}
+.history-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.history-date{font:500 18px "Playfair Display",serif}
+.history-winner{font-size:9px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.task-card{padding:17px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.task-card.active-task{background:var(--pale);border-color:#c5d9cb}
+.task-card h3{font:500 22px "Playfair Display",serif;margin:0 0 5px}
+.task-card p{font-size:11px;color:var(--muted);line-height:1.6;margin:0 0 10px;white-space:pre-wrap}
+.task-time{font-size:9px;color:var(--muted)}
+.task-badge{display:inline-block;margin-bottom:7px;padding:4px 7px;border-radius:99px;background:var(--pale);color:var(--green);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.task-card.active-task .task-badge{background:var(--green);color:#fff}
+@media(max-width:650px){.grade-row{grid-template-columns:1fr 90px}.grade-row .grade-save{grid-column:2}.leader-row{grid-template-columns:32px minmax(0,1fr) 58px}}
+</style></head><body>
+<div id="login" class="login"><div class="login-card"><div class="eyebrow">Circle · private mentor access</div><h1>Welcome back.</h1><p>Sign in with the mentor account you created in Supabase.</p><div class="form"><input id="email" class="field" type="email" placeholder="Email"><input id="password" class="field" type="password" placeholder="Password"><button id="loginBtn" class="btn dark full">Sign in</button><div id="loginError" class="error"></div></div></div></div>
+<div id="app" class="app hidden"><header><a class="brand" href="#" onclick="go('home');return false"><span class="mark">C</span>Circle · Mentor</a><nav id="nav"><button class="active" data-page="home">Overview</button><button data-page="classes">Classes</button><button data-page="people">Students</button><button data-page="learning">Learning</button><button data-page="progress">Progress</button><button data-page="grading">Grading</button><button data-page="tasks">Tasks</button><button data-page="whatsapp">WhatsApp</button></nav><div class="right"><button class="btn dark" onclick="openClass()">＋ Class</button><span class="avatar" id="avatar">ME</span><button class="menu" id="menu">☰</button><button class="btn logout-btn" onclick="logout()">Logout</button></div></header>
+<section id="home" class="page active"><div class="hero"><div><div class="eyebrow">Mentor control · private</div><h1>Guide the circle.<br>Keep learning simple.</h1><p>This is your control space. Changes published here are stored in the shared cloud database and become available to students.</p><div class="mentor-attribution">Mentored by Adhiraag</div></div><div class="hero-side"><div class="mentor-attribution" style="margin-top:0">Mentored by Adhiraag</div><div class="small" style="margin-top:18px">Permanent classroom</div><h2>Google Meet</h2><p>Every class uses the same room.</p><a id="meetHome" class="btn dark" target="_blank">Open classroom ↗</a></div></div><div class="grid stats"><div class="card stat"><strong id="studentCount">0</strong><span>students</span></div><div class="card stat"><strong id="classCount">0</strong><span>scheduled classes</span></div><div class="card stat"><strong id="topicCount">0</strong><span>learning topics</span></div><div class="card stat"><strong>1</strong><span>shared Meet room</span></div></div><div class="section"><div class="head"><div><h2>Next classes</h2><p>What students will see.</p></div><button class="btn" onclick="go('classes')">Manage classes</button></div><div class="card pad" id="homeClasses"></div></div></section>
+<section id="classes" class="page"><div class="section"><div class="head"><div><h2>Class schedule</h2><p>Only mentors can create, edit or remove classes.</p></div><button class="btn dark" onclick="openClass()">＋ Schedule class</button></div><div class="card pad" id="classesList"></div></div></section>
+<section id="people" class="page"><div class="section"><div class="head"><div><h2>Students</h2><p>Student records are managed here.</p></div><button class="btn dark" onclick="openStudent()">＋ Student</button></div><div class="toolbar"><input id="search" class="field" placeholder="Search students…"></div><div class="grid three" id="peopleGrid"></div></div></section>
+<section id="learning" class="page"><div class="section"><div class="head"><div><h2>Learning direction</h2><p>You decide what the group is exploring.</p></div><button class="btn dark" onclick="openTopic()">＋ Topic</button></div><div class="card pad" id="topics"></div></div></section>
+<section id="progress" class="page"><div class="section"><div class="head"><div><h2>Learning progress</h2><p>See what the Circle learned on each day.</p></div></div><div class="grid two"><div class="card pad"><div class="head"><div><h2 style="font-size:24px">Learning calendar</h2><p>Scroll through the year. Each class day shows what was learned.</p></div><div class="year-picker"><select id="mentorYear" class="field"></select></div></div><div id="mentorCalendar"></div></div><div class="card pad"><h3 style="font:500 24px 'Playfair Display',serif;margin:0 0 8px">Progress notes</h3><p class="mentor-note">When a class day is complete, mark it done from the class schedule. The Meet button will then be disabled for that day for everyone.</p><div id="progressSummary"></div></div></div></div></section>
+<section id="grading" class="page"><div class="section">
+<div class="head"><div><h2>Daily grading</h2><p>Grade every registered student out of 10. Scores stay permanently in the Circle history.</p></div></div>
+<div class="grid two">
+<div class="card pad">
+<div class="head"><div><h2 style="font-size:24px">Daily scores</h2><p>Select a day and enter each student's score.</p></div><input id="gradeDate" class="field" type="date" style="max-width:170px"></div>
+<div id="gradingRows" class="daily-grid"></div>
+<div class="actions" style="justify-content:flex-start"><button class="btn dark" onclick="saveGrades()">Save daily grades</button></div>
+</div>
+<div class="card pad">
+<h3 style="font:500 24px 'Playfair Display',serif;margin:0 0 8px">Today's leaderboard</h3>
+<p class="mentor-note">The highest score for the selected day is highlighted automatically.</p>
+<div id="leaderboardToday"></div>
+</div>
+</div>
+<div class="card pad" style="margin-top:13px"><div class="head"><div><h2 style="font-size:24px">Leaderboard history</h2><p>Every graded day remains available for tracking progress.</p></div></div><div id="leaderboardHistory"></div></div>
+</div></section>
+<section id="tasks" class="page"><div class="section">
+<div class="head"><div><h2>Tasks</h2><p>Set a task and decide exactly when it should be visible to students.</p></div><button class="btn dark" onclick="openTask()">＋ Task</button></div>
+<div class="grid two">
+<div class="card pad"><h3 style="font:500 24px 'Playfair Display',serif;margin:0 0 8px">Published tasks</h3><div id="mentorTasks"></div></div>
+<div class="card pad"><h3 style="font:500 24px 'Playfair Display',serif;margin:0 0 8px">Task timing</h3><p class="mentor-note">Use the start and end date/time to keep a task highlighted for a few hours, several days, or any period you choose.</p></div>
+</div>
+</div></section>
+<section id="whatsapp" class="page"><div class="section"><div class="head"><div><h2>WhatsApp group</h2><p>One group only. No individual notifications.</p></div></div><div class="grid two"><div class="card pad notice"><h3>Class notice</h3><p>The notice is generated from the class you select. First copy it; then open your saved group.</p><select id="noticeClass" class="field"></select><div class="notice-preview" id="preview"></div><div class="actions" style="justify-content:flex-start"><button class="btn dark" onclick="copyNotice()">Copy notice</button><button class="btn" onclick="openGroup()">Open group ↗</button></div><div class="warning">A browser page cannot press Send inside WhatsApp. The reliable workflow is copy → open group → paste → send.</div></div><div class="card pad"><h3 style="font:500 24px 'Playfair Display',serif;margin-top:0">Saved group</h3><p style="font-size:11px;color:var(--muted);line-height:1.6">This is stored in Supabase, so students on other devices can see it.</p><input id="group" class="field" placeholder="https://chat.whatsapp.com/..."><div class="actions" style="justify-content:flex-start"><button class="btn dark" onclick="saveGroup()">Save group</button></div></div></div></div></section>
+</div>
+<div class="modal" id="modal"><div class="box"><h3 id="mt"></h3><div id="mb"></div><div class="actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn dark" id="ms">Save</button></div></div></div><div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+const SUPABASE_URL='https://idnzjzcryvgceryaftop.supabase.co',SUPABASE_KEY='sb_publishable_HgIwYunyGeB2HHxJvDVczA_4EY-7jc1';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY); let settings={meet_url:"https://meet.google.com/jen-vrns-nkd",whatsapp_group_url:"https://chat.whatsapp.com/GnriOIYBaKNF0wMnPXpT7t"};
+let classes=[],students=[],topics=[],grades=[],tasks=[]; const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+const $=id=>document.getElementById(id);
+function toast(x){let t=$("toast");t.textContent=x;t.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove("show"),2300)}
+function go(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));$(id).classList.add("active");document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));nav.classList.remove("open");render();scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.page)); menu.onclick=()=>nav.classList.toggle("open"); search.oninput=render;
+async function requireMentor(user){const {data:p,error}=await sb.from("profiles").select("full_name,role").eq("id",user.id).maybeSingle();if(error||!p||p.role!=="mentor"){await sb.auth.signOut();throw new Error("This account is not a mentor account.")} $("avatar").textContent=(p.full_name||"ME").slice(0,2).toUpperCase();}
+async function signIn(){$("loginError").textContent="";try{const {data,error}=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error)throw error;await requireMentor(data.user);$("login").classList.add("hidden");$("app").classList.remove("hidden");await loadAll();subscribe();}catch(e){$("loginError").textContent=e.message||"Sign in failed."}}
+$("loginBtn").onclick=signIn; $("password").addEventListener("keydown",e=>{if(e.key==="Enter")signIn()});
+async function logout(){await sb.auth.signOut();location.reload()}
+async function loadAll(){
+const [c,s,t,g,gr,ta]=await Promise.all([
+sb.from("classes").select("*").order("class_date",{ascending:true}).order("class_time",{ascending:true}),
+sb.from("students").select("*").order("name"),
+sb.from("topics").select("*").order("created_at"),
+sb.from("settings").select("*").eq("id",1).maybeSingle(),
+sb.from("daily_grades").select("*").order("grade_date",{ascending:false}),
+sb.from("tasks").select("*").order("starts_at",{ascending:false})
+]);
+if(c.error||s.error||t.error){toast("Could not load existing Circle data");return}
+classes=c.data||[];students=s.data||[];topics=t.data||[];settings=g.data||settings;
+grades=gr.error?[]:(gr.data||[]);tasks=ta.error?[]:(ta.data||[]);
+$("meetHome").href=settings.meet_url;$("group").value=settings.whatsapp_group_url||"";render()}
+function subscribe(){sb.channel("circle-live").on("postgres_changes",{event:"*",schema:"public",table:"classes"},loadAll).on("postgres_changes",{event:"*",schema:"public",table:"students"},loadAll).on("postgres_changes",{event:"*",schema:"public",table:"topics"},loadAll).on("postgres_changes",{event:"*",schema:"public",table:"settings"},loadAll).on("postgres_changes",{event:"*",schema:"public",table:"daily_grades"},loadAll).on("postgres_changes",{event:"*",schema:"public",table:"tasks"},loadAll).subscribe()}
+function time12(v){let [h,m]=String(v).slice(0,5).split(":").map(Number),ap=h>=12?"PM":"AM";h=h%12||12;return `${h}:${String(m).padStart(2,"0")} ${ap}`}
+function render(){studentCount.textContent=students.length;classCount.textContent=classes.length;topicCount.textContent=topics.length;let rows=classes.map(c=>`<div class="session class-session"><div class="date"><b>${new Date(c.class_date+"T12:00").getDate()}</b><small>${new Date(c.class_date+"T12:00").toLocaleDateString("en",{month:"short"})}</small></div><div class="session-main"><b>${esc(c.title)}</b><div class="meta"><span>Schedule</span> · ${esc(c.class_date)} · ${esc(time12(c.class_time))}</div><span class="tag">${esc(c.description||"Learning")}</span></div><div class="session-actions"><button class="btn red remove-class-btn" onclick="removeClass(${c.id})" aria-label="Remove class" title="Remove class">×</button><div class="meet-done-row"><a class="btn ${c.is_done?'disabled':''}" ${c.is_done?'aria-disabled="true"':''} target="_blank" href="${c.is_done?'#':esc(settings.meet_url)}">${c.is_done?'Meet done':'Meet'}</a><button class="btn ${c.is_done?'':'dark'}" onclick="toggleClassDone(${c.id},${!c.is_done})">${c.is_done?'↺ Reopen':'✓ Mark done'}</button></div></div></div>`).join("");homeClasses.innerHTML=rows||"<p style='color:var(--muted)'>No classes yet.</p>";classesList.innerHTML=rows||"<p style='color:var(--muted)'>No classes yet.</p>";let q=(search.value||"").toLowerCase();peopleGrid.innerHTML=students.filter(p=>(p.name+" "+(p.role||"")).toLowerCase().includes(q)).map(p=>`<div class="card member"><div class="member-top"><div class="avatar">${esc((p.name||"").slice(0,2).toUpperCase())}</div><span style="font-size:9px;color:#28705b">● active</span></div><h3>${esc(p.name)}</h3><small>${esc(p.role||"Learner")}</small><div class="chips">${p.email?`<span class="chip">${esc(p.email)}</span>`:""}<span class="chip">Student</span></div><div class="student-actions"><button class="btn" onclick="editStudent(${p.id})">Edit student</button><button class="btn red" onclick="removeStudent(${p.id})">Remove student</button></div></div>`).join("")||"<p style='color:var(--muted)'>No students yet.</p>";topicsEl.innerHTML=topics.map(t=>`<div class="topic"><div><b>${esc(t.name)}</b><small>Visible to students</small></div><button class="btn red" onclick="removeTopic(${t.id})">×</button></div>`).join("")||"<p style='color:var(--muted)'>No topics yet.</p>";renderProgressCalendar();renderGrading();renderTasks();noticeClass.innerHTML=classes.map(c=>`<option value="${c.id}">${esc(c.title)} · ${esc(c.class_date)} · ${esc(time12(c.class_time))}</option>`).join("");updatePreview()}
+const topicsEl=$("topics");
+function updatePreview(){let c=classes.find(x=>x.id===Number(noticeClass.value))||classes[0];preview.textContent=c?`Circle class reminder\n\n${c.title}\n${c.class_date} · ${time12(c.class_time)}\n\nJoin the class:\n${settings.meet_url}`:"No class selected"}
+noticeClass.onchange=updatePreview;
+function openModal(title,body,fn){mt.textContent=title;mb.innerHTML=body;modal.classList.add("open");ms.onclick=fn}function closeModal(){modal.classList.remove("open")}
+function isoToday(){return new Date().toISOString().slice(0,10)}
+function toggleClassDone(id,done){let c=classes.find(x=>x.id===id);if(!c)return;let action=done?"mark this learning day as done":"reopen this learning day";if(!confirm(`Are you sure you want to ${action}?`))return;sb.from("classes").update({is_done:done}).eq("id",id).then(async({error})=>{if(error)return toast(error.message);await loadAll();toast(done?"Learning day marked done":"Learning day reopened")})}
+function setupYearPicker(){let sel=$("mentorYear");if(!sel)return;let current=new Date().getFullYear();let years=[];for(let y=current-10;y<=current+10;y++)years.push(y);sel.innerHTML=years.map(y=>`<option value="${y}">${y}</option>`).join("");sel.value=window.progressYear||current;sel.onchange=()=>{window.progressYear=Number(sel.value);renderProgressCalendar()}}
+function renderProgressCalendar(){let el=$("mentorCalendar"),sum=$("progressSummary");if(!el||!sum)return;setupYearPicker();let y=window.progressYear||new Date().getFullYear();let byDate={};classes.forEach(c=>(byDate[c.class_date]??=[]).push(c));let months=["January","February","March","April","May","June","July","August","September","October","November","December"],heads=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],now=new Date(),currentMonth=(y===now.getFullYear()?now.getMonth():-1);let cards=[];for(let m=0;m<12;m++){let first=new Date(y,m,1),last=new Date(y,m+1,0),start=(first.getDay()+6)%7;let days=heads.map(d=>`<div class="month-head">${d}</div>`).join("");for(let i=0;i<start;i++)days+='<div class="month-day empty"></div>';for(let d=1;d<=last.getDate();d++){let date=`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`,items=byDate[date]||[],done=items.length>0&&items.every(c=>c.is_done),today=date===isoToday(),learning=items.map(c=>c.description||c.title).join(" · "),names=items.map(c=>c.title).join(" · ");days+=`<div class="month-day ${items.length?"has-class":""} ${done?"done":""} ${today?"today":""}" title="${esc(names)}"><b>${d}</b>${items.length?'<span class="class-dot"></span>':""}${learning?`<span class="learning-label">${done?"Learned":"To learn"}</span><span class="learned">${esc(learning)}</span><span class="class-name">${esc(names)}</span>`:""}</div>`}cards.push({m,html:`<article class="month-card"><div class="month-title"><strong>${months[m]}</strong><span>${y}</span></div><div class="month-grid">${days}</div></article>`})}let rail=cards.map(x=>x.html).join("");el.innerHTML=`<div class="learning-calendar-shell"><div class="year-calendar-rail" id="${el.id}_rail">${rail}</div><div class="calendar-caption"><span>Current month stays in the main view · completed months are to the left · upcoming months are to the right.</span><span class="swipe">← Scroll / swipe through months →</span></div></div>`;let railEl=$(el.id+"_rail");if(railEl&&currentMonth>=0){requestAnimationFrame(()=>{let card=railEl.querySelectorAll(".month-card")[currentMonth];if(card)railEl.scrollLeft=card.offsetLeft;});}let completed=classes.filter(c=>c.is_done).length;sum.innerHTML=`<div class="stat" style="margin-top:14px"><strong>${completed}</strong><span>completed learning days</span></div>`}
+
+function fmtDateLabel(d){return new Date(d+"T12:00").toLocaleDateString("en",{weekday:"short",month:"short",day:"numeric",year:"numeric"})}
+function fmtDateTime(v){return new Date(v).toLocaleString("en",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"})}
+function gradeFor(studentId,date){return grades.find(g=>Number(g.student_id)===Number(studentId)&&g.grade_date===date)}
+function renderGrading(){
+let date=$("gradeDate");if(!date)return;
+if(!date.value)date.value=window.gradeDate||isoToday();window.gradeDate=date.value;
+let rows=$("gradingRows");let dayGrades=grades.filter(g=>g.grade_date===date.value);
+rows.innerHTML=students.map(p=>{let g=dayGrades.find(x=>Number(x.student_id)===Number(p.id));return `<div class="grade-row"><div><div class="grade-name">${esc(p.name)}</div><div class="grade-meta">${esc(p.role||"Learner")}</div></div><input class="grade-input" id="grade_${p.id}" type="number" min="0" max="10" step="0.5" value="${g?g.score:""}" placeholder="0–10"><button class="btn grade-save" onclick="saveOneGrade(${p.id})">Save</button></div>`}).join("")||"<p class='mentor-note'>No registered students yet.</p>";
+date.onchange=()=>{window.gradeDate=date.value;renderGrading()};
+renderSelectedLeaderboard(date.value);renderGradeHistory();
+}
+function renderSelectedLeaderboard(date){
+let box=$("leaderboardToday");if(!box)return;
+let list=grades.filter(g=>g.grade_date===date).map(g=>({...g,student:students.find(s=>Number(s.id)===Number(g.student_id))})).filter(x=>x.student).sort((a,b)=>Number(b.score)-Number(a.score)||xName(a.student.name).localeCompare(xName(b.student.name)));
+if(!list.length){box.innerHTML="<p class='mentor-note'>No grades recorded for this day.</p>";return}
+let max=Number(list[0].score);
+box.innerHTML=list.map((x,i)=>`<div class="leader-row ${i===0?'top-score':''}"><div class="rank">${i+1}</div><div><div class="grade-name">${esc(x.student.name)}</div><div class="grade-meta">${i===0?"Top score · ":""}${fmtDateLabel(date)}</div></div><div class="leader-score">${esc(x.score)}/10</div></div>`).join("");
+}
+function xName(v){return String(v||"")}
+function renderGradeHistory(){
+let box=$("leaderboardHistory");if(!box)return;
+let dates=[...new Set(grades.map(g=>g.grade_date))].sort((a,b)=>b.localeCompare(a));
+if(!dates.length){box.innerHTML="<p class='mentor-note'>No grading history yet.</p>";return}
+box.innerHTML=dates.map(date=>{let list=grades.filter(g=>g.grade_date===date).map(g=>({...g,student:students.find(s=>Number(s.id)===Number(g.student_id))})).filter(x=>x.student).sort((a,b)=>Number(b.score)-Number(a.score));let max=list.length?Number(list[0].score):0;let winners=list.filter(x=>Number(x.score)===max).map(x=>x.student.name).join(", ");return `<div class="history-day"><div class="history-head"><span class="history-date">${fmtDateLabel(date)}</span><span class="history-winner">${winners?`Top: ${esc(winners)} · ${max}/10`:""}</span></div><div style="margin-top:7px;font-size:10px;color:var(--muted)">${list.length} student${list.length===1?"":"s"} graded</div></div>`}).join("");
+}
+async function saveOneGrade(studentId){
+let input=$("grade_"+studentId),v=input?.value.trim(),date=$("gradeDate")?.value||isoToday();
+if(v===""||Number(v)<0||Number(v)>10)return toast("Enter a score from 0 to 10");
+let {error}=await sb.from("daily_grades").upsert({student_id:studentId,grade_date:date,score:Number(v),updated_at:new Date().toISOString()},{onConflict:"student_id,grade_date"});
+if(error)return toast(error.message);await loadAll();toast("Grade saved");
+}
+async function saveGrades(){
+let date=$("gradeDate")?.value||isoToday(),payload=[];
+for(const p of students){let v=$("grade_"+p.id)?.value.trim();if(v==="")continue;if(Number(v)<0||Number(v)>10)return toast(`Score for ${p.name} must be 0–10`);payload.push({student_id:p.id,grade_date:date,score:Number(v),updated_at:new Date().toISOString()})}
+if(!payload.length)return toast("Enter at least one score");
+let {error}=await sb.from("daily_grades").upsert(payload,{onConflict:"student_id,grade_date"});
+if(error)return toast(error.message);await loadAll();toast("Daily grades saved");
+}
+function taskStatus(t){let now=Date.now(),s=new Date(t.starts_at).getTime(),e=new Date(t.ends_at).getTime();return now<s?"upcoming":now<=e?"active":"expired"}
+function renderTasks(){
+let box=$("mentorTasks");if(!box)return;
+box.innerHTML=tasks.map(t=>{let st=taskStatus(t);return `<div class="task-card ${st==="active"?"active-task":""}" style="margin-bottom:10px"><span class="task-badge">${st}</span><h3>${esc(t.title)}</h3><p>${esc(t.description||"")}</p><div class="task-time">${fmtDateTime(t.starts_at)} → ${fmtDateTime(t.ends_at)}</div><div class="actions" style="justify-content:flex-start"><button class="btn red" onclick="removeTask(${t.id})">Remove task</button></div></div>`}).join("")||"<p class='mentor-note'>No tasks published yet.</p>";
+}
+function openTask(){
+let start=new Date();let end=new Date(Date.now()+24*60*60*1000);
+let local=x=>{let z=new Date(x.getTime()-x.getTimezoneOffset()*60000);return z.toISOString().slice(0,16)};
+openModal("Create task",`<div class="form"><input id="a" class="field" placeholder="Task title"><textarea id="b" class="field" rows="5" placeholder="Task instructions"></textarea><label class="small">Starts</label><input id="c" class="field" type="datetime-local" value="${local(start)}"><label class="small">Ends</label><input id="d" class="field" type="datetime-local" value="${local(end)}"></div>`,async()=>{if(!a.value.trim())return toast("Add a task title");if(!c.value||!d.value||new Date(d.value)<=new Date(c.value))return toast("Choose a valid task period");let {error}=await sb.from("tasks").insert({title:a.value.trim(),description:b.value.trim()||null,starts_at:new Date(c.value).toISOString(),ends_at:new Date(d.value).toISOString()});if(error)return toast(error.message);closeModal();await loadAll();toast("Task published")})
+}
+async function removeTask(id){if(!confirm("Remove this task from the task list?"))return;let {error}=await sb.from("tasks").delete().eq("id",id);if(error)return toast(error.message);await loadAll();toast("Task removed")}
+
+async function openClass(){openModal("Schedule class",`<div class="form"><input id="a" class="field" placeholder="Class name"><input id="b" class="field" type="date" value="${new Date().toISOString().slice(0,10)}"><input id="c" class="field" type="time" value="14:00"><input id="d" class="field" placeholder="Topic" value="Learning"></div>`,async()=>{if(!a.value.trim())return toast("Add a class name");let {error}=await sb.from("classes").insert({title:a.value.trim(),class_date:b.value,class_time:c.value,description:d.value||"Learning"});if(error)return toast(error.message);closeModal();await loadAll();toast("Class published")})}
+async function openStudent(){openModal("Add student",`<div class="form"><input id="a" class="field" placeholder="Name"><input id="b" class="field" type="email" placeholder="Email (optional)"><input id="c" class="field" placeholder="Role" value="Learner"></div>`,async()=>{if(!a.value.trim())return toast("Add a name");let {error}=await sb.from("students").insert({name:a.value.trim(),email:b.value.trim()||null,role:c.value.trim()||"Learner"});if(error)return toast(error.message);closeModal();await loadAll();toast("Student added")})}
+async function removeStudent(id){let p=students.find(x=>x.id===id);if(!p)return;if(!confirm(`Remove ${p.name} from the student list?`))return;let {error}=await sb.from("students").delete().eq("id",id);if(error)return toast(error.message);await loadAll();toast("Student removed")}async function editStudent(id){let p=students.find(x=>x.id===id);if(!p)return;openModal("Edit student",`<div class="form"><input id="a" class="field" value="${esc(p.name)}"><input id="b" class="field" type="email" value="${esc(p.email||"")}"><input id="c" class="field" value="${esc(p.role||"Learner")}"></div>`,async()=>{let {error}=await sb.from("students").update({name:a.value.trim(),email:b.value.trim()||null,role:c.value.trim()||"Learner"}).eq("id",id);if(error)return toast(error.message);closeModal();await loadAll();toast("Student updated")})}
+async function openTopic(){openModal("Add learning topic",`<div class="form"><input id="a" class="field" placeholder="Topic"></div>`,async()=>{if(!a.value.trim())return toast("Add a topic");let {error}=await sb.from("topics").insert({name:a.value.trim()});if(error)return toast(error.message);closeModal();await loadAll();toast("Topic published")})}
+async function removeClass(id){if(!confirm("Remove this class?"))return;let {error}=await sb.from("classes").delete().eq("id",id);if(error)return toast(error.message);toast("Class removed")}
+async function removeTopic(id){if(!confirm("Remove this topic?"))return;let {error}=await sb.from("topics").delete().eq("id",id);if(error)return toast(error.message);toast("Topic removed")}
+async function saveGroup(){let v=group.value.trim();if(!v)return toast("Paste the group link first");let {error}=await sb.from("settings").update({whatsapp_group_url:v,updated_at:new Date().toISOString()}).eq("id",1);if(error)return toast(error.message);settings.whatsapp_group_url=v;toast("WhatsApp group saved")}
+async function copyNotice(){let text=preview.textContent;if(!text||text==="No class selected")return toast("Select a class first");try{await navigator.clipboard.writeText(text);toast("Notice copied — now open WhatsApp and paste it")}catch(e){let ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();toast("Notice copied")}}
+function openGroup(){if(!settings.whatsapp_group_url)return toast("Save the WhatsApp group link first");window.open(settings.whatsapp_group_url,"_blank")}
+setInterval(()=>{renderTasks()},60000);
+(async()=>{const {data}=await sb.auth.getSession();if(data.session){try{await requireMentor(data.session.user);login.classList.add("hidden");app.classList.remove("hidden");await loadAll();subscribe()}catch(e){loginError.textContent=e.message}}})();
+</script></body></html>
