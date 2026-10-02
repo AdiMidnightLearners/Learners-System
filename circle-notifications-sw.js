@@ -3,7 +3,7 @@ self.addEventListener("push", (event) => {
 
   try {
     data = event.data ? event.data.json() : {};
-  } catch (error) {
+  } catch (_) {
     data = {
       title: "Circle",
       message: event.data ? event.data.text() : ""
@@ -11,16 +11,15 @@ self.addEventListener("push", (event) => {
   }
 
   const title = data.title || "Circle";
+  const page = data.page || "home";
 
   const options = {
     body: data.message || "",
-    tag:
-      data.tag ||
-      `circle-notification-${data.id || Date.now()}`,
+    tag: data.tag || `circle-notification-${data.id || Date.now()}`,
     renotify: true,
     data: {
       id: data.id || null,
-      page: data.page || "home"
+      page
     }
   };
 
@@ -48,13 +47,15 @@ self.addEventListener("notificationclick", (event) => {
     }).then((clientList) => {
 
       for (const client of clientList) {
+
         if ("focus" in client) {
+
           try {
             client.postMessage({
               type: "circle-open-notification",
-              page: page
+              page
             });
-          } catch (error) {}
+          } catch (_) {}
 
           return client.focus();
         }
