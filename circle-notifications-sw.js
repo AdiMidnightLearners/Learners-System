@@ -1,25 +1,27 @@
-self.addEventListener("push", event => {
+self.addEventListener("push", (event) => {
   let data = {};
 
   try {
     data = event.data ? event.data.json() : {};
-  } catch {
+  } catch (error) {
     data = {
       title: "Circle",
-      body: event.data ? event.data.text() : "You have a new notification."
+      message: event.data ? event.data.text() : ""
     };
   }
 
   const title = data.title || "Circle";
+
   const options = {
-    body: data.body || "You have a new notification.",
-    icon: data.icon || "/favicon.ico",
-    badge: data.badge || "/favicon.ico",
+    body: data.message || "",
+    tag:
+      data.tag ||
+      `circle-notification-${data.id || Date.now()}`,
+    renotify: true,
     data: {
-      url: data.url || "/"
-    },
-    tag: data.tag || "circle-notification",
-    renotify: true
+      id: data.id || null,
+      page: data.page || "home"
+    }
   };
 
   event.waitUntil(
@@ -27,26 +29,39 @@ self.addEventListener("push", event => {
   );
 });
 
-self.addEventListener("notificationclick", event => {
+
+self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
-  const targetUrl =
-    event.notification?.data?.url || "/";
+  const page =
+    event.notification.data?.page || "home";
+
+  const target = new URL(
+    `./#${page}`,
+    self.registration.scope
+  );
 
   event.waitUntil(
     clients.matchAll({
       type: "window",
       includeUncontrolled: true
-    }).then(clientList => {
+    }).then((clientList) => {
+
       for (const client of clientList) {
         if ("focus" in client) {
-          client.navigate(targetUrl);
+          try {
+            client.postMessage({
+              type: "circle-open-notification",
+              page: page
+            });
+          } catch (error) {}
+
           return client.focus();
         }
       }
 
       if (clients.openWindow) {
-        return clients.openWindow(targetUrl);
+        return clients.openWindow(target.href);
       }
     })
   );
