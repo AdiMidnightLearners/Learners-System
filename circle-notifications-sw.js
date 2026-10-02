@@ -28,28 +28,19 @@ self.addEventListener("push", (event) => {
   );
 });
 
-
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
-  const page =
-    event.notification.data?.page || "home";
-
-  const target = new URL(
-    `./#${page}`,
-    self.registration.scope
-  );
+  const page = event.notification.data?.page || "home";
+  const target = new URL(`./#${page}`, self.registration.scope);
 
   event.waitUntil(
     clients.matchAll({
       type: "window",
       includeUncontrolled: true
     }).then((clientList) => {
-
       for (const client of clientList) {
-
         if ("focus" in client) {
-
           try {
             client.postMessage({
               type: "circle-open-notification",
