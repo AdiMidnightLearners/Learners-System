@@ -1,4 +1,3 @@
-
 /* Circle voluntary gratitude payment gate.
    Requires Supabase JS v2 and `sb`.
 */
@@ -6,7 +5,7 @@
 window.CirclePaymentGate = (() => {
   const QR = 'phonepe-qr.png';
   const AMOUNT = 19;
-  const DAY = 7;
+  const MONTH = 1;
 
   function ensureModal() {
     if (document.getElementById('circlePayOverlay')) return;
@@ -172,7 +171,7 @@ window.CirclePaymentGate = (() => {
 
         <p>
           Your learning space is supported by mentor Adhiraag.
-          Please contribute a minimum of ₹19 for the next 7 days
+          Please contribute a minimum of ₹19 for one month
           of access. After payment, send a request; access starts
           once your mentor confirms it.
         </p>
@@ -180,7 +179,7 @@ window.CirclePaymentGate = (() => {
         <div class="cp-amount">
           ₹19
           <span style="font:11px 'DM Sans';color:#74716a">
-            / 7 days
+            / month
           </span>
         </div>
 
@@ -242,19 +241,16 @@ window.CirclePaymentGate = (() => {
 
     document.body.append(el);
 
-    // Close button
     el.querySelector('#cpClose').addEventListener('click', () => {
       el.classList.remove('open');
     });
 
-    // Close when clicking outside the payment card
     el.addEventListener('click', event => {
       if (event.target === el) {
         el.classList.remove('open');
       }
     });
 
-    // Close with Escape key
     document.addEventListener('keydown', event => {
       if (
         event.key === 'Escape' &&
@@ -390,4 +386,3 @@ window.CirclePaymentGate = (() => {
 
   return { ensureAccess };
 })();
-
