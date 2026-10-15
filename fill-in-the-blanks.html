@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fill in the Blanks</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -11,271 +11,271 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
 
 :root {
-  --bg:#f6f4ef;
-  --paper:#fffdf8;
-  --ink:#20231f;
-  --muted:#77766d;
-  --line:#e2dfd6;
-  --green:#163d35;
-  --pale:#e8eee8;
-  --gold:#9b8352;
-  --shadow:0 16px 44px rgba(35,34,25,.055);
+  --bg: #f6f4ef;
+  --paper: #fffdf8;
+  --ink: #20231f;
+  --muted: #77766d;
+  --line: #e2dfd6;
+  --green: #163d35;
+  --pale: #e8eee8;
+  --gold: #9b8352;
+  --shadow: 0 16px 44px rgba(35,34,25,.055);
 }
 
 * {
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 body {
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font:14px 'DM Sans',sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px 'DM Sans', sans-serif;
 }
 
-button,input,textarea,select {
-  font:inherit;
+button, input, textarea, select {
+  font: inherit;
 }
 
 button {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .wrap {
-  width:min(1080px,calc(100% - 32px));
-  margin:auto;
+  width: min(1080px, calc(100% - 32px));
+  margin: auto;
 }
 
 .top {
-  min-height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  border-bottom:1px solid var(--line);
-  padding:12px 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
 }
 
 .btn {
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:12px 17px;
-  background:var(--paper);
-  color:var(--ink);
-  font-size:13px;
-  font-weight:700;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 12px 16px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .btn.primary {
-  background:var(--green);
-  color:white;
-  border-color:var(--green);
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
 }
 
 .btn:disabled {
-  opacity:.55;
-  cursor:not-allowed;
+  opacity: .55;
+  cursor: not-allowed;
 }
 
 .intro {
-  padding:42px 0 24px;
+  padding: 42px 0 24px;
 }
 
 .eyebrow {
-  text-transform:uppercase;
-  letter-spacing:.18em;
-  font-size:10px;
-  font-weight:700;
-  color:var(--green);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--green);
 }
 
 h1 {
-  font:500 clamp(36px,6vw,56px)/1.04 'Playfair Display',serif;
-  letter-spacing:-.04em;
-  margin:10px 0;
+  font: 500 clamp(36px, 6vw, 56px)/1.04 'Playfair Display', serif;
+  letter-spacing: -.04em;
+  margin: 10px 0;
 }
 
-.intro p,.sub {
-  color:var(--muted);
-  line-height:1.7;
-  margin:0;
+.intro p, .sub {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
 }
 
 .panel {
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:20px;
-  box-shadow:var(--shadow);
-  padding:22px;
-  margin-bottom:16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+  margin-bottom: 16px;
 }
 
 .panel-head {
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  align-items:start;
-  margin-bottom:16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+  margin-bottom: 16px;
 }
 
 .panel h2 {
-  font:500 25px 'Playfair Display',serif;
-  margin:0 0 5px;
+  font: 500 25px 'Playfair Display', serif;
+  margin: 0 0 5px;
 }
 
 .form {
-  display:grid;
-  gap:13px;
+  display: grid;
+  gap: 13px;
 }
 
 .two {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 .label {
-  display:block;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  font-weight:700;
-  color:var(--muted);
-  margin-bottom:6px;
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 6px;
 }
 
 .field {
-  width:100%;
-  border:1px solid var(--line);
-  background:white;
-  border-radius:12px;
-  padding:12px 13px;
-  outline:0;
-  color:var(--ink);
+  width: 100%;
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 12px;
+  padding: 12px 13px;
+  outline: 0;
+  color: var(--ink);
 }
 
 .field:focus {
-  border-color:#81958a;
-  box-shadow:0 0 0 3px #e8eee8;
+  border-color: #81958a;
+  box-shadow: 0 0 0 3px #e8eee8;
 }
 
 textarea.field {
-  min-height:95px;
-  resize:vertical;
+  min-height: 95px;
+  resize: vertical;
 }
 
 .grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .card {
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:18px;
-  background:#fffefa;
-  min-width:0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px;
+  background: #fffefa;
+  min-width: 0;
 }
 
 .card h3 {
-  margin:0 0 8px;
-  font-size:16px;
+  margin: 0 0 8px;
+  font-size: 16px;
 }
 
 .meta {
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin:10px 0;
-  color:var(--muted);
-  font-size:11px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+  color: var(--muted);
+  font-size: 11px;
 }
 
 .desc {
-  font-size:12px;
-  line-height:1.7;
-  color:var(--muted);
-  white-space:pre-wrap;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+  white-space: pre-wrap;
 }
 
 .empty {
-  padding:24px;
-  border:1px dashed var(--line);
-  border-radius:14px;
-  color:var(--muted);
-  text-align:center;
-  line-height:1.7;
+  padding: 24px;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.7;
 }
 
 .hidden {
-  display:none!important;
+  display: none !important;
 }
 
 .row {
-  display:flex;
-  gap:8px;
-  align-items:center;
-  flex-wrap:wrap;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .q {
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:16px;
-  margin:10px 0;
-  background:white;
-  line-height:2;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 10px 0;
+  background: white;
+  line-height: 2;
 }
 
 .toast {
-  position:fixed;
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%);
-  background:var(--green);
-  color:white;
-  border-radius:16px;
-  padding:13px 17px;
-  font-size:13px;
-  display:none;
-  max-width:92%;
-  z-index:100;
-  line-height:1.5;
-  box-shadow:0 8px 30px rgba(0,0,0,.15);
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--green);
+  color: white;
+  border-radius: 16px;
+  padding: 13px 17px;
+  font-size: 13px;
+  display: none;
+  max-width: 92%;
+  z-index: 100;
+  line-height: 1.5;
+  box-shadow: 0 8px 30px rgba(0,0,0,.15);
 }
 
 .toast.show {
-  display:block;
+  display: block;
 }
 
-@media(max-width:720px) {
+@media (max-width: 720px) {
   .wrap {
-    width:calc(100% - 22px);
+    width: calc(100% - 22px);
   }
 
   .intro {
-    padding:30px 0 20px;
+    padding: 30px 0 20px;
   }
 
   .panel {
-    padding:16px;
+    padding: 16px;
   }
 
-  .two,.grid {
-    grid-template-columns:1fr;
+  .two, .grid {
+    grid-template-columns: 1fr;
   }
 
   .row .btn {
-    max-width:100%;
-    white-space:normal;
+    max-width: 100%;
+    white-space: normal;
   }
 
   h1 {
-    font-size:clamp(36px,11vw,48px);
+    font-size: clamp(36px, 11vw, 48px);
   }
 
   .field {
-    min-width:0;
+    min-width: 0;
   }
 }
 </style>
@@ -284,161 +284,163 @@ textarea.field {
 <body>
 <div class="wrap">
 
-<header class="top">
-  <div class="row">
-    <button class="btn" id="reload" type="button">Refresh</button>
-  </div>
-</header>
+  <header class="top">
+    <div class="row">
+      <button class="btn" id="reload" type="button">Refresh</button>
+    </div>
+  </header>
 
-<section class="intro">
-  <div>
-    <div class="eyebrow">Practice · recall · master</div>
-    <h1>Fill in the<br>blanks.</h1>
-    <p>
-      Build stronger recall with focused, AI-assisted practice.
-      Mentors can prepare and publish activities; students can
-      complete assigned activities and review their results.
-    </p>
-  </div>
-</section>
-
-<div id="authError" class="panel hidden"></div>
-
-<section id="mentorPanel" class="panel hidden">
-  <div class="panel-head">
+  <section class="intro">
     <div>
-      <h2>Create an activity</h2>
-      <p class="sub">
-        Generate draft questions from a topic or your own learning
-        material. Review answers before publishing.
+      <div class="eyebrow">Practice · recall · master</div>
+      <h1>Fill in the<br>blanks.</h1>
+      <p>
+        Build stronger recall with focused, AI-assisted practice.
+        Mentors can prepare and publish activities; students can
+        complete assigned activities and review their results.
       </p>
     </div>
-  </div>
+  </section>
 
-  <form id="createForm" class="form">
+  <div id="authError" class="panel hidden"></div>
 
-    <div class="two">
+  <section id="mentorPanel" class="panel hidden">
+
+    <div class="panel-head">
       <div>
-        <label class="label" for="title">Activity title</label>
-        <input
-          id="title"
+        <h2>Create an activity</h2>
+        <p class="sub">
+          Generate draft questions from a topic or your own learning
+          material. Review answers before publishing.
+        </p>
+      </div>
+    </div>
+
+    <form id="createForm" class="form">
+
+      <div class="two">
+        <div>
+          <label class="label" for="title">Activity title</label>
+          <input
+            id="title"
+            class="field"
+            required
+            maxlength="120"
+            placeholder="e.g. Python fundamentals">
+        </div>
+
+        <div>
+          <label class="label" for="cohort">Learning group</label>
+          <select id="cohort" class="field">
+            <option value="existing">Python</option>
+            <option value="btech">Java</option>
+            <option value="ml">Machine Learning</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="two">
+        <div>
+          <label class="label" for="difficulty">Difficulty</label>
+          <select id="difficulty" class="field">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="label" for="count">Number of questions</label>
+          <input
+            id="count"
+            class="field"
+            type="number"
+            min="1"
+            max="20"
+            value="8"
+            required>
+        </div>
+      </div>
+
+      <div>
+        <label class="label" for="source">Topic or source material</label>
+        <textarea
+          id="source"
           class="field"
           required
-          maxlength="120"
-          placeholder="e.g. Python fundamentals">
+          maxlength="12000"
+          placeholder="Describe the topic or paste notes."></textarea>
       </div>
 
+      <div class="row">
+        <button class="btn primary" type="button" id="generate">
+          ✦ Generate with AI
+        </button>
+
+        <button class="btn" type="button" id="addQuestion">
+          + Add question manually
+        </button>
+
+        <button class="btn" type="button" id="saveDraft">
+          Save draft
+        </button>
+
+        <button class="btn primary" type="button" id="publish">
+          Publish activity
+        </button>
+      </div>
+
+    </form>
+
+    <div id="editor" style="margin-top:16px"></div>
+  </section>
+
+  <section id="studentPanel" class="panel hidden">
+    <div class="panel-head">
       <div>
-        <label class="label" for="cohort">Learning group</label>
-        <select id="cohort" class="field">
-          <option value="existing">Python</option>
-          <option value="btech">Java</option>
-          <option value="ml">Machine Learning</option>
-        </select>
+        <h2>Your activities</h2>
+        <p class="sub">
+          Published activities assigned to your learning group.
+        </p>
       </div>
     </div>
 
-    <div class="two">
+    <div id="studentList" class="grid"></div>
+  </section>
+
+  <section id="libraryPanel" class="panel hidden">
+    <div class="panel-head">
       <div>
-        <label class="label" for="difficulty">Difficulty</label>
-        <select id="difficulty" class="field">
-          <option>Beginner</option>
-          <option>Intermediate</option>
-          <option>Advanced</option>
-        </select>
+        <h2>Activity library</h2>
+        <p class="sub">
+          Drafts, published activities and student progress.
+        </p>
       </div>
+    </div>
 
+    <div id="mentorList" class="grid"></div>
+  </section>
+
+  <section id="attemptPanel" class="panel hidden">
+    <div class="panel-head">
       <div>
-        <label class="label" for="count">Number of questions</label>
-        <input
-          id="count"
-          class="field"
-          type="number"
-          min="1"
-          max="20"
-          value="8"
-          required>
+        <h2 id="attemptTitle">Activity</h2>
+        <p class="sub" id="attemptDesc"></p>
       </div>
-    </div>
 
-    <div>
-      <label class="label" for="source">Topic or source material</label>
-      <textarea
-        id="source"
-        class="field"
-        required
-        maxlength="12000"
-        placeholder="Describe the topic or paste notes."></textarea>
-    </div>
-
-    <div class="row">
-      <button class="btn primary" type="button" id="generate">
-        ✦ Generate with AI
-      </button>
-
-      <button class="btn" type="button" id="addQuestion">
-        + Add question manually
-      </button>
-
-      <button class="btn" type="button" id="saveDraft">
-        Save draft
-      </button>
-
-      <button class="btn primary" type="button" id="publish">
-        Publish activity
+      <button class="btn" id="back" type="button">
+        Back to activities
       </button>
     </div>
-  </form>
 
-  <div id="editor" style="margin-top:16px"></div>
-</section>
+    <div id="attemptQuestions"></div>
 
-<section id="studentPanel" class="panel hidden">
-  <div class="panel-head">
-    <div>
-      <h2>Your activities</h2>
-      <p class="sub">
-        Published activities assigned to your learning group.
-      </p>
-    </div>
-  </div>
-
-  <div id="studentList" class="grid"></div>
-</section>
-
-<section id="libraryPanel" class="panel hidden">
-  <div class="panel-head">
-    <div>
-      <h2>Activity library</h2>
-      <p class="sub">
-        Drafts, published activities and student progress.
-      </p>
-    </div>
-  </div>
-
-  <div id="mentorList" class="grid"></div>
-</section>
-
-<section id="attemptPanel" class="panel hidden">
-  <div class="panel-head">
-    <div>
-      <h2 id="attemptTitle">Activity</h2>
-      <p class="sub" id="attemptDesc"></p>
-    </div>
-
-    <button class="btn" id="back" type="button">
-      Back to activities
+    <button class="btn primary" id="submitAttempt" type="button">
+      Submit answers
     </button>
-  </div>
 
-  <div id="attemptQuestions"></div>
-
-  <button class="btn primary" id="submitAttempt" type="button">
-    Submit answers
-  </button>
-
-  <div id="attemptResult"></div>
-</section>
+    <div id="attemptResult"></div>
+  </section>
 
 </div>
 
@@ -465,28 +467,35 @@ let activities = [];
 let draftQuestions = [];
 let activeActivity = null;
 
-const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#39;'
-}[m]));
+const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+}[char]));
 
-const cohortName = c => ({
-  existing:'Python',
-  btech:'Java',
-  ml:'Machine Learning'
-}[c] || c);
+const cohortName = cohort => ({
+  existing: 'Python',
+  btech: 'Java',
+  ml: 'Machine Learning'
+}[cohort] || cohort);
 
 function toast(message) {
-  $('toast').textContent = message;
-  $('toast').classList.add('show');
+  const element = $('toast');
+
+  if (!element) {
+    alert(message);
+    return;
+  }
+
+  element.textContent = message;
+  element.classList.add('show');
 
   clearTimeout(window.toastTimer);
 
   window.toastTimer = setTimeout(() => {
-    $('toast').classList.remove('show');
+    element.classList.remove('show');
   }, 4500);
 }
 
@@ -494,17 +503,25 @@ function mentor() {
   return ['mentor', 'admin'].includes(role);
 }
 
+/* =====================================================
+   QUESTION EDITOR
+===================================================== */
+
 function qEditor() {
-  $('editor').innerHTML = draftQuestions.map((q, i) => `
+  const editor = $('editor');
+
+  if (!editor) return;
+
+  editor.innerHTML = draftQuestions.map((question, index) => `
     <div class="card" style="margin-bottom:10px">
 
       <div class="panel-head">
-        <b>Question ${i + 1}</b>
+        <b>Question ${index + 1}</b>
 
         <button
           class="btn"
           type="button"
-          onclick="removeQ(${i})">
+          onclick="removeQ(${index})">
           Remove
         </button>
       </div>
@@ -515,9 +532,9 @@ function qEditor() {
 
       <textarea
         class="field"
-        data-prompt="${i}"
+        data-prompt="${index}"
         placeholder="The keyword to define a function in Python is _____."
-      >${esc(q.prompt)}</textarea>
+      >${esc(question.prompt || '')}</textarea>
 
       <div class="two" style="margin-top:10px">
 
@@ -526,8 +543,8 @@ function qEditor() {
 
           <input
             class="field"
-            data-answer="${i}"
-            value="${esc(q.answer)}"
+            data-answer="${index}"
+            value="${esc(question.answer || '')}"
             placeholder="Correct answer">
         </div>
 
@@ -536,8 +553,8 @@ function qEditor() {
 
           <input
             class="field"
-            data-explanation="${i}"
-            value="${esc(q.explanation || '')}"
+            data-explanation="${index}"
+            value="${esc(question.explanation || '')}"
             placeholder="Why this answer is correct">
         </div>
 
@@ -549,56 +566,111 @@ function qEditor() {
     </div>
   `;
 
-  document.querySelectorAll(
-    '[data-prompt],[data-answer],[data-explanation]'
-  ).forEach(el => {
-    el.addEventListener('input', () => {
-      const i = Number(
-        el.dataset.prompt ??
-        el.dataset.answer ??
-        el.dataset.explanation
+  editor.querySelectorAll(
+    '[data-prompt], [data-answer], [data-explanation]'
+  ).forEach(field => {
+
+    field.addEventListener('input', () => {
+      const card = field.closest('.card');
+
+      if (!card) return;
+
+      const promptField =
+        card.querySelector('[data-prompt]');
+
+      const answerField =
+        card.querySelector('[data-answer]');
+
+      const explanationField =
+        card.querySelector('[data-explanation]');
+
+      const index = Number(
+        promptField?.dataset.prompt ??
+        answerField?.dataset.answer ??
+        explanationField?.dataset.explanation
       );
 
-      if (!draftQuestions[i]) return;
-
-      const prompt = $(`[data-prompt="${i}"]`);
-      const answer = $(`[data-answer="${i}"]`);
-      const explanation = $(`[data-explanation="${i}"]`);
-
-      if (prompt) draftQuestions[i].prompt = prompt.value;
-      if (answer) draftQuestions[i].answer = answer.value;
-
-      if (explanation) {
-        draftQuestions[i].explanation = explanation.value;
+      if (
+        !Number.isInteger(index) ||
+        index < 0 ||
+        !draftQuestions[index]
+      ) {
+        return;
       }
+
+      draftQuestions[index].prompt =
+        promptField ? promptField.value : '';
+
+      draftQuestions[index].answer =
+        answerField ? answerField.value : '';
+
+      draftQuestions[index].explanation =
+        explanationField ? explanationField.value : '';
     });
+
   });
 }
 
-window.removeQ = i => {
-  draftQuestions.splice(i, 1);
+window.removeQ = index => {
+  draftQuestions.splice(index, 1);
   qEditor();
 };
 
+/*
+ * Collect question fields safely.
+ * This avoids reading .value from a missing element.
+ */
+
 function gather() {
-  document.querySelectorAll('[data-prompt]').forEach(el => {
-    const i = Number(el.dataset.prompt);
+  const editor = $('editor');
 
-    if (!draftQuestions[i]) return;
+  if (!editor) return draftQuestions;
 
-    draftQuestions[i].prompt = el.value;
-    draftQuestions[i].answer =
-      $(`[data-answer="${i}"]`).value;
+  editor.querySelectorAll('.card').forEach(card => {
+    const promptField =
+      card.querySelector('[data-prompt]');
 
-    draftQuestions[i].explanation =
-      $(`[data-explanation="${i}"]`).value;
+    const answerField =
+      card.querySelector('[data-answer]');
+
+    const explanationField =
+      card.querySelector('[data-explanation]');
+
+    if (!promptField || !answerField) return;
+
+    const index = Number(promptField.dataset.prompt);
+
+    if (
+      !Number.isInteger(index) ||
+      index < 0 ||
+      !draftQuestions[index]
+    ) {
+      return;
+    }
+
+    draftQuestions[index].prompt =
+      promptField.value.trim();
+
+    draftQuestions[index].answer =
+      answerField.value.trim();
+
+    draftQuestions[index].explanation =
+      explanationField
+        ? explanationField.value.trim()
+        : '';
   });
 
   return draftQuestions;
 }
 
+/* =====================================================
+   LOAD ACCOUNT
+===================================================== */
+
 async function load() {
-  $('reload').disabled = true;
+  const reloadButton = $('reload');
+
+  reloadButton.disabled = true;
 
   try {
     const {
@@ -606,16 +678,16 @@ async function load() {
       error: authError
     } = await sb.auth.getUser();
 
-    if (authError) {
-      throw authError;
-    }
+    if (authError) throw authError;
 
     user = currentUser;
 
     if (!user) {
       $('authError').classList.remove('hidden');
+
       $('authError').textContent =
         'Please sign in to Circle first, then open this page again.';
+
       return;
     }
 
@@ -625,12 +697,12 @@ async function load() {
       .eq('id', user.id)
       .single();
 
-    if (result.error) {
-      throw result.error;
-    }
+    if (result.error) throw result.error;
 
     profile = result.data;
     role = profile.role || '';
+
+    // The role label has intentionally been removed.
 
     if (mentor()) {
       $('mentorPanel').classList.remove('hidden');
@@ -647,23 +719,28 @@ async function load() {
     await loadActivities();
 
   } catch (error) {
-    console.error('Page loading failed:', error);
+    console.error('Account loading failed:', error);
 
     $('authError').classList.remove('hidden');
+
     $('authError').textContent =
-      'Could not load your account: ' +
+      'Could not load account: ' +
       (error.message || 'Unknown error');
 
   } finally {
-    $('reload').disabled = false;
+    reloadButton.disabled = false;
   }
 }
+
+/* =====================================================
+   LOAD ACTIVITIES
+===================================================== */
 
 async function loadActivities() {
   let query = sb
     .from('circle_fill_blank_activities')
     .select('*')
-    .order('created_at', { ascending:false });
+    .order('created_at', { ascending: false });
 
   if (!mentor()) {
     query = query
@@ -674,7 +751,7 @@ async function loadActivities() {
   const result = await query;
 
   if (result.error) {
-    console.error('Loading activities failed:', result.error);
+    console.error('Activity loading failed:', result.error);
 
     const message = `
       <div class="empty">
@@ -691,48 +768,58 @@ async function loadActivities() {
   }
 
   activities = result.data || [];
+
   renderLists();
 }
+
+/* =====================================================
+   DISPLAY ACTIVITIES
+===================================================== */
 
 function renderLists() {
   if (mentor()) {
     $('mentorList').innerHTML = activities.length
-      ? activities.map(a => `
+      ? activities.map(activity => `
         <article class="card">
 
-          <div class="row" style="justify-content:space-between">
-            <span>${esc(cohortName(a.cohort))}</span>
-            <span>${a.is_published ? 'Published' : 'Draft'}</span>
+          <div class="row">
+            <span>${esc(cohortName(activity.cohort))}</span>
+
+            <span>
+              ${activity.is_published ? 'Published' : 'Draft'}
+            </span>
           </div>
 
-          <h3 style="margin-top:12px">${esc(a.title)}</h3>
+          <h3 style="margin-top:12px">
+            ${esc(activity.title)}
+          </h3>
 
           <p class="desc">
-            ${esc(a.description || 'Fill-in-the-blank practice')}
+            ${esc(activity.description || 'Fill-in-the-blank practice')}
           </p>
 
           <div class="meta">
-            ${(a.questions || []).length} questions ·
-            ${esc(a.difficulty || 'Beginner')}
+            ${(activity.questions || []).length} questions ·
+            ${esc(activity.difficulty || 'Beginner')}
           </div>
 
           <div class="row">
 
             <button
               class="btn"
-              onclick="editActivity('${a.id}')">
+              onclick="editActivity('${activity.id}')">
               Edit
             </button>
 
             <button
               class="btn primary"
-              onclick="togglePublish('${a.id}',${!a.is_published})">
-              ${a.is_published ? 'Unpublish' : 'Publish'}
+              onclick="togglePublish('${activity.id}',${!activity.is_published})">
+              ${activity.is_published ? 'Unpublish' : 'Publish'}
             </button>
 
             <button
               class="btn"
-              onclick="deleteActivity('${a.id}')">
+              onclick="deleteActivity('${activity.id}')">
               Delete
             </button>
 
@@ -747,23 +834,23 @@ function renderLists() {
 
   } else {
     $('studentList').innerHTML = activities.length
-      ? activities.map(a => `
+      ? activities.map(activity => `
         <article class="card">
 
-          <h3>${esc(a.title)}</h3>
+          <h3>${esc(activity.title)}</h3>
 
           <p class="desc">
-            ${esc(a.description || 'Practice recall with missing words.')}
+            ${esc(activity.description || 'Practice recall with missing words.')}
           </p>
 
           <div class="meta">
-            ${(a.questions || []).length} questions ·
-            ${esc(a.difficulty || 'Beginner')}
+            ${(activity.questions || []).length} questions ·
+            ${esc(activity.difficulty || 'Beginner')}
           </div>
 
           <button
             class="btn primary"
-            onclick="startActivity('${a.id}')">
+            onclick="startActivity('${activity.id}')">
             Start activity
           </button>
 
@@ -777,38 +864,56 @@ function renderLists() {
   }
 }
 
+/* =====================================================
+   EDIT ACTIVITY
+===================================================== */
+
 window.editActivity = id => {
-  const activity = activities.find(a => a.id === id);
+  const activity = activities.find(item => item.id === id);
 
   if (!activity) return;
 
-  $('title').value = activity.title;
-  $('cohort').value = activity.cohort;
+  $('title').value = activity.title || '';
+  $('cohort').value = activity.cohort || 'existing';
   $('difficulty').value = activity.difficulty || 'Beginner';
   $('source').value = activity.description || '';
-  $('count').value = (activity.questions || []).length;
+
+  draftQuestions = (activity.questions || []).map(question => ({
+    prompt: question.prompt || question.sentence || '',
+    answer: question.answer || '',
+    explanation: question.explanation || ''
+  }));
+
+  $('count').value = draftQuestions.length;
 
   $('createForm').dataset.editId = id;
 
-  draftQuestions = (activity.questions || []).map(q => ({
-    prompt: q.prompt || q.sentence || '',
-    answer: q.answer || '',
-    explanation: q.explanation || ''
-  }));
-
   qEditor();
 
-  window.scrollTo({ top:0, behavior:'smooth' });
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
 };
 
+/* =====================================================
+   SAVE DRAFT OR PUBLISH ACTIVITY
+===================================================== */
+
 async function save(publish) {
-  const button = publish ? $('publish') : $('saveDraft');
-  const originalText = button.textContent;
+  const button = publish
+    ? $('publish')
+    : $('saveDraft');
 
   if (button.disabled) return;
 
+  const originalText = button.textContent;
+
   button.disabled = true;
-  button.textContent = publish ? 'Publishing…' : 'Saving…';
+
+  button.textContent = publish
+    ? 'Publishing…'
+    : 'Saving…';
 
   try {
     const {
@@ -825,7 +930,9 @@ async function save(publish) {
 
     const questions = gather();
 
-    if (!$('title').value.trim()) {
+    const title = $('title').value.trim();
+
+    if (!title) {
       toast('Add an activity title.');
       $('title').focus();
       return;
@@ -836,20 +943,23 @@ async function save(publish) {
       return;
     }
 
-    const invalidIndex = questions.findIndex(q =>
-      !q ||
-      !q.prompt ||
-      !q.answer ||
-      !q.prompt.trim() ||
-      !q.answer.trim() ||
-      !q.prompt.includes('_____')
-    );
+    for (let index = 0; index < questions.length; index++) {
+      const question = questions[index];
 
-    if (invalidIndex !== -1) {
-      toast(
-        `Question ${invalidIndex + 1} needs a sentence containing _____ and a correct answer.`
-      );
-      return;
+      if (
+        !question ||
+        typeof question.prompt !== 'string' ||
+        typeof question.answer !== 'string' ||
+        !question.prompt.trim() ||
+        !question.answer.trim() ||
+        !question.prompt.includes('_____')
+      ) {
+        toast(
+          `Question ${index + 1} needs a sentence containing _____ and a correct answer.`
+        );
+
+        return;
+      }
     }
 
     const {
@@ -858,20 +968,20 @@ async function save(publish) {
     } = await sb.auth.getSession();
 
     if (sessionError || !session) {
-      toast('Your session has expired. Please sign in again.');
+      toast('Your session has expired. Sign in again, then retry.');
       return;
     }
 
     const payload = {
-      title: $('title').value.trim(),
+      title: title,
       description: $('source').value.trim(),
       cohort: $('cohort').value,
       difficulty: $('difficulty').value,
 
-      questions: questions.map(q => ({
-        prompt: q.prompt.trim(),
-        answer: q.answer.trim(),
-        explanation: (q.explanation || '').trim()
+      questions: questions.map(question => ({
+        prompt: question.prompt.trim(),
+        answer: question.answer.trim(),
+        explanation: (question.explanation || '').trim()
       })),
 
       is_published: Boolean(publish),
@@ -900,33 +1010,27 @@ async function save(publish) {
     if (result.error) {
       console.error('Activity save failed:', result.error);
 
-      const message = result.error.message || 'Unknown database error';
+      const message =
+        result.error.message || 'Unknown database error';
 
-      if (/row-level security|permission denied|not allowed/i.test(message)) {
-        toast(
-          'Supabase blocked the save because of database permissions. Check the activity table RLS policies.'
-        );
-      } else if (/column .* does not exist|schema cache/i.test(message)) {
-        toast(
-          'The activity table columns do not match the page. Check your setup SQL.'
-        );
-      } else {
-        toast('Save failed: ' + message);
-      }
+      toast('Save failed: ' + message);
 
       return;
     }
 
     if (!result.data) {
       toast(
-        'Supabase returned no saved activity. Check your table permissions.'
+        'No activity was saved. Check your Supabase table permissions.'
       );
+
       return;
     }
 
+    // Clear the editor only after Supabase confirms success.
     delete $('createForm').dataset.editId;
 
     draftQuestions = [];
+
     $('createForm').reset();
 
     qEditor();
@@ -940,11 +1044,11 @@ async function save(publish) {
     await loadActivities();
 
   } catch (error) {
-    console.error('Unexpected save error:', error);
+    console.error('Activity save failed:', error);
 
     toast(
       'Could not save: ' +
-      (error.message || 'Unexpected error')
+      (error.message || String(error))
     );
 
   } finally {
@@ -952,6 +1056,10 @@ async function save(publish) {
     button.textContent = originalText;
   }
 }
+
+/* =====================================================
+   PUBLISH OR UNPUBLISH AN EXISTING ACTIVITY
+===================================================== */
 
 window.togglePublish = async (id, publish) => {
   try {
@@ -968,11 +1076,18 @@ window.togglePublish = async (id, publish) => {
     }
 
     if (!result.data) {
-      toast('No activity was updated. Check database permissions.');
+      toast(
+        'No activity was updated. Check your Supabase permissions.'
+      );
+
       return;
     }
 
-    toast(publish ? 'Activity published.' : 'Activity unpublished.');
+    toast(
+      publish
+        ? 'Activity published.'
+        : 'Activity unpublished.'
+    );
 
     await loadActivities();
 
@@ -980,6 +1095,10 @@ window.togglePublish = async (id, publish) => {
     toast('Could not update activity: ' + error.message);
   }
 };
+
+/* =====================================================
+   DELETE ACTIVITY
+===================================================== */
 
 window.deleteActivity = async id => {
   if (!confirm('Delete this activity?')) return;
@@ -996,6 +1115,7 @@ window.deleteActivity = async id => {
     }
 
     toast('Activity deleted.');
+
     await loadActivities();
 
   } catch (error) {
@@ -1003,15 +1123,23 @@ window.deleteActivity = async id => {
   }
 };
 
+/* =====================================================
+   ADD MANUAL QUESTION
+===================================================== */
+
 $('addQuestion').onclick = () => {
   draftQuestions.push({
-    prompt:'',
-    answer:'',
-    explanation:''
+    prompt: '',
+    answer: '',
+    explanation: ''
   });
 
   qEditor();
 };
+
+/* =====================================================
+   GENERATE QUESTIONS USING GEMINI
+===================================================== */
 
 $('generate').onclick = async () => {
   if (!$('source').value.trim()) {
@@ -1037,20 +1165,20 @@ $('generate').onclick = async () => {
     const response = await fetch(
       `${SUPABASE_URL}/functions/v1/generate-fill-blanks`,
       {
-        method:'POST',
+        method: 'POST',
 
-        headers:{
-          'Content-Type':'application/json',
-          'Authorization':`Bearer ${session.access_token}`,
-          'apikey':SUPABASE_KEY
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
+          'apikey': SUPABASE_KEY
         },
 
-        body:JSON.stringify({
-          topic:$('source').value,
-          title:$('title').value,
-          difficulty:$('difficulty').value,
-          count:Number($('count').value),
-          cohort:$('cohort').value
+        body: JSON.stringify({
+          topic: $('source').value,
+          title: $('title').value,
+          difficulty: $('difficulty').value,
+          count: Number($('count').value),
+          cohort: $('cohort').value
         })
       }
     );
@@ -1059,27 +1187,40 @@ $('generate').onclick = async () => {
 
     if (!response.ok) {
       throw new Error(
-        data.error || data.message || 'AI generation failed.'
+        data.error ||
+        data.message ||
+        'AI generation failed.'
       );
     }
 
-    const questions = data.questions || data.items;
+    const generatedQuestions =
+      data.questions || data.items;
 
-    if (!Array.isArray(questions) || !questions.length) {
+    if (
+      !Array.isArray(generatedQuestions) ||
+      !generatedQuestions.length
+    ) {
       throw new Error('The AI response contained no questions.');
     }
 
-    draftQuestions = questions.map(q => ({
-      prompt:String(q.prompt || q.sentence || ''),
-      answer:String(q.answer || q.correct_answer || ''),
-      explanation:String(q.explanation || '')
+    draftQuestions = generatedQuestions.map(question => ({
+      prompt: String(
+        question.prompt || question.sentence || ''
+      ),
+
+      answer: String(
+        question.answer || question.correct_answer || ''
+      ),
+
+      explanation: String(question.explanation || '')
     }));
 
     qEditor();
 
     toast(
-      'Generated ' + draftQuestions.length +
-      ' questions. Review them before saving.'
+      'Generated ' +
+      draftQuestions.length +
+      ' questions. Review before saving.'
     );
 
   } catch (error) {
@@ -1096,11 +1237,18 @@ $('generate').onclick = async () => {
   }
 };
 
+/* Connect the save buttons. */
+
 $('saveDraft').onclick = () => save(false);
+
 $('publish').onclick = () => save(true);
 
-window.startActivity = async id => {
-  activeActivity = activities.find(a => a.id === id);
+/* =====================================================
+   STUDENT ACTIVITY
+===================================================== */
+
+window.startActivity = id => {
+  activeActivity = activities.find(item => item.id === id);
 
   if (!activeActivity) return;
 
@@ -1116,16 +1264,20 @@ window.startActivity = async id => {
   $('submitAttempt').disabled = false;
 
   $('attemptQuestions').innerHTML =
-    (activeActivity.questions || []).map((q, i) => `
+    (activeActivity.questions || []).map((question, index) => `
       <div class="q">
-        <b>${i + 1}.</b>
-        ${esc((q.prompt || q.sentence || '').replace(/_____+/g, '___'))}
+        <b>${index + 1}.</b>
+
+        ${esc(
+          (question.prompt || question.sentence || '')
+            .replace(/_____+/g, '___')
+        )}
 
         <br>
 
         <input
           class="field"
-          data-student-answer="${i}"
+          data-student-answer="${index}"
           placeholder="Type the missing word"
           autocomplete="off"
           style="max-width:320px;margin-top:8px">
@@ -1144,6 +1296,10 @@ $('back').onclick = () => {
   }
 };
 
+/* =====================================================
+   SUBMIT STUDENT ANSWERS
+===================================================== */
+
 $('submitAttempt').onclick = async () => {
   if (!activeActivity || !user) {
     toast('Please sign in again.');
@@ -1159,72 +1315,106 @@ $('submitAttempt').onclick = async () => {
   const normalise = value =>
     String(value || '')
       .trim()
-      .toLocaleLowerCase()
+      .toLowerCase()
       .replace(/\s+/g, ' ');
 
-  const score = questions.reduce((total, question, i) => {
+  const score = questions.reduce((total, question, index) => {
     return total +
-      (normalise(answers[i]) === normalise(question.answer) ? 1 : 0);
+      (
+        normalise(answers[index]) ===
+        normalise(question.answer)
+          ? 1
+          : 0
+      );
   }, 0);
 
-  const result = await sb
-    .from('circle_fill_blank_attempts')
-    .insert({
-      activity_id:activeActivity.id,
-      student_user_id:user.id,
-      answers,
-      score,
-      total_questions:questions.length,
-      submitted_at:new Date().toISOString()
-    });
+  try {
+    const result = await sb
+      .from('circle_fill_blank_attempts')
+      .insert({
+        activity_id: activeActivity.id,
+        student_user_id: user.id,
+        answers: answers,
+        score: score,
+        total_questions: questions.length,
+        submitted_at: new Date().toISOString()
+      });
 
-  if (result.error) {
-    toast('Could not save attempt: ' + result.error.message);
-    return;
-  }
+    if (result.error) {
+      toast(
+        'Could not save attempt: ' + result.error.message
+      );
 
-  $('attemptResult').innerHTML = `
-    <div class="card" style="margin-top:16px">
-      <div class="eyebrow">Your result</div>
+      return;
+    }
 
-      <div style="font:500 42px 'Playfair Display',serif;color:var(--green)">
-        ${score} / ${questions.length}
-      </div>
+    $('attemptResult').innerHTML = `
+      <div class="card" style="margin-top:16px">
 
-      <p class="desc">
-        ${Math.round(score / Math.max(1, questions.length) * 100)}% correct
-      </p>
+        <div class="eyebrow">Your result</div>
 
-      ${questions.map((q, i) => `
-        <div class="q">
-          <b>
-            ${normalise(answers[i]) === normalise(q.answer)
-              ? 'Correct'
-              : 'Review answer'}
-          </b>
-
-          <br>
-
-          Your answer: ${esc(answers[i] || '—')}
-
-          <br>
-
-          Correct answer: ${esc(q.answer)}
-
-          ${q.explanation ? '<br>' + esc(q.explanation) : ''}
+        <div style="font:500 42px 'Playfair Display',serif;color:var(--green)">
+          ${score} / ${questions.length}
         </div>
-      `).join('')}
-    </div>
-  `;
 
-  $('submitAttempt').disabled = true;
+        <p class="desc">
+          ${Math.round(
+            score / Math.max(1, questions.length) * 100
+          )}% correct
+        </p>
 
-  toast('Answers submitted.');
+        ${questions.map((question, index) => `
+          <div class="q">
+
+            <b>
+              ${
+                normalise(answers[index]) ===
+                normalise(question.answer)
+                  ? 'Correct'
+                  : 'Review answer'
+              }
+            </b>
+
+            <br>
+
+            Your answer: ${esc(answers[index] || '—')}
+
+            <br>
+
+            Correct answer: ${esc(question.answer)}
+
+            ${
+              question.explanation
+                ? '<br>' + esc(question.explanation)
+                : ''
+            }
+
+          </div>
+        `).join('')}
+
+      </div>
+    `;
+
+    $('submitAttempt').disabled = true;
+
+    toast('Answers submitted.');
+
+  } catch (error) {
+    console.error('Attempt submission failed:', error);
+
+    toast(
+      'Could not submit answers: ' +
+      (error.message || String(error))
+    );
+  }
 };
+
+/* Refresh and initialise the page. */
 
 $('reload').onclick = load;
 
 load();
 </script>
+
 </body>
 </html>
