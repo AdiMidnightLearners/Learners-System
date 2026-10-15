@@ -962,4 +962,269 @@ window.togglePublish = async (id, publish) => {
       .select()
       .maybeSingle();
 
-    if (res
+    if (result.error) {
+      toast('Publish update failed: ' + result.error.message);
+      return;
+    }
+
+    if (!result.data) {
+      toast('No activity was updated. Check database permissions.');
+      return;
+    }
+
+    toast(publish ? 'Activity published.' : 'Activity unpublished.');
+
+    await loadActivities();
+
+  } catch (error) {
+    toast('Could not update activity: ' + error.message);
+  }
+};
+
+window.deleteActivity = async id => {
+  if (!confirm('Delete this activity?')) return;
+
+  try {
+    const result = await sb
+      .from('circle_fill_blank_activities')
+      .delete()
+      .eq('id', id);
+
+    if (result.error) {
+      toast('Delete failed: ' + result.error.message);
+      return;
+    }
+
+    toast('Activity deleted.');
+    await loadActivities();
+
+  } catch (error) {
+    toast('Could not delete activity: ' + error.message);
+  }
+};
+
+$('addQuestion').onclick = () => {
+  draftQuestions.push({
+    prompt:'',
+    answer:'',
+    explanation:''
+  });
+
+  qEditor();
+};
+
+$('generate').onclick = async () => {
+  if (!$('source').value.trim()) {
+    toast('Enter a topic or source material first.');
+    return;
+  }
+
+  const {
+    data: { session }
+  } = await sb.auth.getSession();
+
+  if (!session) {
+    toast('Please sign in again.');
+    return;
+  }
+
+  const button = $('generate');
+
+  button.disabled = true;
+  button.textContent = 'Generating…';
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/functions/v1/generate-fill-blanks`,
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':'application/json',
+          'Authorization':`Bearer ${session.access_token}`,
+          'apikey':SUPABASE_KEY
+        },
+
+        body:JSON.stringify({
+          topic:$('source').value,
+          title:$('title').value,
+          difficulty:$('difficulty').value,
+          count:Number($('count').value),
+          cohort:$('cohort').value
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error || data.message || 'AI generation failed.'
+      );
+    }
+
+    const questions = data.questions || data.items;
+
+    if (!Array.isArray(questions) || !questions.length) {
+      throw new Error('The AI response contained no questions.');
+    }
+
+    draftQuestions = questions.map(q => ({
+      prompt:String(q.prompt || q.sentence || ''),
+      answer:String(q.answer || q.correct_answer || ''),
+      explanation:String(q.explanation || '')
+    }));
+
+    qEditor();
+
+    toast(
+      'Generated ' + draftQuestions.length +
+      ' questions. Review them before saving.'
+    );
+
+  } catch (error) {
+    console.error('AI generation failed:', error);
+
+    toast(
+      error.message ||
+      'AI generation failed. Check the Edge Function logs.'
+    );
+
+  } finally {
+    button.disabled = false;
+    button.textContent = '✦ Generate with AI';
+  }
+};
+
+$('saveDraft').onclick = () => save(false);
+$('publish').onclick = () => save(true);
+
+window.startActivity = async id => {
+  activeActivity = activities.find(a => a.id === id);
+
+  if (!activeActivity) return;
+
+  $('attemptPanel').classList.remove('hidden');
+  $('mentorPanel').classList.add('hidden');
+  $('studentPanel').classList.add('hidden');
+  $('libraryPanel').classList.add('hidden');
+
+  $('attemptTitle').textContent = activeActivity.title;
+  $('attemptDesc').textContent = activeActivity.description || '';
+  $('attemptResult').innerHTML = '';
+
+  $('submitAttempt').disabled = false;
+
+  $('attemptQuestions').innerHTML =
+    (activeActivity.questions || []).map((q, i) => `
+      <div class="q">
+        <b>${i + 1}.</b>
+        ${esc((q.prompt || q.sentence || '').replace(/_____+/g, '___'))}
+
+        <br>
+
+        <input
+          class="field"
+          data-student-answer="${i}"
+          placeholder="Type the missing word"
+          autocomplete="off"
+          style="max-width:320px;margin-top:8px">
+      </div>
+    `).join('');
+};
+
+$('back').onclick = () => {
+  $('attemptPanel').classList.add('hidden');
+
+  if (mentor()) {
+    $('mentorPanel').classList.remove('hidden');
+    $('libraryPanel').classList.remove('hidden');
+  } else {
+    $('studentPanel').classList.remove('hidden');
+  }
+};
+
+$('submitAttempt').onclick = async () => {
+  if (!activeActivity || !user) {
+    toast('Please sign in again.');
+    return;
+  }
+
+  const questions = activeActivity.questions || [];
+
+  const answers = [
+    ...document.querySelectorAll('[data-student-answer]')
+  ].map(input => input.value.trim());
+
+  const normalise = value =>
+    String(value || '')
+      .trim()
+      .toLocaleLowerCase()
+      .replace(/\s+/g, ' ');
+
+  const score = questions.reduce((total, question, i) => {
+    return total +
+      (normalise(answers[i]) === normalise(question.answer) ? 1 : 0);
+  }, 0);
+
+  const result = await sb
+    .from('circle_fill_blank_attempts')
+    .insert({
+      activity_id:activeActivity.id,
+      student_user_id:user.id,
+      answers,
+      score,
+      total_questions:questions.length,
+      submitted_at:new Date().toISOString()
+    });
+
+  if (result.error) {
+    toast('Could not save attempt: ' + result.error.message);
+    return;
+  }
+
+  $('attemptResult').innerHTML = `
+    <div class="card" style="margin-top:16px">
+      <div class="eyebrow">Your result</div>
+
+      <div style="font:500 42px 'Playfair Display',serif;color:var(--green)">
+        ${score} / ${questions.length}
+      </div>
+
+      <p class="desc">
+        ${Math.round(score / Math.max(1, questions.length) * 100)}% correct
+      </p>
+
+      ${questions.map((q, i) => `
+        <div class="q">
+          <b>
+            ${normalise(answers[i]) === normalise(q.answer)
+              ? 'Correct'
+              : 'Review answer'}
+          </b>
+
+          <br>
+
+          Your answer: ${esc(answers[i] || '—')}
+
+          <br>
+
+          Correct answer: ${esc(q.answer)}
+
+          ${q.explanation ? '<br>' + esc(q.explanation) : ''}
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  $('submitAttempt').disabled = true;
+
+  toast('Answers submitted.');
+};
+
+$('reload').onclick = load;
+
+load();
+</script>
+</body>
+</html>
