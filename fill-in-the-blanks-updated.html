@@ -1,0 +1,207 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fill in the Blanks</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');:root{--bg:#f6f4ef;--paper:#fffdf8;--ink:#20231f;--muted:#77766d;--line:#e2dfd6;--green:#163d35;--pale:#e8eee8;--gold:#9b8352;--shadow:0 16px 44px rgba(35,34,25,.055)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px 'DM Sans',sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{width:min(1080px,calc(100% - 32px));margin:auto}.top{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{font:500 32px 'Playfair Display',serif;letter-spacing:-.04em}.pill,.btn{border:1px solid var(--line);border-radius:999px;padding:10px 15px;background:var(--paper);color:var(--ink);font-size:12px;font-weight:700}.btn.primary{background:var(--green);color:#fff;border-color:var(--green)}.intro{padding:42px 0 24px;display:flex;justify-content:space-between;align-items:end;gap:20px}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:10px;font-weight:700;color:var(--green)}h1{font:500 clamp(36px,6vw,56px)/1.04 'Playfair Display',serif;letter-spacing:-.04em;margin:10px 0}.intro p,.sub{color:var(--muted);line-height:1.7;margin:0}.tag,.badge{display:inline-flex;border-radius:999px;padding:7px 10px;background:var(--pale);color:var(--green);font-size:10px;font-weight:700}.panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:22px;margin-bottom:16px}.panel-head{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:16px}.panel h2{font:500 25px 'Playfair Display',serif;margin:0 0 5px}.form{display:grid;gap:13px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:var(--muted);margin-bottom:6px}.field{width:100%;border:1px solid var(--line);background:white;border-radius:12px;padding:12px 13px;outline:0;color:var(--ink)}.field:focus{border-color:#81958a;box-shadow:0 0 0 3px #e8eee8}textarea.field{min-height:95px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:16px;padding:18px;background:#fffefa;min-width:0}.card h3{margin:0 0 8px;font-size:16px}.meta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;color:var(--muted);font-size:11px}.desc{font-size:12px;line-height:1.7;color:var(--muted);white-space:pre-wrap}.empty{padding:24px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);text-align:center;line-height:1.7}.hidden{display:none!important}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.blank{display:inline-block;min-width:110px;max-width:180px;border:0;border-bottom:2px solid #91a79a;background:#f2f5ef;border-radius:7px;padding:7px 9px;outline:0}.q{border:1px solid var(--line);border-radius:14px;padding:16px;margin:10px 0;background:white;line-height:2}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;border-radius:999px;padding:12px 17px;font-size:12px;display:none;max-width:90%;z-index:10}.toast.show{display:block}@media(max-width:720px){.wrap{width:calc(100% - 22px)}.intro{padding:30px 0 20px;align-items:start;flex-direction:column}.panel{padding:16px}.two,.grid{grid-template-columns:1fr}}
+
+/* Responsive layout safeguards */
+@media(max-width:680px){.wrap{width:min(100% - 24px,1080px)}.top{height:auto;min-height:64px;gap:10px;flex-wrap:wrap;padding:12px 0}.brand{font-size:28px}.intro{display:block;padding:28px 0 18px}.intro .tag{margin-top:14px}.panel{padding:16px;border-radius:16px}.two,.grid{grid-template-columns:1fr}.row{display:flex;flex-wrap:wrap;gap:8px}.row .btn{max-width:100%;white-space:normal}h1{font-size:clamp(36px,11vw,48px)}.field{min-width:0} }
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:8px 0 20px}.stat{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px}.stat strong{display:block;font:500 30px 'Playfair Display',serif;margin-bottom:4px}.stat span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid var(--line);border-radius:999px;padding:12px 17px;background:var(--paper);color:var(--muted);font:500 13px 'DM Sans',sans-serif}.tab.active{background:var(--green);color:white;border-color:var(--green)}.result-row{padding:16px 0;border-bottom:1px solid var(--line)}.result-row:last-child{border-bottom:0}.result-title{font-weight:600;margin:8px 0}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.filter.active{background:var(--green);color:#fff;border-color:var(--green)}
+@media(max-width:720px){.stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.stat{padding:12px 10px}.stat strong{font-size:25px}.stat span{font-size:9px}.tabs{gap:8px}.tab{padding:11px 13px}}
+</style></head><body><div class="wrap"><header class="top"><div class="row"><button class="btn" id="reload">Refresh</button></div></header><section class="intro"><div><div class="eyebrow">Practice · recall · master</div><h1>Fill in the<br>blanks.</h1><p>Build stronger recall with focused, AI-assisted practice. Mentors can prepare and publish activities; students can complete assigned activities and review their results.</p></div></section><section id="stats" class="stats hidden"><div class="stat"><strong id="statActivities">0</strong><span>Available activities</span></div><div class="stat"><strong id="statAttempts">0</strong><span>Attempts used</span></div><div class="stat"><strong id="statAverage">—</strong><span>Average score</span></div></section><nav id="mentorTabs" class="tabs hidden" aria-label="Activity navigation"><button class="tab active" data-view="library" type="button">Activity library</button><button class="tab" data-view="create" type="button">Create activity</button><button class="tab" data-view="results" type="button">All results</button></nav><nav id="studentTabs" class="tabs hidden" aria-label="Activity navigation"><button class="tab active" data-view="student" type="button">Activity library</button></nav><div id="authError" class="panel hidden"></div><section id="mentorPanel" class="panel hidden"><div class="panel-head"><div><h2>Create an activity</h2><p class="sub">Generate draft questions from a topic or your own learning material. Review answers before publishing.</p></div></div><form id="createForm" class="form"><div class="two"><div><label class="label">Activity title</label><input id="title" class="field" required maxlength="120" placeholder="e.g. Python fundamentals"></div><div><label class="label">Learning group</label><select id="cohort" class="field"><option value="existing">Python</option><option value="btech">Java</option><option value="ml">Machine Learning</option></select></div></div><div class="two"><div><label class="label">Difficulty</label><select id="difficulty" class="field"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></div><div><label class="label">Number of questions</label><input id="count" class="field" type="number" min="1" max="30" value="8" required></div></div><div><label class="label">Topic or source material</label><textarea id="source" class="field" required maxlength="12000" placeholder="Describe the topic or paste notes. AI generation requires the generate-fill-blanks Supabase Edge Function to be deployed."></textarea></div><div class="row"><button class="btn primary" type="button" id="generate">✦ Generate with AI</button><button class="btn" type="button" id="addQuestion">+ Add question manually</button><button class="btn" type="button" id="saveDraft">Save draft</button><button class="btn primary" type="button" id="publish">Publish activity</button></div></form><div id="editor" style="margin-top:16px"></div></section><section id="studentPanel" class="panel hidden"><div class="panel-head"><div><h2>Your activities</h2><p class="sub">Published activities assigned to your learning group.</p></div></div><div id="studentList" class="grid"></div></section><section id="libraryPanel" class="panel hidden"><div class="panel-head"><div><h2>Activity library</h2><p class="sub">Drafts, published activities and student progress.</p></div></div><div id="mentorList" class="grid"></div></section><section id="resultsPanel" class="panel hidden"><div class="panel-head"><div><h2>All student results</h2><p class="sub">Review submitted attempts by learning group and student.</p></div></div><div class="filters"><button class="btn filter active" data-result-cohort="all" type="button">All groups</button><button class="btn filter" data-result-cohort="existing" type="button">Python</button><button class="btn filter" data-result-cohort="btech" type="button">Java</button><button class="btn filter" data-result-cohort="ml" type="button">Machine Learning</button></div><input id="resultSearch" class="field" placeholder="Search student or activity title..."><div id="resultsList" style="margin-top:12px"></div></section><section id="attemptPanel" class="panel hidden"><div class="panel-head"><div><h2 id="attemptTitle">Activity</h2><p class="sub" id="attemptDesc"></p></div><button class="btn" id="back">Back to activities</button></div><div id="attemptQuestions"></div><button class="btn primary" id="submitAttempt">Submit answers</button><div id="attemptResult"></div></section></div><div id="toast" class="toast" role="status" aria-live="polite"></div><script>
+const SUPABASE_URL='https://idnzjzcryvgceryaftop.supabase.co',SUPABASE_KEY='sb_publishable_HgIwYunyGeB2HHxJvDVczA_4EY-7jc1';const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY),$=id=>document.getElementById(id);let user,profile,role='',activities=[],draftQuestions=[],activeActivity=null,attempts=[],resultCohort='all',currentView='library';const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));const cohortName=c=>({existing:'Python',btech:'Java',ml:'Machine Learning'}[c]||c);function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),3200)}function mentor(){return ['mentor','admin'].includes(role)}function qEditor() {
+  const editor = $('editor');
+  if (!editor) return;
+
+  editor.innerHTML = draftQuestions.map((q, i) => `
+    <div class="card" style="margin-bottom:10px">
+      <div class="panel-head">
+        <b>Question ${i + 1}</b>
+        <button class="btn" type="button" onclick="removeQ(${i})">Remove</button>
+      </div>
+      <label class="label">Sentence with a blank marked as _____</label>
+      <textarea class="field" data-prompt="${i}" placeholder="The keyword to define a function in Python is _____.">${esc(q.prompt || '')}</textarea>
+      <div class="two" style="margin-top:10px">
+        <div>
+          <label class="label">Correct answer</label>
+          <input class="field" data-answer="${i}" value="${esc(q.answer || '')}" placeholder="Correct answer">
+        </div>
+        <div>
+          <label class="label">Explanation (optional)</label>
+          <input class="field" data-explanation="${i}" value="${esc(q.explanation || '')}" placeholder="Why this answer is correct">
+        </div>
+      </div>
+    </div>
+  `).join('') || '<div class="empty">No questions yet. Generate with AI or add one manually.</div>';
+
+  editor.querySelectorAll('[data-prompt], [data-answer], [data-explanation]').forEach(field => {
+    field.addEventListener('input', () => {
+      const card = field.closest('.card');
+      if (!card) return;
+
+      const promptField = card.querySelector('[data-prompt]');
+      const answerField = card.querySelector('[data-answer]');
+      const explanationField = card.querySelector('[data-explanation]');
+      const index = Number(
+        promptField?.dataset.prompt ??
+        answerField?.dataset.answer ??
+        explanationField?.dataset.explanation
+      );
+
+      if (!Number.isInteger(index) || index < 0 || !draftQuestions[index]) return;
+
+      draftQuestions[index].prompt = promptField ? promptField.value : '';
+      draftQuestions[index].answer = answerField ? answerField.value : '';
+      draftQuestions[index].explanation = explanationField ? explanationField.value : '';
+    });
+  });
+}
+
+window.removeQ = i => {
+  draftQuestions.splice(i, 1);
+  qEditor();
+};
+
+function gather() {
+  const editor = $('editor');
+  if (!editor) return draftQuestions;
+
+  editor.querySelectorAll('.card').forEach(card => {
+    const promptField = card.querySelector('[data-prompt]');
+    const answerField = card.querySelector('[data-answer]');
+    const explanationField = card.querySelector('[data-explanation]');
+
+    // Skip cards that do not contain a question editor.
+    if (!promptField || !answerField) return;
+
+    const index = Number(promptField.dataset.prompt);
+    if (!Number.isInteger(index) || index < 0 || !draftQuestions[index]) return;
+
+    draftQuestions[index].prompt = promptField.value.trim();
+    draftQuestions[index].answer = answerField.value.trim();
+    draftQuestions[index].explanation = explanationField
+      ? explanationField.value.trim()
+      : '';
+  });
+
+  return draftQuestions;
+}
+async function load(){const {data:{user:u},error:authErr}=await sb.auth.getUser();user=u;if(authErr){$('authError').classList.remove('hidden');$('authError').textContent='Could not verify sign-in: '+authErr.message;return}if(!user){$('authError').classList.remove('hidden');$('authError').textContent='Please sign in to Circle first, then open this page again.';return}const r=await sb.from('profiles').select('id,role,cohort,full_name').eq('id',user.id).single();if(r.error){$('authError').classList.remove('hidden');$('authError').textContent='Could not load profile: '+r.error.message;return}profile=r.data;role=profile.role||'';$('authError').classList.add('hidden');$('stats').classList.remove('hidden');if(mentor()){$('mentorTabs').classList.remove('hidden');$('studentTabs').classList.add('hidden');await showView('library')}else{$('studentTabs').classList.remove('hidden');$('mentorTabs').classList.add('hidden');await showView('student')}await loadActivities();await loadResults()}
+async function showView(view){currentView=view;$('mentorPanel').classList.toggle('hidden',!(mentor()&&view==='create'));$('libraryPanel').classList.toggle('hidden',!(mentor()&&view==='library'));$('resultsPanel').classList.toggle('hidden',!(mentor()&&view==='results'));$('studentPanel').classList.toggle('hidden',!( !mentor()&&view==='student'));$('attemptPanel').classList.add('hidden');document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));if(view==='results')await loadResults()}
+async function loadActivities(){let query=sb.from('circle_fill_blank_activities').select('*').order('created_at',{ascending:false});if(!mentor())query=query.eq('cohort',profile.cohort).eq('is_published',true);let r=await query;if(r.error){$('mentorList').innerHTML='';$('studentList').innerHTML=`<div class="empty" style="grid-column:1/-1">Activity storage is not set up yet. Run the supplied setup SQL before using this module.<br><small>${esc(r.error.message)}</small></div>`;return}activities=r.data||[];renderLists();updateStats()}function renderLists(){if(mentor())$('mentorList').innerHTML=activities.length?activities.map(a=>`<article class="card"><div class="row" style="justify-content:space-between"><span class="badge">${cohortName(a.cohort)}</span><span class="badge">${a.is_published?'Published':'Draft'}</span></div><h3 style="margin-top:12px">${esc(a.title)}</h3><p class="desc">${esc(a.description||'Fill-in-the-blank practice')}</p><div class="meta">${(a.questions||[]).length} questions · ${esc(a.difficulty||'Beginner')}</div><div class="row"><button class="btn" onclick="editActivity('${a.id}')">Edit</button><button class="btn primary" onclick="togglePublish('${a.id}',${!a.is_published})">${a.is_published?'Unpublish':'Publish'}</button><button class="btn" onclick="deleteActivity('${a.id}')">Delete</button></div></article>`).join(''):'<div class="empty" style="grid-column:1/-1">No activities yet. Create your first activity above.</div>';else $('studentList').innerHTML=activities.length?activities.map(a=>`<article class="card"><span class="badge">${cohortName(a.cohort)}</span><h3 style="margin-top:12px">${esc(a.title)}</h3><div class="meta">${(a.questions||[]).length} questions · ${esc(a.difficulty||'Beginner')}</div><button class="btn primary" onclick="startActivity('${a.id}')">Start activity ↗</button></article>`).join(''):'<div class="empty" style="grid-column:1/-1">No published activities for your learning group yet.</div>'}function updateStats(){const published=activities.filter(a=>a.is_published);$('statActivities').textContent=mentor()?published.length:activities.length;$('statAttempts').textContent=attempts.length;const submitted=attempts.filter(a=>Number.isFinite(Number(a.score))&&Number(a.total_questions)>0);if(submitted.length){const avg=submitted.reduce((sum,a)=>sum+(Number(a.score)/Number(a.total_questions))*100,0)/submitted.length;$('statAverage').textContent=Math.round(avg)+'%'}else $('statAverage').textContent='—'}
+async function loadResults(){if(!mentor())return;const list=$('resultsList');if(!list)return;list.innerHTML='<div class="empty">Loading results…</div>';const r=await sb.from('circle_fill_blank_attempts').select('id,activity_id,student_user_id,answers,score,total_questions,submitted_at').order('submitted_at',{ascending:false});if(r.error){attempts=[];list.innerHTML='<div class="empty">Could not load results: '+esc(r.error.message)+'</div>';updateStats();return}const rows=r.data||[];const userIds=[...new Set(rows.map(a=>a.student_user_id).filter(Boolean))];const activityIds=[...new Set(rows.map(a=>a.activity_id).filter(Boolean))];let profileMap={},activityMap={};if(userIds.length){const pr=await sb.from('profiles').select('id,full_name,cohort').in('id',userIds);if(!pr.error)(pr.data||[]).forEach(p=>profileMap[p.id]=p)}if(activityIds.length){activities.filter(a=>activityIds.includes(a.id)).forEach(a=>activityMap[a.id]=a);const missing=activityIds.filter(id=>!activityMap[id]);if(missing.length){const ar=await sb.from('circle_fill_blank_activities').select('id,title,cohort').in('id',missing);if(!ar.error)(ar.data||[]).forEach(a=>activityMap[a.id]=a)}}attempts=rows.map(a=>({...a,student:profileMap[a.student_user_id]||{},activity:activityMap[a.activity_id]||{title:'Activity',cohort:''}}));renderResults();updateStats()}
+function renderResults(){const search=($('resultSearch')?.value||'').trim().toLowerCase();const filtered=attempts.filter(a=>{const cohort=a.activity?.cohort||a.student?.cohort||'';const matchesCohort=resultCohort==='all'||cohort===resultCohort;const text=((a.student?.full_name||'Student')+' '+(a.activity?.title||'Activity')).toLowerCase();return matchesCohort&&text.includes(search)});$('resultsList').innerHTML=filtered.length?filtered.map(a=>{const score=Number(a.score)||0,total=Number(a.total_questions)||0;const status=total>0?'Submitted':'In progress';const date=a.submitted_at?new Date(a.submitted_at).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'';return `<div class="result-row"><strong>${esc(a.student?.full_name||'Student')}</strong> <span class="badge">${esc(cohortName(a.activity?.cohort||a.student?.cohort||'—'))}</span><div class="result-title">${esc(a.activity?.title||'Activity')} · ${score}/${total} · ${status}</div><div class="sub">${esc(date)}</div></div>`}).join(''):'<div class="empty">No results match your search.</div>'}
+document.querySelectorAll('#mentorTabs [data-view],#studentTabs [data-view]').forEach(button=>button.addEventListener('click',()=>showView(button.dataset.view)));document.querySelectorAll('[data-result-cohort]').forEach(button=>button.addEventListener('click',()=>{resultCohort=button.dataset.resultCohort;document.querySelectorAll('[data-result-cohort]').forEach(b=>b.classList.toggle('active',b===button));renderResults()}));$('resultSearch').addEventListener('input',renderResults);
+window.editActivity=id=>{let a=activities.find(x=>x.id===id);if(!a)return;$('title').value=a.title;$('cohort').value=a.cohort;$('difficulty').value=a.difficulty||'Beginner';$('source').value=a.description||'';$('count').value=(a.questions||[]).length;$('createForm').dataset.editId=id;draftQuestions=(a.questions||[]).map(q=>({...q}));qEditor();window.scrollTo({top:0,behavior:'smooth'})};async function save(publish){
+  const saveButton = publish ? $('publish') : $('saveDraft');
+  const originalText = saveButton.textContent;
+  saveButton.disabled = true;
+  saveButton.textContent = publish ? 'Publishing…' : 'Saving…';
+
+  try {
+    if (!user) {
+      const { data: { user: currentUser }, error: authError } = await sb.auth.getUser();
+      if (authError || !currentUser) {
+        toast('Please sign in again before saving.');
+        return;
+      }
+      user = currentUser;
+    }
+
+    const qs = gather();
+
+    if (!$('title').value.trim()) {
+      toast('Add an activity title.');
+      $('title').focus();
+      return;
+    }
+
+    if (!qs.length) {
+      toast('Add at least one question before saving.');
+      return;
+    }
+
+    const invalidIndex = qs.findIndex(q =>
+      !q ||
+      typeof q.prompt !== 'string' ||
+      typeof q.answer !== 'string' ||
+      !q.prompt.trim() ||
+      !q.answer.trim() ||
+      !q.prompt.includes('_____')
+    );
+
+    if (invalidIndex !== -1) {
+      toast(`Question ${invalidIndex + 1} needs a sentence containing _____ and a correct answer.`);
+      return;
+    }
+
+    const { data: { session }, error: sessionError } = await sb.auth.getSession();
+    if (sessionError || !session) {
+      toast('Your session has expired. Sign in again, then retry.');
+      return;
+    }
+
+    const payload = {
+      title: $('title').value.trim(),
+      description: $('source').value.trim(),
+      cohort: $('cohort').value,
+      difficulty: $('difficulty').value,
+      questions: qs.map(q => ({
+        prompt: q.prompt.trim(),
+        answer: q.answer.trim(),
+        explanation: (q.explanation || '').trim()
+      })),
+      is_published: Boolean(publish),
+      created_by: user.id
+    };
+
+    const id = $('createForm').dataset.editId;
+    let result;
+
+    if (id) {
+      result = await sb
+        .from('circle_fill_blank_activities')
+        .update(payload)
+        .eq('id', id)
+        .select()
+        .maybeSingle();
+    } else {
+      result = await sb
+        .from('circle_fill_blank_activities')
+        .insert(payload)
+        .select()
+        .single();
+    }
+
+    if (result.error) {
+      console.error('Activity save failed:', result.error);
+      const msg = result.error.message || 'Unknown database error';
+      if (/row-level security|permission denied|not allowed/i.test(msg)) {
+        toast('Supabase blocked the save (permissions/RLS). Check the activity table policies.');
+      } else if (/column .* does not exist|schema cache/i.test(msg)) {
+        toast('The activity table columns do not match this page. Check the setup SQL.');
+      } else {
+        toast('Save failed: ' + msg);
+      }
+      return;
+    }
+
+    if (!result.data) {
+      toast('Supabase returned no saved activity. Check table permissions and policies.');
+      return;
+    }
+
+    delete $('createForm').dataset.editId;
+    draftQuestions = [];
+    $('createForm').reset();
+    qEditor();
+    toast(publish ? 'Activity published successfully.' : 'Draft saved successfully.');
+    await loadActivities();
+  } catch (error) {
+    console.error('Unexpected activity save error:', error);
+    toast('Could not save: ' + (error instanceof Error ? error.message : String(error)));
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = originalText;
+  }
+}
+window.togglePublish=async(id,pub)=>{let r=await sb.from('circle_fill_blank_activities').update({is_published:pub}).eq('id',id);if(r.error)return toast(r.error.message);loadActivities()};window.deleteActivity=async id=>{if(!confirm('Delete this activity?'))return;let r=await sb.from('circle_fill_blank_activities').delete().eq('id',id);if(r.error)return toast(r.error.message);loadActivities()};$('addQuestion').onclick=()=>{draftQuestions.push({prompt:'',answer:'',explanation:''});qEditor()};$('generate').onclick=async()=>{if(!$('source').value.trim())return toast('Enter a topic or source material first.');let {data:{session}}=await sb.auth.getSession();if(!session)return toast('Please sign in again.');$('generate').disabled=true;$('generate').textContent='Generating…';try{let res=await fetch(`${SUPABASE_URL}/functions/v1/generate-fill-blanks`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.access_token}`,'apikey':SUPABASE_KEY},body:JSON.stringify({topic:$('source').value,title:$('title').value,difficulty:$('difficulty').value,count:Number($('count').value),cohort:$('cohort').value})});let data=await res.json();if(!res.ok)throw Error(data.error||data.message||'AI generation failed');let arr=data.questions||data.items;if(!Array.isArray(arr)||!arr.length)throw Error('The AI response contained no questions.');draftQuestions=arr.map(q=>({prompt:String(q.prompt||q.sentence||''),answer:String(q.answer||q.correct_answer||''),explanation:String(q.explanation||'')}));qEditor();toast('Generated '+draftQuestions.length+' questions. Review before publishing.')}catch(e){toast(e.message+' (Ensure the generate-fill-blanks Edge Function is deployed.)')}finally{$('generate').disabled=false;$('generate').textContent='✦ Generate with AI'}};$('saveDraft').onclick=()=>save(false);$('publish').onclick=()=>save(true);window.startActivity=async id=>{activeActivity=activities.find(x=>x.id===id);if(!activeActivity)return;$('attemptPanel').classList.remove('hidden');$('mentorPanel').classList.add('hidden');$('studentPanel').classList.add('hidden');$('libraryPanel').classList.add('hidden');$('resultsPanel').classList.add('hidden');$('mentorTabs').classList.add('hidden');$('studentTabs').classList.add('hidden');$('attemptTitle').textContent=activeActivity.title;$('attemptDesc').textContent='';$('attemptResult').innerHTML='';$('attemptQuestions').innerHTML=(activeActivity.questions||[]).map((q,i)=>`<div class="q"><b>${i+1}.</b> ${esc(q.prompt.replace(/_____+/g,'___'))}<br><input class="field" data-student-answer="${i}" placeholder="Type the missing word" autocomplete="off" style="max-width:320px;margin-top:8px"></div>`).join('');};$('back').onclick=async()=>{ $('attemptPanel').classList.add('hidden');$('studentTabs').classList.remove('hidden');await showView('student')};$('submitAttempt').onclick=async()=>{let qs=activeActivity.questions||[],answers=[...document.querySelectorAll('[data-student-answer]')].map(x=>x.value.trim()),score=qs.reduce((n,q,i)=>n+(answers[i].toLocaleLowerCase().replace(/\s+/g,' ')==String(q.answer).trim().toLocaleLowerCase().replace(/\s+/g,' ')?1:0),0);let result=await sb.from('circle_fill_blank_attempts').insert({activity_id:activeActivity.id,student_user_id:user.id,answers,score,total_questions:qs.length,submitted_at:new Date().toISOString()});if(result.error)return toast('Could not save attempt: '+result.error.message);$('attemptResult').innerHTML=`<div class="card" style="margin-top:16px"><div class="eyebrow">Your result</div><div style="font:500 42px 'Playfair Display',serif;color:var(--green)">${score} / ${qs.length}</div><p class="desc">${Math.round(score/Math.max(1,qs.length)*100)}% correct</p>${qs.map((q,i)=>`<div class="q"><b>${i+1}. ${answers[i].toLocaleLowerCase()===String(q.answer).trim().toLocaleLowerCase()?'Correct':'Review answer'}</b><br>Your answer: ${esc(answers[i]||'—')}<br>Correct answer: ${esc(q.answer)}${q.explanation?'<br>'+esc(q.explanation):''}</div>`).join('')}</div>`;$('submitAttempt').disabled=true;toast('Answers submitted');await loadResults()};$('reload').onclick=load;load();
+</script></body></html>
