@@ -348,44 +348,6 @@ textarea.field {
   cursor:default;
 }
 
-/* Spacing refinements: student results and mentor evaluation */
-#submit {
-  display:block;
-  margin:18px 0 24px;
-  max-width:100%;
-}
-
-#studentResult {
-  display:grid;
-  gap:16px;
-  margin:0 0 8px;
-}
-
-#studentResult > .card {
-  margin:0;
-}
-
-#reviewSearch {
-  display:block;
-  margin-bottom:18px;
-}
-
-#reviewList > .card {
-  margin-bottom:18px;
-}
-
-#reviewList #evalForm {
-  margin-top:18px;
-}
-
-#evalForm > .question + .question {
-  margin-top:2px;
-}
-
-#evalForm .question .card {
-  margin-top:16px;
-}
-
 @media (min-width:600px) {
   #evalForm .evaluation-actions {
     align-items:flex-start;
@@ -1333,13 +1295,6 @@ async function studentStats() {
 async function loadReviews() {
   if (!mentor()) return;
 
-  // Always start with All groups so a previously selected cohort filter
-  // cannot hide a student's submission after refresh/navigation.
-  rf = 'all';
-  document.querySelectorAll('[data-rfilter]').forEach(b => {
-    b.classList.toggle('active', b.dataset.rfilter === 'all');
-  });
-
   $('reviewList').innerHTML = '<div class="empty">Loading submissions…</div>';
 
   try {
@@ -1387,62 +1342,34 @@ async function loadReviews() {
 
 function renderReviews() {
   const search = $('reviewSearch').value.toLowerCase().trim();
-
-  // Build a lookup using normalized IDs. Supabase UUIDs are strings, but
-  // normalizing here avoids accidental mismatches from different value types.
-  const testMap = new Map();
-  [...(tests || []), ...(allTests || [])].forEach(t => {
-    if (t && t.id != null) testMap.set(String(t.id).trim().toLowerCase(), t);
-  });
-  const profileMap = new Map((students || []).map(p => [
-    String(p.id || '').trim().toLowerCase(), p
-  ]));
-
-  const selectedCohort = String(rf || 'all').toLowerCase().trim();
+  const testMap = new Map(allTests.map(t => [t.id,t]));
+  const profileMap = new Map(students.map(p => [p.id,p]));
 
   const rows = submissions.filter(s => {
-    const testId = String(s.test_id || '').trim().toLowerCase();
-    const test = testMap.get(testId);
-    if (!test) {
-      console.warn('Test record missing for submission:', s.id, s.test_id);
-      return false;
-    }
+    const t = testMap.get(s.test_id);
+    const p = profileMap.get(s.student_user_id);
+    const cohort = t?.cohort || p?.cohort || '';
 
-    const student = profileMap.get(
-      String(s.student_user_id || '').trim().toLowerCase()
-    );
-
-    // The test's database cohort is authoritative: existing=Python,
-    // btech=Java, ml=Machine Learning. Never infer from the title.
-    const testCohort = String(test.cohort || '').toLowerCase().trim();
-    const matchesCohort =
-      selectedCohort === 'all' || testCohort === selectedCohort;
-
-    const matchesSearch =
-      `${student?.full_name || 'Student'} ${test.title || 'Test'}`
-        .toLowerCase()
-        .includes(search);
-
-    return matchesCohort && matchesSearch;
+    return (rf === 'all' || cohort === rf) &&
+      `${p?.full_name || 'Student'} ${t?.title || 'Test'}`
+        .toLowerCase().includes(search);
   });
 
   $('reviewList').innerHTML = rows.length ? rows.map(s => {
-    const test = testMap.get(String(s.test_id || '').trim().toLowerCase());
-    const student = profileMap.get(
-      String(s.student_user_id || '').trim().toLowerCase()
-    );
+    const t = testMap.get(s.test_id);
+    const p = profileMap.get(s.student_user_id);
 
     return `
       <article class="resultitem">
         <div class="row">
-          <strong>${esc(student?.full_name || 'Student')}</strong>
+          <strong>${esc(p?.full_name || 'Student')}</strong>
           <span class="status ${s.status === 'evaluated' ? 'right' : 'pending'}">
             ${s.status === 'evaluated' ? 'Evaluated' : 'Needs evaluation'}
           </span>
         </div>
-        <h3>${esc(test?.title || 'Test')}</h3>
+        <h3>${esc(t?.title || 'Test')}</h3>
         <div class="meta">
-          ${esc(cohortName(test?.cohort))} · ${esc(fmt(s.submitted_at))}
+          ${esc(cohortName(t?.cohort || p?.cohort))} · ${esc(fmt(s.submitted_at))}
           ${s.status === 'evaluated'
             ? ` · ${Number(s.total_marks || 0)}/${Number(s.max_marks || 0)} marks`
             : ''}
@@ -1452,13 +1379,7 @@ function renderReviews() {
         </button>
       </article>
     `;
-  }).join('') : `
-    <div class="empty">
-      No submissions match this view.
-      ${selectedCohort === 'all'
-        ? 'If a submission is missing, check the browser console and Supabase SELECT policies for circle_test_submissions and circle_tests.'
-        : `This filter only shows tests whose saved cohort is "${esc(selectedCohort)}".`}
-    </div>`;
+  }).join('') : '<div class="empty">No matching submissions.</div>';
 }
 
 $('reviewList').addEventListener('click',e => {
