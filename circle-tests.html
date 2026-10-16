@@ -1387,18 +1387,37 @@ async function loadReviews() {
 
 function renderReviews() {
   const search = $('reviewSearch').value.toLowerCase().trim();
-  const testMap = new Map(allTests.map(t => [t.id, t]));
-  const profileMap = new Map(students.map(p => [p.id, p]));
 
-  // Always filter by the cohort saved on the submitted test record.
-  // Do not infer a cohort from a title or from the student's profile.
+  // Build a lookup using normalized IDs. Supabase UUIDs are strings, but
+  // normalizing here avoids accidental mismatches from different value types.
+  const testMap = new Map();
+  [...(tests || []), ...(allTests || [])].forEach(t => {
+    if (t && t.id != null) testMap.set(String(t.id).trim().toLowerCase(), t);
+  });
+  const profileMap = new Map((students || []).map(p => [
+    String(p.id || '').trim().toLowerCase(), p
+  ]));
+
+  const selectedCohort = String(rf || 'all').toLowerCase().trim();
+
   const rows = submissions.filter(s => {
-    const test = testMap.get(s.test_id);
-    const student = profileMap.get(s.student_user_id);
-    if (!test) return false;
+    const testId = String(s.test_id || '').trim().toLowerCase();
+    const test = testMap.get(testId);
+    if (!test) {
+      console.warn('Test record missing for submission:', s.id, s.test_id);
+      return false;
+    }
 
+    const student = profileMap.get(
+      String(s.student_user_id || '').trim().toLowerCase()
+    );
+
+    // The test's database cohort is authoritative: existing=Python,
+    // btech=Java, ml=Machine Learning. Never infer from the title.
     const testCohort = String(test.cohort || '').toLowerCase().trim();
-    const matchesCohort = rf === 'all' || testCohort === rf;
+    const matchesCohort =
+      selectedCohort === 'all' || testCohort === selectedCohort;
+
     const matchesSearch =
       `${student?.full_name || 'Student'} ${test.title || 'Test'}`
         .toLowerCase()
@@ -1408,8 +1427,10 @@ function renderReviews() {
   });
 
   $('reviewList').innerHTML = rows.length ? rows.map(s => {
-    const test = testMap.get(s.test_id);
-    const student = profileMap.get(s.student_user_id);
+    const test = testMap.get(String(s.test_id || '').trim().toLowerCase());
+    const student = profileMap.get(
+      String(s.student_user_id || '').trim().toLowerCase()
+    );
 
     return `
       <article class="resultitem">
@@ -1433,8 +1454,10 @@ function renderReviews() {
     `;
   }).join('') : `
     <div class="empty">
-      No submissions match this view. Submissions are grouped by the cohort saved on each test.
-      If a test is assigned to the wrong cohort, edit that test's cohort in the Test library.
+      No submissions match this view.
+      ${selectedCohort === 'all'
+        ? 'If a submission is missing, check the browser console and Supabase SELECT policies for circle_test_submissions and circle_tests.'
+        : `This filter only shows tests whose saved cohort is "${esc(selectedCohort)}".`}
     </div>`;
 }
 
