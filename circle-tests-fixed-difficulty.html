@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Circle — Tests</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
+
+:root {
+  --bg:#f5f3ed;
+  --paper:#fffdf8;
+  --ink:#22231f;
+  --muted:#77766d;
+  --line:#e4e0d6;
+  --green:#173f35;
+  --greenbg:#e5f1e9;
+  --red:#b63838;
+  --redbg:#fae8e6;
+  --amber:#9a6b12;
+  --amberbg:#fff1cf;
+  --blue:#3e6895;
+  --bluebg:#e7eef9;
+  --gold:#9b8352;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:14px 'DM Sans',sans-serif;
+}
+
+button,input,textarea,select { font:inherit; }
+button { cursor:pointer; }
+button:disabled { opacity:.65; cursor:default; }
+
+.wrap {
+  width:min(1080px,calc(100% - 28px));
+  margin:auto;
+}
+
+header,.row,.head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+header {
+  padding:17px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.brand {
+  font:500 30px 'Playfair Display',serif;
+}
+
+.brand span { color:var(--gold); }
+
+.row { justify-content:flex-start; }
+
+.btn {
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:12px 17px;
+  min-height:44px;
+  background:var(--paper);
+  color:var(--ink);
+  font-size:12px;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  text-decoration:none;
+  line-height:1.35;
+}
+
+.btn.primary,.btn.active {
+  background:var(--green);
+  border-color:var(--green);
+  color:white;
+}
+
+.btn:focus-visible,.field:focus-visible {
+  outline:3px solid #9ab6a8;
+  outline-offset:2px;
+}
+
+.badge,.status {
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:7px 11px;
+  background:var(--greenbg);
+  color:var(--green);
+  font-size:10px;
+  font-weight:700;
+}
+
+.intro { padding:32px 0 20px; }
+
+.eyebrow {
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.17em;
+  color:var(--green);
+}
+
+h1 {
+  font:500 clamp(38px,7vw,58px)/1.04 'Playfair Display',serif;
+  letter-spacing:-.04em;
+  margin:10px 0;
+}
+
+h2 {
+  font:500 26px 'Playfair Display',serif;
+  margin:0 0 6px;
+}
+
+h3 { margin:10px 0; }
+
+.intro p,.sub,.hint {
+  color:var(--muted);
+  line-height:1.7;
+  margin:0;
+}
+
+.panel {
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:22px;
+  margin-bottom:17px;
+  box-shadow:0 8px 28px #1e1e1406;
+}
+
+.head {
+  margin-bottom:17px;
+  align-items:flex-start;
+}
+
+.tabs {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:18px 0;
+}
+
+.stats,.grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin:18px 0;
+}
+
+.grid {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  margin:14px 0;
+}
+
+.stat,.card,.question {
+  background:#fffefa;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:17px;
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+
+.stat strong {
+  display:block;
+  font:500 28px 'Playfair Display',serif;
+}
+
+.stat span,.label {
+  font-size:10px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.form { display:grid; gap:14px; }
+
+.two {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.label {
+  display:block;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.field {
+  width:100%;
+  min-width:0;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:white;
+  color:var(--ink);
+  outline:0;
+  font-size:16px;
+}
+
+.field:focus {
+  border-color:#8b9b8d;
+  box-shadow:0 0 0 3px var(--greenbg);
+}
+
+textarea.field {
+  min-height:105px;
+  resize:vertical;
+}
+
+.meta {
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  color:var(--muted);
+  font-size:11px;
+  margin:10px 0;
+}
+
+.empty {
+  grid-column:1/-1;
+  border:1px dashed var(--line);
+  border-radius:15px;
+  padding:24px;
+  text-align:center;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.hidden { display:none!important; }
+
+.question {
+  background:white;
+  margin:12px 0;
+  line-height:1.7;
+}
+
+.question textarea { min-height:120px; }
+
+.status.pending,.markbox.pending {
+  background:var(--bluebg);
+  color:var(--blue);
+}
+
+.status.right,.markbox.right {
+  background:var(--greenbg);
+  color:var(--green);
+}
+
+.status.wrong,.markbox.wrong {
+  background:var(--redbg);
+  color:var(--red);
+}
+
+.status.partial,.markbox.partial {
+  background:var(--amberbg);
+  color:var(--amber);
+}
+
+.markbox {
+  padding:14px;
+  border-radius:13px;
+  margin-top:12px;
+}
+
+.resultitem {
+  padding:17px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.resultitem:last-child { border:0; }
+
+.toast {
+  display:none;
+  position:fixed;
+  z-index:99;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:92%;
+  padding:14px 17px;
+  border-radius:14px;
+  background:var(--green);
+  color:white;
+  box-shadow:0 8px 30px #0002;
+  line-height:1.5;
+}
+
+.toast.show { display:block; }
+
+/* --------------------------------------------------
+   FIX 1: Student submitted status and final result.
+   The submit button is separated from the result card.
+-------------------------------------------------- */
+
+#testPanel > #submit {
+  display:flex;
+  width:fit-content;
+  max-width:100%;
+  margin:22px 0 26px;
+  position:relative;
+  clear:both;
+}
+
+#testPanel > #studentResult {
+  display:block;
+  clear:both;
+  width:100%;
+  margin:0 0 12px;
+}
+
+#studentResult > .card {
+  margin:0;
+  padding:24px;
+}
+
+#studentResult .eyebrow {
+  margin-bottom:12px;
+}
+
+#studentResult h2 {
+  margin:10px 0 18px;
+  font-size:36px;
+  line-height:1.2;
+}
+
+#studentResult .sub {
+  margin-top:8px;
+  overflow-wrap:anywhere;
+}
+
+#testPanel > #submit:disabled {
+  opacity:1;
+  background:#82978f;
+  border-color:#82978f;
+  color:white;
+  cursor:default;
+}
+
+/* --------------------------------------------------
+   FIX 2: Mentor submission heading and question cards.
+-------------------------------------------------- */
+
+#reviewList > .card {
+  margin:0 0 24px;
+  padding:22px;
+}
+
+#reviewList > #evalForm {
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  margin:0;
+}
+
+#evalForm > .question {
+  margin:0;
+  padding:22px;
+  line-height:1.7;
+}
+
+/* Separate the question heading from its prompt. */
+#evalForm > .question > strong {
+  display:block;
+  margin-bottom:16px;
+}
+
+#evalForm > .question > p {
+  margin:14px 0 22px;
+}
+
+/* Mentor rubric and student answer cards. */
+#evalForm > .question > .card {
+  margin:18px 0 0;
+  padding:18px;
+}
+
+#evalForm > .question > .card p {
+  margin:12px 0 0;
+}
+
+/* Keep verdict and marks fields comfortably separated. */
+#evalForm > .question > .two {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:16px;
+  margin-top:22px !important;
+}
+
+#evalForm > .question > .two > div {
+  min-width:0;
+}
+
+#evalForm > .question > div:not(.head):not(.two):not(.card) {
+  margin-top:20px !important;
+}
+
+/* Feedback textareas have clear space above them. */
+#evalForm textarea.field {
+  display:block;
+  margin-top:8px;
+  min-height:120px;
+}
+
+/* Overall feedback card is separated from the questions. */
+#evalForm > .question:last-of-type {
+  margin-top:0;
+}
+
+#evalForm > .question:last-of-type > .label {
+  margin-bottom:12px;
+}
+
+/* --------------------------------------------------
+   FIX 3: Evaluation buttons.
+   They are stacked with a clear gap on mobile.
+-------------------------------------------------- */
+
+#evalForm .evaluation-actions {
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:12px;
+  margin-top:0;
+  padding-top:2px;
+}
+
+#evalForm .evaluation-actions .btn {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-width:0;
+  min-height:52px;
+  margin:0;
+  padding:14px 18px;
+  white-space:normal;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+
+#evalForm .evaluation-actions button[type="submit"] {
+  order:1;
+}
+
+#evalForm .evaluation-actions #cancelEval {
+  order:2;
+}
+
+/* Inputs remain easy to use on mobile. */
+#evalForm .field {
+  font-size:16px;
+}
+
+@media (min-width:600px) {
+  #evalForm .evaluation-actions {
+    align-items:flex-start;
+  }
+
+  #evalForm .evaluation-actions .btn {
+    width:auto;
+    min-width:220px;
+    max-width:100%;
+  }
+
+  #testPanel > #submit {
+    margin-bottom:28px;
+  }
+}
+
+@media (max-width:680px) {
+  .wrap { width:calc(100% - 22px); }
+
+  .panel { padding:16px; }
+
+  .two,.grid,.stats { grid-template-columns:1fr; }
+
+  .head { flex-wrap:wrap; }
+
+  .tabs .btn { flex:1 1 auto; }
+
+  #form > .row { gap:9px; }
+
+  #form > .row .btn { flex:1 1 42%; }
+
+  .question { padding:15px; }
+
+  #evalForm > .question { padding:17px; }
+
+  #evalForm > .question > .two {
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  #evalForm > .question > .card {
+    padding:16px;
+  }
+
+  #reviewList > .card {
+    padding:18px;
+    margin-bottom:20px;
+  }
+
+  #reviewList > #evalForm {
+    gap:20px;
+  }
+
+  #testPanel > #submit {
+    width:100%;
+    min-height:50px;
+    justify-content:center;
+    margin:22px 0 24px;
+  }
+
+  #studentResult > .card {
+    padding:20px;
+  }
+
+  #studentResult h2 {
+    font-size:32px;
+  }
+
+  .stat strong { font-size:25px; }
+}
+
+
+
+/* One custom menu only: native browser dropdowns are visually and interactively disabled. */
+.select-wrap { position:relative; width:100%; min-width:0; }
+.select-wrap > select.field {
+  position:absolute !important;
+  width:1px !important; height:1px !important;
+  padding:0 !important; margin:0 !important;
+  opacity:0 !important; pointer-events:none !important;
+  left:0; bottom:0; border:0 !important;
+}
+.select-trigger {
+  width:100%; min-height:50px; display:flex; align-items:center;
+  justify-content:space-between; gap:12px; text-align:left;
+  padding:13px 16px; border:1px solid var(--line); border-radius:13px;
+  background:var(--paper); color:var(--ink); font:inherit; font-size:16px;
+}
+.select-trigger:focus-visible { outline:3px solid #9ab6a8; outline-offset:2px; }
+.select-trigger .select-chevron {
+  width:10px; height:10px; flex:0 0 10px;
+  border-right:2px solid currentColor; border-bottom:2px solid currentColor;
+  transform:rotate(45deg) translateY(-2px);
+}
+.circle-menu-backdrop {
+  position:fixed; inset:0; z-index:9999; display:flex;
+  align-items:center; justify-content:center; padding:22px;
+  background:rgba(30,32,29,.42);
+  -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px);
+  animation:circleFadeIn .14s ease-out;
+}
+.circle-menu {
+  width:min(640px,100%); max-height:min(78dvh,720px); overflow:auto;
+  padding:8px 0; border-radius:34px; background:#fffefa;
+  border:1px solid rgba(228,224,214,.9);
+  box-shadow:0 18px 60px rgba(0,0,0,.2);
+  animation:circleMenuIn .16s ease-out;
+}
+.circle-menu-option {
+  width:100%; min-height:79px; display:flex; align-items:center;
+  justify-content:space-between; gap:18px; padding:18px 22px;
+  border:0; border-bottom:1px solid #e7e3da; background:transparent;
+  color:var(--ink); text-align:left; font:400 20px/1.35 'DM Sans',sans-serif;
+}
+.circle-menu-option:last-child { border-bottom:0; }
+.circle-menu-option[aria-selected="true"] { background:#e5ebe5; color:#173f35; font-weight:600; }
+.circle-menu-option:active { background:#e5ebe5; }
+.circle-menu-check {
+  width:22px; height:22px; flex:0 0 22px; display:inline-flex;
+  align-items:center; justify-content:center; border:2px solid #858b86;
+  border-radius:50%; color:transparent; font:700 13px 'DM Sans',sans-serif;
+}
+.circle-menu-option[aria-selected="true"] .circle-menu-check {
+  border-color:#173f35; color:#173f35; background:transparent;
+}
+@keyframes circleFadeIn { from {opacity:0} to {opacity:1} }
+@keyframes circleMenuIn { from {opacity:.7;transform:translateY(6px) scale(.99)} to {opacity:1;transform:none} }
+@media(max-width:600px) {
+ .circle-menu-backdrop { padding:16px; }
+ .circle-menu { border-radius:32px; max-height:76dvh; }
+ .circle-menu-option { min-height:79px; padding:18px 20px; font-size:19px; }
+}
+@media(prefers-reduced-motion:reduce) { .circle-menu-backdrop,.circle-menu {animation:none} }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">Circle<span>.</span></div>
+  <div class="row">
+    <span class="badge" id="roleBadge">Connecting…</span>
+    <button class="btn" id="refresh" type="button">Refresh</button>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="eyebrow">Think · explain · demonstrate</div>
+  <h1>Tests.</h1>
+  <p>Open-ended assessments. Students write in their own words; mentors review and grade.</p>
+</section>
+
+<section id="error" class="panel hidden" role="alert"></section>
+
+<div id="stats" class="stats hidden">
+  <div class="stat"><strong id="sTests">0</strong><span>Available tests</span></div>
+  <div class="stat"><strong id="sSub">0</strong><span>Submissions</span></div>
+  <div class="stat"><strong id="sEval">0</strong><span>Evaluated</span></div>
+</div>
+
+<nav id="tabs" class="tabs hidden" aria-label="Mentor test navigation">
+  <button class="btn active" type="button" data-tab="library">Test library</button>
+  <button class="btn" type="button" data-tab="create">Create test</button>
+  <button class="btn" type="button" data-tab="reviews">Evaluate submissions</button>
+</nav>
+
+<section id="editor" class="panel hidden">
+  <div class="head">
+    <div>
+      <h2 id="editorTitle">Create a test</h2>
+      <p class="sub">Generate open-ended questions with Gemini, then review and publish.</p>
+    </div>
+  </div>
+
+  <form id="form" class="form">
+    <div>
+      <label class="label" for="title">Test title</label>
+      <input id="title" class="field" required maxlength="140" placeholder="e.g. Python written assessment">
+    </div>
+
+    <div class="two">
+      <div>
+        <label class="label" for="cohort">Learning group</label>
+        <select id="cohort" class="field">
+          <option value="existing">Python</option>
+          <option value="btech">Java</option>
+          <option value="ml">Machine Learning</option>
+        </select>
+      </div>
+      <div>
+        <label class="label" for="difficulty">Difficulty</label>
+        <select id="difficulty" class="field">
+          <option>Beginner</option>
+          <option selected>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="two">
+      <div>
+        <label class="label" for="count">Number of questions</label>
+        <input id="count" class="field" type="number" min="1" max="20" value="5">
+      </div>
+      <div>
+        <label class="label" for="duration">Suggested time (minutes)</label>
+        <input id="duration" class="field" type="number" min="1" max="300" value="30">
+      </div>
+    </div>
+
+    <div>
+      <label class="label" for="instructions">Student instructions</label>
+      <textarea id="instructions" class="field" maxlength="2000" placeholder="Expected answer depth, rules, or guidance."></textarea>
+    </div>
+
+    <div>
+      <label class="label" for="source">Topic/source material — mentor only</label>
+      <textarea id="source" class="field" maxlength="12000" placeholder="Topic or notes for Gemini."></textarea>
+    </div>
+
+    <div class="row">
+      <button class="btn primary" id="generate" type="button">✦ Generate with Gemini</button>
+      <button class="btn" id="addQuestion" type="button">+ Add question</button>
+      <button class="btn" id="save" type="button">Save draft</button>
+      <button class="btn primary" id="publish" type="button">Publish test</button>
+      <button class="btn hidden" id="cancel" type="button">Cancel editing</button>
+    </div>
+  </form>
+
+  <div id="questions"></div>
+</section>
+
+<section id="library" class="panel hidden">
+  <div class="head">
+    <div>
+      <h2>Test library</h2>
+      <p class="sub">Manage drafts and published tests.</p>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom:13px">
+    <button class="btn active" type="button" data-cfilter="all">All groups</button>
+    <button class="btn" type="button" data-cfilter="existing">Python</button>
+    <button class="btn" type="button" data-cfilter="btech">Java</button>
+    <button class="btn" type="button" data-cfilter="ml">Machine Learning</button>
+  </div>
+
+  <input id="search" class="field" aria-label="Search tests" placeholder="Search tests…">
+  <div id="mentorList" class="grid"></div>
+</section>
+
+<section id="student" class="panel hidden">
+  <div class="head">
+    <div>
+      <h2>Your tests</h2>
+      <p class="sub">Your results become visible after mentor evaluation.</p>
+    </div>
+  </div>
+  <div id="studentList" class="grid"></div>
+</section>
+
+<section id="testPanel" class="panel hidden">
+  <div class="head">
+    <div>
+      <h2 id="activeTitle">Test</h2>
+      <p class="sub" id="activeInfo"></p>
+    </div>
+    <button class="btn" id="back" type="button">Back</button>
+  </div>
+  <div id="testBody"></div>
+  <button class="btn primary" id="submit" type="button">Submit answers</button>
+  <div id="studentResult"></div>
+</section>
+
+<section id="reviews" class="panel hidden">
+  <div class="head">
+    <div>
+      <h2>Evaluate submissions</h2>
+      <p class="sub">Review each student's written answers.</p>
+    </div>
+    <button class="btn" id="refreshReviews" type="button">Refresh</button>
+  </div>
+
+  <div class="row" style="margin-bottom:13px">
+    <button class="btn active" type="button" data-rfilter="all">All groups</button>
+    <button class="btn" type="button" data-rfilter="existing">Python</button>
+    <button class="btn" type="button" data-rfilter="btech">Java</button>
+    <button class="btn" type="button" data-rfilter="ml">Machine Learning</button>
+  </div>
+
+  <input id="reviewSearch" class="field" aria-label="Search submissions" placeholder="Search student or test…">
+  <div id="reviewList"></div>
+</section>
+
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+
+const SUPABASE_URL = 'https://idnzjzcryvgceryaftop.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_HgIwYunyGeB2HHxJvDVczA_4EY-7jc1';
+
+const $ = id => document.getElementById(id);
+
+const cohortName = v => ({
+  existing:'Python',
+  btech:'Java',
+  ml:'Machine Learning'
+}[v] || v || 'Unknown');
+
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({
+  '&':'&amp;',
+  '<':'&lt;',
+  '>':'&gt;',
+  '"':'&quot;',
+  "'":'&#39;'
+}[c]));
+
+const fmt = v => {
+  const d = new Date(v);
+  return v && !isNaN(d) ? d.toLocaleString() : 'Date unavailable';
+};
+
+let db = null;
+let user = null;
+let profile = null;
+let role = '';
+let tests = [];
+let qs = [];
+let active = null;
+let submission = null;
+let submissions = [];
+let students = [];
+let allTests = [];
+let tab = 'library';
+let cf = 'all';
+let rf = 'all';
+let busy = false;
+let initBusy = false;
+
+const mentor = () => ['mentor','admin'].includes(role);
+
+function toast(message) {
+  $('toast').textContent = message;
+  $('toast').classList.add('show');
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => $('toast').classList.remove('show'),4500);
+}
+
+function showError(message) {
+  $('roleBadge').textContent = 'Error';
+  $('error').classList.remove('hidden');
+  $('error').replaceChildren();
+
+  const title = document.createElement('strong');
+  title.textContent = 'Tests could not load';
+
+  const p = document.createElement('p');
+  p.className = 'sub';
+  p.style.marginTop = '8px';
+  p.textContent = message;
+
+  $('error').append(title,p);
+}
+
+function panel(id) {
+  ['editor','library','student','testPanel','reviews'].forEach(x => {
+    $(x).classList.add('hidden');
+  });
+  if (id) $(id).classList.remove('hidden');
+}
+
+function withTimeout(promise,ms,message) {
+  let timer;
+  return Promise.race([
+    promise,
+    new Promise((_,reject) => {
+      timer = setTimeout(() => reject(new Error(message)),ms);
+    })
+  ]).finally(() => clearTimeout(timer));
+}
+
+function openTab(t) {
+  if (!mentor()) return;
+
+  tab = t;
+
+  document.querySelectorAll('[data-tab]').forEach(b => {
+    b.classList.toggle('active',b.dataset.tab === t);
+  });
+
+  if (t === 'create') {
+    panel('editor');
+  } else if (t === 'library') {
+    panel('library');
+    renderMentor();
+  } else {
+    panel('reviews');
+    loadReviews();
+  }
+}
+
+document.querySelectorAll('[data-tab]').forEach(b => {
+  b.addEventListener('click',() => openTab(b.dataset.tab));
+});
+
+async function init() {
+  if (initBusy) return;
+  initBusy = true;
+
+  $('refresh').disabled = true;
+  $('roleBadge').textContent = 'Connecting…';
+  $('error').classList.add('hidden');
+
+  try {
+    if (!window.supabase || !window.supabase.createClient) {
+      throw new Error('Supabase library did not load. Check your internet connection.');
+    }
+
+    if (!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(SUPABASE_URL)) {
+      throw new Error('The Supabase URL is invalid. Check SUPABASE_URL.');
+    }
+
+    if (!db) {
+      db = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{
+        auth:{
+          persistSession:true,
+          autoRefreshToken:true,
+          detectSessionInUrl:true
+        }
+      });
+    }
+
+    const authResult = await withTimeout(
+      db.auth.getUser(),
+      10000,
+      'Authentication timed out. Refresh and sign in again.'
+    );
+
+    if (authResult.error) throw authResult.error;
+
+    user = authResult.data.user;
+
+    if (!user) {
+      $('roleBadge').textContent = 'Sign-in required';
+      showError('Please sign in to Circle in this browser, then return to Tests.');
+      return;
+    }
+
+    const profileResult = await withTimeout(
+      db.from('profiles')
+        .select('id,role,cohort,full_name')
+        .eq('id',user.id)
+        .maybeSingle(),
+      10000,
+      'Profile loading timed out. Check profiles table permissions.'
+    );
+
+    if (profileResult.error) throw profileResult.error;
+
+    profile = profileResult.data;
+
+    if (!profile) {
+      throw new Error('No profiles record matches this signed-in user.');
+    }
+
+    role = profile.role || '';
+
+    if (!['student','mentor','admin'].includes(role)) {
+      throw new Error('Your profile role must be student, mentor, or admin.');
+    }
+
+    $('roleBadge').textContent = mentor()
+      ? 'Mentor workspace'
+      : cohortName(profile.cohort);
+
+    $('stats').classList.remove('hidden');
+
+    await withTimeout(
+      loadTests(),
+      15000,
+      'Loading tests timed out. Check circle_tests and its read policies.'
+    );
+
+    if (mentor()) {
+      $('tabs').classList.remove('hidden');
+      openTab(tab);
+    } else {
+      panel('student');
+      await loadStudentList();
+      await studentStats();
+    }
+  } catch(e) {
+    console.error('Tests initialization failed:',e);
+    showError(e?.message || String(e));
+  } finally {
+    $('refresh').disabled = false;
+    initBusy = false;
+  }
+}
+
+async function loadTests() {
+  let query = db.from('circle_tests')
+    .select('*')
+    .order('created_at',{ascending:false});
+
+  if (!mentor()) {
+    query = query
+      .eq('cohort',profile.cohort)
+      .eq('is_published',true);
+  }
+
+  const result = await query;
+  if (result.error) throw result.error;
+
+  tests = result.data || [];
+
+  $('sTests').textContent = String(
+    mentor() ? tests.filter(t => t.is_published).length : tests.length
+  );
+
+  if (mentor()) renderMentor();
+  else await loadStudentList();
+}
+
+function renderMentor() {
+  if (!mentor()) return;
+
+  const search = $('search').value.toLowerCase().trim();
+
+  const rows = tests.filter(t =>
+    (cf === 'all' || t.cohort === cf) &&
+    String(t.title).toLowerCase().includes(search)
+  );
+
+  $('mentorList').innerHTML = rows.length ? rows.map(t => `
+    <article class="card">
+      <div class="row">
+        <span class="badge">${esc(cohortName(t.cohort))}</span>
+        <span class="badge">${t.is_published ? 'Published' : 'Draft'}</span>
+      </div>
+      <h3>${esc(t.title)}</h3>
+      <div class="meta">
+        ${(t.questions || []).length} questions ·
+        ${esc(t.difficulty)} ·
+        ${Number(t.duration_minutes || 30)} min
+      </div>
+      <div class="row">
+        <button class="btn" type="button" data-edit="${esc(t.id)}">Edit</button>
+        <button class="btn primary" type="button" data-pub="${esc(t.id)}" data-state="${t.is_published ? '1' : '0'}">${t.is_published ? 'Unpublish' : 'Publish'}</button>
+        <button class="btn" type="button" data-del="${esc(t.id)}">Delete</button>
+      </div>
+    </article>
+  `).join('') : '<div class="empty">No matching tests.</div>';
+}
+
+async function getSubmission(id) {
+  const result = await db.from('circle_test_submissions')
+    .select('*')
+    .eq('test_id',id)
+    .eq('student_user_id',user.id)
+    .maybeSingle();
+
+  if (result.error) throw result.error;
+  return result.data || null;
+}
+
+async function loadStudentList() {
+  if (mentor()) return;
+
+  if (!tests.length) {
+    $('studentList').innerHTML = '<div class="empty">No published tests for your group yet.</div>';
+    return;
+  }
+
+  const rows = await Promise.all(tests.map(async t => {
+    try {
+      return {test:t,submission:await getSubmission(t.id)};
+    } catch(e) {
+      console.error('Submission lookup failed:',e);
+      return {test:t,submission:null};
+    }
+  }));
+
+  $('studentList').innerHTML = rows.map(({test:t,submission:s}) => `
+    <article class="card">
+      <span class="badge">${esc(cohortName(t.cohort))}</span>
+      <h3>${esc(t.title)}</h3>
+      <div class="meta">${(t.questions || []).length} questions · ${Number(t.duration_minutes || 30)} min</div>
+      ${t.instructions ? `<p class="hint">${esc(t.instructions)}</p>` : ''}
+      ${s ? `
+        <span class="status ${s.status === 'evaluated' ? 'right' : 'pending'}">${s.status === 'evaluated' ? 'Evaluated' : 'Awaiting review'}</span>
+        <p><button class="btn primary" type="button" data-view="${esc(t.id)}">View ${s.status === 'evaluated' ? 'results' : 'status'}</button></p>
+      ` : `
+        <button class="btn primary" type="button" data-start="${esc(t.id)}">Start test</button>
+      `}
+    </article>
+  `).join('');
+}
+
+function renderQs() {
+  $('questions').innerHTML = qs.length ? qs.map((q,i) => `
+    <div class="question">
+      <div class="head">
+        <strong>Question ${i+1}</strong>
+        <button type="button" class="btn" data-rmq="${i}">Remove</button>
+      </div>
+      <label class="label" for="qprompt${i}">Open-ended question</label>
+      <textarea class="field" id="qprompt${i}" data-q="${i}" placeholder="Write the question…">${esc(q.prompt)}</textarea>
+      <div class="two" style="margin-top:10px">
+        <div>
+          <label class="label" for="qpoints${i}">Maximum points</label>
+          <input class="field" id="qpoints${i}" type="number" min="1" max="100" data-p="${i}" value="${Number(q.points || 1)}">
+        </div>
+        <div>
+          <label class="label" for="qguidance${i}">Mentor rubric (not shown to students)</label>
+          <input class="field" id="qguidance${i}" data-g="${i}" value="${esc(q.guidance || '')}" placeholder="Optional evaluation guidance">
+        </div>
+      </div>
+    </div>
+  `).join('') : '<div class="empty">No questions yet. Generate with Gemini or add a question.</div>';
+}
+
+function readQs() {
+  qs = qs.map((q,i) => ({
+    prompt:$('questions').querySelector(`[data-q="${i}"]`)?.value.trim() || '',
+    points:Math.max(1,Number($('questions').querySelector(`[data-p="${i}"]`)?.value || 1)),
+    guidance:$('questions').querySelector(`[data-g="${i}"]`)?.value.trim() || ''
+  }));
+}
+
+$('questions').addEventListener('input',e => {
+  const f = e.target;
+  const i = Number(f.dataset.q ?? f.dataset.p ?? f.dataset.g);
+
+  if (!Number.isInteger(i) || !qs[i]) return;
+
+  if (f.dataset.q !== undefined) qs[i].prompt = f.value;
+  if (f.dataset.p !== undefined) qs[i].points = Math.max(1,Number(f.value || 1));
+  if (f.dataset.g !== undefined) qs[i].guidance = f.value;
+});
+
+$('questions').addEventListener('click',e => {
+  const b = e.target.closest('[data-rmq]');
+  if (!b) return;
+
+  readQs();
+  qs.splice(Number(b.dataset.rmq),1);
+  renderQs();
+});
+
+$('addQuestion').onclick = () => {
+  readQs();
+  qs.push({prompt:'',points:1,guidance:''});
+  renderQs();
+};
+
+function resetForm() {
+  $('form').reset();
+  delete $('form').dataset.editId;
+  $('editorTitle').textContent = 'Create a test';
+  $('cancel').classList.add('hidden');
+  qs = [];
+  renderQs();
+}
+
+$('cancel').onclick = resetForm;
+
+$('mentorList').addEventListener('click',async e => {
+  const ed = e.target.closest('[data-edit]');
+  const pb = e.target.closest('[data-pub]');
+  const del = e.target.closest('[data-del]');
+
+  try {
+    if (ed) {
+      const t = tests.find(x => x.id === ed.dataset.edit);
+      if (!t) return;
+
+      $('title').value = t.title || '';
+      $('cohort').value = t.cohort || 'existing';
+      $('difficulty').value = t.difficulty || 'Intermediate';
+      $('count').value = (t.questions || []).length || 5;
+      $('duration').value = t.duration_minutes || 30;
+      $('instructions').value = t.instructions || '';
+      $('source').value = t.source_material || '';
+
+      qs = (t.questions || []).map(q => ({
+        prompt:q.prompt || '',
+        points:q.points || 1,
+        guidance:q.guidance || ''
+      }));
+
+      $('form').dataset.editId = t.id;
+      $('editorTitle').textContent = 'Edit test';
+      $('cancel').classList.remove('hidden');
+      renderQs();
+      openTab('create');
+    }
+
+    if (pb) await publishTest(pb.dataset.pub,pb.dataset.state !== '1');
+    if (del) await deleteTest(del.dataset.del);
+  } catch(e) {
+    toast('Action failed: ' + e.message);
+  }
+});
+
+async function saveTest(pub) {
+  const b = pub ? $('publish') : $('save');
+  const old = b.textContent;
+
+  if (b.disabled) return;
+
+  b.disabled = true;
+  b.textContent = pub ? 'Publishing…' : 'Saving…';
+
+  try {
+    readQs();
+
+    const title = $('title').value.trim();
+
+    if (!title) throw new Error('Enter a test title.');
+    if (!qs.length || qs.some(q => !q.prompt)) {
+      throw new Error('Add a prompt for every question.');
+    }
+
+    const payload = {
+      title,
+      cohort:$('cohort').value,
+      difficulty:$('difficulty').value,
+      duration_minutes:Math.max(1,Number($('duration').value || 30)),
+      instructions:$('instructions').value.trim(),
+      source_material:$('source').value.trim(),
+      questions:qs.map(q => ({
+        prompt:q.prompt,
+        points:q.points,
+        guidance:q.guidance
+      })),
+      is_published:pub
+    };
+
+    const id = $('form').dataset.editId;
+
+    const result = id
+      ? await db.from('circle_tests').update(payload).eq('id',id).select().single()
+      : await db.from('circle_tests').insert({...payload,created_by:user.id}).select().single();
+
+    if (result.error) throw result.error;
+    if (!result.data) throw new Error('No test saved. Check table policies.');
+
+    resetForm();
+    toast(pub ? 'Test published.' : 'Draft saved.');
+    await loadTests();
+    openTab('library');
+  } catch(e) {
+    console.error(e);
+    toast('Could not save: ' + e.message);
+  } finally {
+    b.disabled = false;
+    b.textContent = old;
+  }
+}
+
+$('save').onclick = () => saveTest(false);
+$('publish').onclick = () => saveTest(true);
+
+$('generate').onclick = async () => {
+  const topic = $('source').value.trim();
+  const count = Number($('count').value);
+
+  if (!topic) return toast('Enter a topic or source material first.');
+  if (!Number.isInteger(count) || count < 1 || count > 20) {
+    return toast('Choose 1–20 questions.');
+  }
+
+  const b = $('generate');
+  b.disabled = true;
+  b.textContent = 'Generating…';
+
+  try {
+    const sr = await db.auth.getSession();
+    if (sr.error) throw sr.error;
+
+    const session = sr.data.session;
+    if (!session) throw new Error('Sign in again.');
+
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/generate-tests`,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${session.access_token}`,
+        'apikey':SUPABASE_KEY
+      },
+      body:JSON.stringify({
+        topic,
+        title:$('title').value.trim(),
+        difficulty:({Beginner:'easy',Intermediate:'medium',Advanced:'hard'}[$('difficulty').value] || $('difficulty').value.toLowerCase()),
+        count,
+        cohort:$('cohort').value
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) throw new Error(data.error || data.message || 'Generation failed.');
+
+    const items = data.questions || data.items;
+    if (!Array.isArray(items) || !items.length) {
+      throw new Error('Gemini returned no questions.');
+    }
+
+    qs = items.map(q => ({
+      prompt:String(q.prompt || q.question || ''),
+      points:Number(q.points || 1),
+      guidance:String(q.guidance || q.rubric || '')
+    }));
+
+    renderQs();
+    toast(`Generated ${qs.length} questions. Review before saving.`);
+  } catch(e) {
+    console.error(e);
+    toast('Generation failed: ' + e.message);
+  } finally {
+    b.disabled = false;
+    b.textContent = '✦ Generate with Gemini';
+  }
+};
+
+async function publishTest(id,pub) {
+  const result = await db.from('circle_tests')
+    .update({is_published:pub})
+    .eq('id',id)
+    .select()
+    .single();
+
+  if (result.error) throw result.error;
+
+  toast(pub ? 'Test published.' : 'Test unpublished.');
+  await loadTests();
+}
+
+async function deleteTest(id) {
+  if (!confirm('Delete this test? Submissions may prevent deletion.')) return;
+
+  const result = await db.from('circle_tests').delete().eq('id',id);
+  if (result.error) throw result.error;
+
+  toast('Test deleted.');
+  await loadTests();
+}
+
+async function openTest(id) {
+  const t = tests.find(x => x.id === id);
+  if (!t) return;
+
+  const s = await getSubmission(id);
+  if (s) return showStudentSubmission(t,s);
+
+  active = t;
+  submission = null;
+
+  $('activeTitle').textContent = t.title;
+  $('activeInfo').textContent =
+    `${(t.questions || []).length} questions · ${t.duration_minutes || 30} minutes · ${t.difficulty || ''}`;
+
+  $('studentResult').innerHTML = '';
+
+  $('testBody').innerHTML = `
+    ${t.instructions ? `
+      <div class="card">
+        <strong>Instructions</strong>
+        <p class="hint">${esc(t.instructions)}</p>
+      </div>
+    ` : ''}
+    ${(t.questions || []).map((q,i) => `
+      <div class="question">
+        <div class="head">
+          <strong>Question ${i+1}</strong>
+          <span class="badge">${Number(q.points || 1)} point(s)</span>
+        </div>
+        <p>${esc(q.prompt)}</p>
+        <label class="label" for="answer${i}">Your answer</label>
+        <textarea id="answer${i}" class="field" data-answer="${i}" maxlength="12000" placeholder="Write your answer in your own words…"></textarea>
+      </div>
+    `).join('')}`;
+
+  $('submit').disabled = false;
+  $('submit').textContent = 'Submit answers';
+  $('submit').classList.add('primary');
+  $('submit').classList.remove('active');
+  $('submit').style.cursor = 'pointer';
+
+  panel('testPanel');
+}
+
+$('studentList').addEventListener('click',async e => {
+  const start = e.target.closest('[data-start]');
+  const view = e.target.closest('[data-view]');
+
+  try {
+    if (start) await openTest(start.dataset.start);
+
+    if (view) {
+      const t = tests.find(x => x.id === view.dataset.view);
+      const s = await getSubmission(view.dataset.view);
+      if (t && s) showStudentSubmission(t,s);
+    }
+  } catch(e) {
+    toast('Could not open test: ' + e.message);
+  }
+});
+
+function showStudentSubmission(t,s) {
+  active = t;
+  submission = s;
+
+  $('activeTitle').textContent = t.title;
+  $('activeInfo').textContent = `Submitted ${fmt(s.submitted_at)}`;
+
+  $('submit').disabled = true;
+  $('submit').textContent = 'Already submitted';
+  $('submit').classList.remove('primary');
+  $('submit').classList.add('active');
+  $('submit').style.cursor = 'default';
+
+  const evaluated = s.status === 'evaluated';
+  const marks = Array.isArray(s.evaluation) ? s.evaluation : [];
+
+  $('testBody').innerHTML = (t.questions || []).map((q,i) => {
+    const m = marks[i] || {};
+    const color = evaluated
+      ? ({right:'right',wrong:'wrong',partial:'partial'}[m.verdict] || 'pending')
+      : 'pending';
+
+    return `
+      <div class="question">
+        <strong>Question ${i+1}</strong>
+        <p>${esc(q.prompt)}</p>
+
+        <div class="card">
+          <span class="label">Student answer</span>
+          <div style="white-space:pre-wrap;margin-top:7px">${esc((s.answers || [])[i] || 'No answer')}</div>
+        </div>
+
+        <div class="markbox ${color}">
+          <span class="status ${color}">
+            ${evaluated
+              ? ({right:'Right',wrong:'Wrong',partial:'Partially right'}[m.verdict] || 'Evaluated')
+              : 'Awaiting mentor evaluation'}
+          </span>
+          ${evaluated ? `
+            <p><strong>Marks:</strong> ${Number(m.marks || 0)} / ${Number(q.points || 1)}</p>
+            ${m.feedback ? `<p><strong>Feedback:</strong> ${esc(m.feedback)}</p>` : ''}
+          ` : '<p>Your mentor has not evaluated this answer yet.</p>'}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  $('studentResult').innerHTML = evaluated ? `
+    <div class="card">
+      <div class="eyebrow">Final result</div>
+      <h2>${Number(s.total_marks || 0)} / ${Number(s.max_marks || 0)}</h2>
+      <p class="sub">${esc(s.overall_feedback || 'Your mentor has evaluated this test.')}</p>
+    </div>
+  ` : `
+    <div class="card">
+      <span class="status pending">Submitted · awaiting evaluation</span>
+      <p class="sub">Check back after your mentor evaluates the answers.</p>
+    </div>
+  `;
+
+  panel('testPanel');
+}
+
+$('submit').onclick = async () => {
+  if (busy || !active || !user) return;
+
+  busy = true;
+  $('submit').disabled = true;
+  $('submit').textContent = 'Submitting…';
+
+  try {
+    const prior = await getSubmission(active.id);
+
+    if (prior) {
+      showStudentSubmission(active,prior);
+      toast('Already submitted.');
+      return;
+    }
+
+    const answers = (active.questions || []).map((q,i) =>
+      document.querySelector(`[data-answer="${i}"]`)?.value.trim() || ''
+    );
+
+    if (answers.every(x => !x)) throw new Error('Write at least one answer.');
+
+    const result = await db.from('circle_test_submissions').insert({
+      test_id:active.id,
+      student_user_id:user.id,
+      answers,
+      status:'submitted',
+      submitted_at:new Date().toISOString()
+    }).select().single();
+
+    if (result.error) throw result.error;
+
+    showStudentSubmission(active,result.data);
+    toast('Submitted. Your mentor will evaluate it.');
+    await studentStats();
+    await loadStudentList();
+  } catch(e) {
+    console.error(e);
+    toast('Submission failed: ' + e.message);
+    $('submit').disabled = false;
+    $('submit').textContent = 'Submit answers';
+  } finally {
+    busy = false;
+  }
+};
+
+$('back').onclick = async () => {
+  active = null;
+
+  if (mentor()) {
+    panel('library');
+  } else {
+    panel('student');
+    await loadTests();
+    await studentStats();
+  }
+};
+
+async function studentStats() {
+  if (mentor() || !user) return;
+
+  try {
+    const result = await db.from('circle_test_submissions')
+      .select('id,status')
+      .eq('student_user_id',user.id);
+
+    if (result.error) throw result.error;
+
+    $('sSub').textContent = String((result.data || []).length);
+    $('sEval').textContent = String(
+      (result.data || []).filter(x => x.status === 'evaluated').length
+    );
+  } catch(e) {
+    console.error('Could not load student stats:',e);
+  }
+}
+
+async function loadReviews() {
+  if (!mentor()) return;
+
+  $('reviewList').innerHTML = '<div class="empty">Loading submissions…</div>';
+
+  try {
+    const [subResult,testResult] = await Promise.all([
+      db.from('circle_test_submissions')
+        .select('*')
+        .order('submitted_at',{ascending:false}),
+      db.from('circle_tests')
+        .select('id,title,cohort,questions')
+    ]);
+
+    if (subResult.error) throw subResult.error;
+    if (testResult.error) throw testResult.error;
+
+    submissions = subResult.data || [];
+    allTests = testResult.data || [];
+
+    const ids = [...new Set(
+      submissions.map(s => s.student_user_id).filter(Boolean)
+    )];
+
+    if (ids.length) {
+      const p = await db.from('profiles')
+        .select('id,full_name,cohort')
+        .in('id',ids);
+
+      if (p.error) throw p.error;
+      students = p.data || [];
+    } else {
+      students = [];
+    }
+
+    renderReviews();
+
+    $('sSub').textContent = String(submissions.length);
+    $('sEval').textContent = String(
+      submissions.filter(s => s.status === 'evaluated').length
+    );
+  } catch(e) {
+    console.error(e);
+    $('reviewList').innerHTML =
+      `<div class="empty">Could not load submissions: ${esc(e.message)}. Check your RLS policies.</div>`;
+  }
+}
+
+function renderReviews() {
+  const search = $('reviewSearch').value.toLowerCase().trim();
+  const testMap = new Map(allTests.map(t => [t.id,t]));
+  const profileMap = new Map(students.map(p => [p.id,p]));
+
+  const rows = submissions.filter(s => {
+    const t = testMap.get(s.test_id);
+    const p = profileMap.get(s.student_user_id);
+    const cohort = t?.cohort || p?.cohort || '';
+
+    return (rf === 'all' || cohort === rf) &&
+      `${p?.full_name || 'Student'} ${t?.title || 'Test'}`
+        .toLowerCase().includes(search);
+  });
+
+  $('reviewList').innerHTML = rows.length ? rows.map(s => {
+    const t = testMap.get(s.test_id);
+    const p = profileMap.get(s.student_user_id);
+
+    return `
+      <article class="resultitem">
+        <div class="row">
+          <strong>${esc(p?.full_name || 'Student')}</strong>
+          <span class="status ${s.status === 'evaluated' ? 'right' : 'pending'}">
+            ${s.status === 'evaluated' ? 'Evaluated' : 'Needs evaluation'}
+          </span>
+        </div>
+        <h3>${esc(t?.title || 'Test')}</h3>
+        <div class="meta">
+          ${esc(cohortName(t?.cohort || p?.cohort))} · ${esc(fmt(s.submitted_at))}
+          ${s.status === 'evaluated'
+            ? ` · ${Number(s.total_marks || 0)}/${Number(s.max_marks || 0)} marks`
+            : ''}
+        </div>
+        <button class="btn primary" type="button" data-eval="${esc(s.id)}">
+          ${s.status === 'evaluated' ? 'Review / edit evaluation' : 'Evaluate answers'}
+        </button>
+      </article>
+    `;
+  }).join('') : '<div class="empty">No matching submissions.</div>';
+}
+
+$('reviewList').addEventListener('click',e => {
+  const b = e.target.closest('[data-eval]');
+  if (b) openEvaluation(b.dataset.eval);
+});
+
+function openEvaluation(id) {
+  const s = submissions.find(x => x.id === id);
+  const t = allTests.find(x => x.id === s?.test_id);
+  const p = students.find(x => x.id === s?.student_user_id);
+
+  if (!s || !t) return toast('Submission/test not found.');
+
+  const old = Array.isArray(s.evaluation) ? s.evaluation : [];
+  const answers = s.answers || [];
+
+  $('reviewList').innerHTML = `
+    <div class="card">
+      <div class="eyebrow">Evaluate submission</div>
+      <h2>${esc(t.title)}</h2>
+      <p class="sub">${esc(p?.full_name || 'Student')} · ${esc(cohortName(t.cohort))} · ${esc(fmt(s.submitted_at))}</p>
+    </div>
+
+    <form id="evalForm">
+      ${(t.questions || []).map((q,i) => {
+        const m = old[i] || {};
+        const max = Number(q.points || 1);
+
+        return `
+          <div class="question">
+            <strong>Question ${i+1} · Max ${max} marks</strong>
+            <p>${esc(q.prompt)}</p>
+
+            ${q.guidance ? `
+              <div class="card">
+                <span class="label">Mentor rubric</span>
+                <p>${esc(q.guidance)}</p>
+              </div>
+            ` : ''}
+
+            <div class="card">
+              <span class="label">Student answer</span>
+              <div style="white-space:pre-wrap;margin-top:7px">${esc(answers[i] || 'No answer provided')}</div>
+            </div>
+
+            <div class="two" style="margin-top:14px">
+              <div>
+                <label class="label" for="verdict${i}">Verdict</label>
+                <select class="field" id="verdict${i}" data-verdict="${i}" required>
+                  <option value="">Choose verdict</option>
+                  <option value="right" ${m.verdict === 'right' ? 'selected' : ''}>Right</option>
+                  <option value="partial" ${m.verdict === 'partial' ? 'selected' : ''}>Partially right</option>
+                  <option value="wrong" ${m.verdict === 'wrong' ? 'selected' : ''}>Wrong</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="label" for="marks${i}">Marks (0–${max})</label>
+                <input class="field" id="marks${i}" type="number" min="0" max="${max}" step="0.5" data-marks="${i}" value="${Number(m.marks || 0)}" required>
+              </div>
+            </div>
+
+            <div style="margin-top:14px">
+              <label class="label" for="feedback${i}">Feedback for student</label>
+              <textarea class="field" id="feedback${i}" data-feedback="${i}" placeholder="Optional feedback">${esc(m.feedback || '')}</textarea>
+            </div>
+          </div>
+        `;
+      }).join('')}
+
+      <div class="question">
+        <label class="label" for="overall">Overall feedback</label>
+        <textarea id="overall" class="field" placeholder="Optional overall feedback">${esc(s.overall_feedback || '')}</textarea>
+      </div>
+
+      <div class="evaluation-actions">
+        <button class="btn primary" type="submit">Save evaluation and release result</button>
+        <button class="btn" id="cancelEval" type="button">Back to submissions</button>
+      </div>
+    </form>
+  `;
+
+  $('cancelEval').onclick = loadReviews;
+
+  $('evalForm').onsubmit = async e => {
+    e.preventDefault();
+
+    const saveButton = $('evalForm').querySelector('button[type="submit"]');
+    if (saveButton.disabled) return;
+
+    const evaluation = [];
+
+    for (let i = 0; i < (t.questions || []).length; i++) {
+      const verdict = $('reviewList').querySelector(`[data-verdict="${i}"]`).value;
+      const marks = Number($('reviewList').querySelector(`[data-marks="${i}"]`).value);
+      const feedback = $('reviewList').querySelector(`[data-feedback="${i}"]`).value.trim();
+      const max = Number(t.questions[i].points || 1);
+
+      if (!verdict) return toast(`Choose a verdict for question ${i+1}.`);
+
+      if (!Number.isFinite(marks) || marks < 0 || marks > max) {
+        return toast(`Marks for question ${i+1} must be between 0 and ${max}.`);
+      }
+
+      evaluation.push({verdict,marks,feedback});
+    }
+
+    const maxMarks = (t.questions || []).reduce(
+      (sum,q) => sum + Number(q.points || 1),0
+    );
+
+    const totalMarks = evaluation.reduce((sum,item) => sum + item.marks,0);
+
+    saveButton.disabled = true;
+    saveButton.textContent = 'Saving evaluation…';
+
+    try {
+      const result = await db.from('circle_test_submissions')
+        .update({
+          evaluation,
+          total_marks:totalMarks,
+          max_marks:maxMarks,
+          overall_feedback:$('overall').value.trim(),
+          status:'evaluated',
+          evaluated_at:new Date().toISOString(),
+          evaluated_by:user.id
+        })
+        .eq('id',s.id)
+        .select()
+        .single();
+
+      if (result.error) throw result.error;
+      if (!result.data) throw new Error('No evaluation saved. Check mentor update policy.');
+
+      toast('Evaluation saved; result released to student.');
+      await loadReviews();
+    } catch(e) {
+      toast('Could not save evaluation: ' + e.message);
+      saveButton.disabled = false;
+      saveButton.textContent = 'Save evaluation and release result';
+    }
+  };
+}
+
+document.querySelectorAll('[data-cfilter]').forEach(b => {
+  b.onclick = () => {
+    cf = b.dataset.cfilter;
+    document.querySelectorAll('[data-cfilter]').forEach(x => {
+      x.classList.toggle('active',x === b);
+    });
+    renderMentor();
+  };
+});
+
+document.querySelectorAll('[data-rfilter]').forEach(b => {
+  b.onclick = () => {
+    rf = b.dataset.rfilter;
+    document.querySelectorAll('[data-rfilter]').forEach(x => {
+      x.classList.toggle('active',x === b);
+    });
+    renderReviews();
+  };
+});
+
+$('search').oninput = renderMentor;
+$('reviewSearch').oninput = renderReviews;
+$('refreshReviews').onclick = loadReviews;
+$('refresh').onclick = init;
+
+
+
+/* Custom select popup; the native select remains the data source but never opens. */
+let circleMenuBackdrop = null;
+let circleMenuSelect = null;
+
+function closeCircleMenu() {
+  if (circleMenuBackdrop) circleMenuBackdrop.remove();
+  circleMenuBackdrop = null;
+  circleMenuSelect = null;
+}
+
+function syncSelectTrigger(select) {
+  const wrap = select.closest('.select-wrap');
+  if (!wrap) return;
+  const trigger = wrap.querySelector('.select-trigger');
+  const selected = select.options[select.selectedIndex];
+  const label = trigger?.querySelector('.select-value');
+  if (label) label.textContent = selected ? selected.textContent : 'Choose an option';
+  if (trigger) trigger.disabled = select.disabled;
+}
+
+function enhanceSelect(select) {
+  if (select.dataset.customMenu === '1' || !select.classList.contains('field')) return;
+  select.dataset.customMenu = '1';
+  const wrap = document.createElement('div');
+  wrap.className = 'select-wrap';
+  select.parentNode.insertBefore(wrap, select);
+  wrap.appendChild(select);
+
+  const trigger = document.createElement('button');
+  trigger.type = 'button';
+  trigger.className = 'select-trigger';
+  trigger.setAttribute('aria-haspopup', 'listbox');
+  trigger.setAttribute('aria-expanded', 'false');
+  const value = document.createElement('span');
+  value.className = 'select-value';
+  const chevron = document.createElement('span');
+  chevron.className = 'select-chevron';
+  chevron.setAttribute('aria-hidden', 'true');
+  trigger.append(value, chevron);
+  wrap.appendChild(trigger);
+  trigger.addEventListener('click', () => openCircleMenu(select, trigger));
+  select.addEventListener('change', () => syncSelectTrigger(select));
+  syncSelectTrigger(select);
+}
+
+function openCircleMenu(select, trigger) {
+  if (!select || select.disabled) return;
+  closeCircleMenu();
+  circleMenuSelect = select;
+  const backdrop = document.createElement('div');
+  backdrop.className = 'circle-menu-backdrop';
+  backdrop.setAttribute('role', 'presentation');
+  const menu = document.createElement('div');
+  menu.className = 'circle-menu';
+  menu.setAttribute('role', 'listbox');
+  menu.setAttribute('aria-label', select.labels?.[0]?.textContent?.trim() || 'Choose an option');
+
+  Array.from(select.options).forEach((option, index) => {
+    if (option.hidden) return;
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.className = 'circle-menu-option';
+    item.setAttribute('role', 'option');
+    item.setAttribute('aria-selected', String(select.selectedIndex === index));
+    item.disabled = option.disabled;
+    const label = document.createElement('span');
+    label.textContent = option.textContent;
+    const check = document.createElement('span');
+    check.className = 'circle-menu-check';
+    check.setAttribute('aria-hidden', 'true');
+    check.textContent = select.selectedIndex === index ? '✓' : '';
+    item.append(label, check);
+    item.addEventListener('click', () => {
+      select.selectedIndex = index;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      select.dispatchEvent(new Event('input', { bubbles: true }));
+      trigger.setAttribute('aria-expanded', 'false');
+      closeCircleMenu();
+      trigger.focus({ preventScroll: true });
+    });
+    menu.appendChild(item);
+  });
+
+  backdrop.appendChild(menu);
+  backdrop.addEventListener('click', event => {
+    if (event.target === backdrop) {
+      trigger.setAttribute('aria-expanded', 'false');
+      closeCircleMenu();
+    }
+  });
+  document.body.appendChild(backdrop);
+  circleMenuBackdrop = backdrop;
+  trigger.setAttribute('aria-expanded', 'true');
+}
+
+function enhanceAllSelects(root = document) {
+  root.querySelectorAll('select.field').forEach(enhanceSelect);
+}
+enhanceAllSelects();
+new MutationObserver(records => {
+  for (const record of records) {
+    record.addedNodes.forEach(node => {
+      if (node.nodeType !== 1) return;
+      if (node.matches?.('select.field')) enhanceSelect(node);
+      enhanceAllSelects(node);
+    });
+  }
+}).observe(document.body, { childList: true, subtree: true });
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && circleMenuBackdrop) {
+    closeCircleMenu();
+    document.querySelector('.select-trigger[aria-expanded="true"]')?.setAttribute('aria-expanded', 'false');
+  }
+});
+
+renderQs();
+init();
+</script>
+</body>
+</html>
