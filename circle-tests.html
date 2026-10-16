@@ -85,5 +85,39 @@ function openEvaluation(id){let s=submissions.find(x=>x.id===id),t=allTests.find
 document.querySelectorAll('[data-cfilter]').forEach(b=>b.onclick=()=>{cf=b.dataset.cfilter;document.querySelectorAll('[data-cfilter]').forEach(x=>x.classList.toggle('active',x===b));renderMentor()});
 document.querySelectorAll('[data-rfilter]').forEach(b=>b.onclick=()=>{rf=b.dataset.rfilter;document.querySelectorAll('[data-rfilter]').forEach(x=>x.classList.toggle('active',x===b));renderReviews()});
 $('search').oninput=renderMentor;$('reviewSearch').oninput=renderReviews;$('refreshReviews').onclick=loadReviews;$('refresh').onclick=init;
+function enhanceCircleSelects(root=document){
+  root.querySelectorAll('select.field').forEach(select=>{
+    if(select.dataset.circleEnhanced==='1') return;
+    select.dataset.circleEnhanced='1';
+    const wrap=document.createElement('div'); wrap.className='select-wrap';
+    select.parentNode.insertBefore(wrap,select); wrap.appendChild(select);
+    select.classList.add('native-select-hidden');
+    const trigger=document.createElement('button'); trigger.type='button'; trigger.className='select-trigger';
+    trigger.setAttribute('aria-haspopup','listbox'); trigger.setAttribute('aria-expanded','false');
+    const label=()=>{const opt=select.options[select.selectedIndex];return opt?opt.textContent.trim():'Choose…'};
+    trigger.textContent=label(); wrap.appendChild(trigger);
+    const sync=()=>{trigger.textContent=label()};
+    select.addEventListener('change',sync);
+    trigger.addEventListener('click',()=>{
+      const backdrop=document.createElement('div'); backdrop.className='select-menu-backdrop';
+      const menu=document.createElement('div'); menu.className='select-menu'; menu.setAttribute('role','listbox');
+      select.dataset.circleOpen='1'; trigger.setAttribute('aria-expanded','true');
+      Array.from(select.options).forEach((opt,index)=>{
+        const item=document.createElement('button'); item.type='button'; item.className='select-option'+(opt.selected?' selected':'');
+        item.setAttribute('role','option'); item.setAttribute('aria-selected',opt.selected?'true':'false');
+        const text=document.createElement('span'); text.textContent=opt.textContent.trim(); item.appendChild(text);
+        if(opt.selected){const check=document.createElement('span');check.textContent='✓';check.setAttribute('aria-hidden','true');item.appendChild(check)}
+        item.addEventListener('click',()=>{select.value=opt.value;select.dispatchEvent(new Event('input',{bubbles:true}));select.dispatchEvent(new Event('change',{bubbles:true}));backdrop.remove();trigger.setAttribute('aria-expanded','false');select.focus({preventScroll:true})});
+        menu.appendChild(item);
+      });
+      backdrop.appendChild(menu); document.body.appendChild(backdrop);
+      requestAnimationFrame(()=>backdrop.classList.add('show'));
+      const close=()=>{backdrop.remove();trigger.setAttribute('aria-expanded','false')};
+      backdrop.addEventListener('click',e=>{if(e.target===backdrop)close()});
+      const escClose=e=>{if(e.key==='Escape'){close();document.removeEventListener('keydown',escClose)}};
+      document.addEventListener('keydown',escClose); menu.querySelector('.selected')?.focus();
+    });
+  });
+}
 renderQs();enhanceCircleSelects();init();
 </script></body></html>
