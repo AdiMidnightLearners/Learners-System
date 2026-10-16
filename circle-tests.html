@@ -1387,52 +1387,41 @@ async function loadReviews() {
 
 function renderReviews() {
   const search = $('reviewSearch').value.toLowerCase().trim();
-  const testMap = new Map(allTests.map(t => [t.id,t]));
-  const profileMap = new Map(students.map(p => [p.id,p]));
+  const testMap = new Map(allTests.map(t => [t.id, t]));
+  const profileMap = new Map(students.map(p => [p.id, p]));
 
+  // Always filter by the cohort saved on the submitted test record.
+  // Do not infer a cohort from a title or from the student's profile.
   const rows = submissions.filter(s => {
-    const t = testMap.get(s.test_id);
-    const p = profileMap.get(s.student_user_id);
-    const testCohort = String(t?.cohort || '').toLowerCase().trim();
-    const studentCohort = String(p?.cohort || '').toLowerCase().trim();
-    const title = String(t?.title || '').toLowerCase();
+    const test = testMap.get(s.test_id);
+    const student = profileMap.get(s.student_user_id);
+    if (!test) return false;
 
-    // Cohort is primarily determined by the test record. For older tests
-    // whose title clearly identifies a course but whose saved cohort is
-    // stale, allow the matching course filter to find their submissions.
-    const titleSuggestsML = /\b(machine learning|ml)\b/.test(title);
-    const titleSuggestsJava = /\b(java)\b/.test(title);
-    const titleSuggestsPython = /\b(python)\b/.test(title);
-
-    const matchesCohort = rf === 'all' ||
-      testCohort === rf ||
-      (rf === 'ml' && titleSuggestsML) ||
-      (rf === 'btech' && titleSuggestsJava) ||
-      (rf === 'existing' && titleSuggestsPython) ||
-      (!testCohort && studentCohort === rf);
-
+    const testCohort = String(test.cohort || '').toLowerCase().trim();
+    const matchesCohort = rf === 'all' || testCohort === rf;
     const matchesSearch =
-      `${p?.full_name || 'Student'} ${t?.title || 'Test'}`
-        .toLowerCase().includes(search);
+      `${student?.full_name || 'Student'} ${test.title || 'Test'}`
+        .toLowerCase()
+        .includes(search);
 
     return matchesCohort && matchesSearch;
   });
 
   $('reviewList').innerHTML = rows.length ? rows.map(s => {
-    const t = testMap.get(s.test_id);
-    const p = profileMap.get(s.student_user_id);
+    const test = testMap.get(s.test_id);
+    const student = profileMap.get(s.student_user_id);
 
     return `
       <article class="resultitem">
         <div class="row">
-          <strong>${esc(p?.full_name || 'Student')}</strong>
+          <strong>${esc(student?.full_name || 'Student')}</strong>
           <span class="status ${s.status === 'evaluated' ? 'right' : 'pending'}">
             ${s.status === 'evaluated' ? 'Evaluated' : 'Needs evaluation'}
           </span>
         </div>
-        <h3>${esc(t?.title || 'Test')}</h3>
+        <h3>${esc(test?.title || 'Test')}</h3>
         <div class="meta">
-          ${esc(cohortName((t?.title || '').toLowerCase().includes('machine learning') || /\bml\b/i.test(t?.title || '') ? 'ml' : (t?.title || '').toLowerCase().includes('java') ? 'btech' : (t?.title || '').toLowerCase().includes('python') ? 'existing' : (t?.cohort || p?.cohort)))} · ${esc(fmt(s.submitted_at))}
+          ${esc(cohortName(test?.cohort))} · ${esc(fmt(s.submitted_at))}
           ${s.status === 'evaluated'
             ? ` · ${Number(s.total_marks || 0)}/${Number(s.max_marks || 0)} marks`
             : ''}
@@ -1442,7 +1431,11 @@ function renderReviews() {
         </button>
       </article>
     `;
-  }).join('') : `<div class="empty">No submissions match this view. The filter is set to All groups. If a student has submitted but nothing appears, verify that the mentor's Supabase RLS SELECT policy allows this mentor to read that test's submissions.</div>`;
+  }).join('') : `
+    <div class="empty">
+      No submissions match this view. Submissions are grouped by the cohort saved on each test.
+      If a test is assigned to the wrong cohort, edit that test's cohort in the Test library.
+    </div>`;
 }
 
 $('reviewList').addEventListener('click',e => {
