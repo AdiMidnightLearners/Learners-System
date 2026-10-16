@@ -1333,6 +1333,13 @@ async function studentStats() {
 async function loadReviews() {
   if (!mentor()) return;
 
+  // Always start with All groups so a previously selected cohort filter
+  // cannot hide a student's submission after refresh/navigation.
+  rf = 'all';
+  document.querySelectorAll('[data-rfilter]').forEach(b => {
+    b.classList.toggle('active', b.dataset.rfilter === 'all');
+  });
+
   $('reviewList').innerHTML = '<div class="empty">Loading submissions…</div>';
 
   try {
@@ -1417,7 +1424,7 @@ function renderReviews() {
         </button>
       </article>
     `;
-  }).join('') : '<div class="empty">No matching submissions.</div>';
+  }).join('') : `<div class="empty">No submissions match this view. The filter is set to All groups. If a student has submitted but nothing appears, verify that the mentor's Supabase RLS SELECT policy allows this mentor to read that test's submissions.</div>`;
 }
 
 $('reviewList').addEventListener('click',e => {
