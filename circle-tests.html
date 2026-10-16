@@ -1393,11 +1393,29 @@ function renderReviews() {
   const rows = submissions.filter(s => {
     const t = testMap.get(s.test_id);
     const p = profileMap.get(s.student_user_id);
-    const cohort = t?.cohort || p?.cohort || '';
+    const testCohort = String(t?.cohort || '').toLowerCase().trim();
+    const studentCohort = String(p?.cohort || '').toLowerCase().trim();
+    const title = String(t?.title || '').toLowerCase();
 
-    return (rf === 'all' || cohort === rf) &&
+    // Cohort is primarily determined by the test record. For older tests
+    // whose title clearly identifies a course but whose saved cohort is
+    // stale, allow the matching course filter to find their submissions.
+    const titleSuggestsML = /\b(machine learning|ml)\b/.test(title);
+    const titleSuggestsJava = /\b(java)\b/.test(title);
+    const titleSuggestsPython = /\b(python)\b/.test(title);
+
+    const matchesCohort = rf === 'all' ||
+      testCohort === rf ||
+      (rf === 'ml' && titleSuggestsML) ||
+      (rf === 'btech' && titleSuggestsJava) ||
+      (rf === 'existing' && titleSuggestsPython) ||
+      (!testCohort && studentCohort === rf);
+
+    const matchesSearch =
       `${p?.full_name || 'Student'} ${t?.title || 'Test'}`
         .toLowerCase().includes(search);
+
+    return matchesCohort && matchesSearch;
   });
 
   $('reviewList').innerHTML = rows.length ? rows.map(s => {
@@ -1414,7 +1432,7 @@ function renderReviews() {
         </div>
         <h3>${esc(t?.title || 'Test')}</h3>
         <div class="meta">
-          ${esc(cohortName(t?.cohort || p?.cohort))} · ${esc(fmt(s.submitted_at))}
+          ${esc(cohortName((t?.title || '').toLowerCase().includes('machine learning') || /\bml\b/i.test(t?.title || '') ? 'ml' : (t?.title || '').toLowerCase().includes('java') ? 'btech' : (t?.title || '').toLowerCase().includes('python') ? 'existing' : (t?.cohort || p?.cohort)))} · ${esc(fmt(s.submitted_at))}
           ${s.status === 'evaluated'
             ? ` · ${Number(s.total_marks || 0)}/${Number(s.max_marks || 0)} marks`
             : ''}
