@@ -348,6 +348,44 @@ textarea.field {
   cursor:default;
 }
 
+/* Spacing refinements: student results and mentor evaluation */
+#submit {
+  display:block;
+  margin:18px 0 24px;
+  max-width:100%;
+}
+
+#studentResult {
+  display:grid;
+  gap:16px;
+  margin:0 0 8px;
+}
+
+#studentResult > .card {
+  margin:0;
+}
+
+#reviewSearch {
+  display:block;
+  margin-bottom:18px;
+}
+
+#reviewList > .card {
+  margin-bottom:18px;
+}
+
+#reviewList #evalForm {
+  margin-top:18px;
+}
+
+#evalForm > .question + .question {
+  margin-top:2px;
+}
+
+#evalForm .question .card {
+  margin-top:16px;
+}
+
 @media (min-width:600px) {
   #evalForm .evaluation-actions {
     align-items:flex-start;
