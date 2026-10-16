@@ -540,92 +540,67 @@ textarea.field {
 }
 
 
-/* Custom Circle select menus — styled to match the supplied reference */
-select.field {
-  appearance: none;
-  -webkit-appearance: none;
-  padding-right: 44px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23173f35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 15px center;
-  cursor: pointer;
+
+/* One custom menu only: native browser dropdowns are visually and interactively disabled. */
+.select-wrap { position:relative; width:100%; min-width:0; }
+.select-wrap > select.field {
+  position:absolute !important;
+  width:1px !important; height:1px !important;
+  padding:0 !important; margin:0 !important;
+  opacity:0 !important; pointer-events:none !important;
+  left:0; bottom:0; border:0 !important;
+}
+.select-trigger {
+  width:100%; min-height:50px; display:flex; align-items:center;
+  justify-content:space-between; gap:12px; text-align:left;
+  padding:13px 16px; border:1px solid var(--line); border-radius:13px;
+  background:var(--paper); color:var(--ink); font:inherit; font-size:16px;
+}
+.select-trigger:focus-visible { outline:3px solid #9ab6a8; outline-offset:2px; }
+.select-trigger .select-chevron {
+  width:10px; height:10px; flex:0 0 10px;
+  border-right:2px solid currentColor; border-bottom:2px solid currentColor;
+  transform:rotate(45deg) translateY(-2px);
 }
 .circle-menu-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 22px;
-  background: rgba(24, 27, 24, .48);
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
-  animation: circleFadeIn .16s ease-out;
+  position:fixed; inset:0; z-index:9999; display:flex;
+  align-items:center; justify-content:center; padding:22px;
+  background:rgba(30,32,29,.42);
+  -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px);
+  animation:circleFadeIn .14s ease-out;
 }
 .circle-menu {
-  width: min(620px, 100%);
-  max-height: min(78dvh, 720px);
-  overflow-y: auto;
-  background: #fffefa;
-  border: 1px solid rgba(228,224,214,.9);
-  border-radius: 34px;
-  box-shadow: 0 18px 60px rgba(0,0,0,.2);
-  padding: 8px 0;
-  animation: circleMenuIn .18s ease-out;
+  width:min(640px,100%); max-height:min(78dvh,720px); overflow:auto;
+  padding:8px 0; border-radius:34px; background:#fffefa;
+  border:1px solid rgba(228,224,214,.9);
+  box-shadow:0 18px 60px rgba(0,0,0,.2);
+  animation:circleMenuIn .16s ease-out;
 }
 .circle-menu-option {
-  width: 100%;
-  min-height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 18px 22px;
-  border: 0;
-  border-bottom: 1px solid #e7e3da;
-  background: transparent;
-  color: var(--ink);
-  text-align: left;
-  font: 400 21px/1.35 'Segoe Print','Bradley Hand','Comic Sans MS',cursive;
-  letter-spacing: .025em;
-  overflow-wrap: anywhere;
+  width:100%; min-height:79px; display:flex; align-items:center;
+  justify-content:space-between; gap:18px; padding:18px 22px;
+  border:0; border-bottom:1px solid #e7e3da; background:transparent;
+  color:var(--ink); text-align:left; font:400 20px/1.35 'DM Sans',sans-serif;
 }
-.circle-menu-option:last-child { border-bottom: 0; }
-.circle-menu-option:active,
-.circle-menu-option:hover { background: #f4f4ed; }
-.circle-menu-option[aria-selected="true"] {
-  color: var(--green);
-  background: #e5f1e9;
-}
+.circle-menu-option:last-child { border-bottom:0; }
+.circle-menu-option[aria-selected="true"] { background:#e5ebe5; color:#173f35; font-weight:600; }
+.circle-menu-option:active { background:#e5ebe5; }
 .circle-menu-check {
-  flex: 0 0 22px;
-  width: 22px;
-  height: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #8b918c;
-  border-radius: 50%;
-  color: white;
-  font: 700 13px 'DM Sans', sans-serif;
+  width:22px; height:22px; flex:0 0 22px; display:inline-flex;
+  align-items:center; justify-content:center; border:2px solid #858b86;
+  border-radius:50%; color:transparent; font:700 13px 'DM Sans',sans-serif;
 }
 .circle-menu-option[aria-selected="true"] .circle-menu-check {
-  background: #208b7e;
-  border-color: #208b7e;
-  color: white;
+  border-color:#173f35; color:#173f35; background:transparent;
 }
-@keyframes circleFadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes circleMenuIn { from { opacity: .7; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@media (max-width: 600px) {
-  .circle-menu-backdrop { padding: 16px; }
-  .circle-menu { border-radius: 32px; max-height: 76dvh; }
-  .circle-menu-option { min-height: 76px; padding: 18px 20px; font-size: 20px; }
+@keyframes circleFadeIn { from {opacity:0} to {opacity:1} }
+@keyframes circleMenuIn { from {opacity:.7;transform:translateY(6px) scale(.99)} to {opacity:1;transform:none} }
+@media(max-width:600px) {
+ .circle-menu-backdrop { padding:16px; }
+ .circle-menu { border-radius:32px; max-height:76dvh; }
+ .circle-menu-option { min-height:79px; padding:18px 20px; font-size:19px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .circle-menu-backdrop, .circle-menu { animation: none; }
-}
-
+@media(prefers-reduced-motion:reduce) { .circle-menu-backdrop,.circle-menu {animation:none} }
 </style>
 </head>
 
@@ -1806,7 +1781,8 @@ $('refreshReviews').onclick = loadReviews;
 $('refresh').onclick = init;
 
 
-/* Custom select popup. Native select values/events remain the source of truth. */
+
+/* Custom select popup; the native select remains the data source but never opens. */
 let circleMenuBackdrop = null;
 let circleMenuSelect = null;
 
@@ -1816,20 +1792,52 @@ function closeCircleMenu() {
   circleMenuSelect = null;
 }
 
-function openCircleMenu(select) {
+function syncSelectTrigger(select) {
+  const wrap = select.closest('.select-wrap');
+  if (!wrap) return;
+  const trigger = wrap.querySelector('.select-trigger');
+  const selected = select.options[select.selectedIndex];
+  const label = trigger?.querySelector('.select-value');
+  if (label) label.textContent = selected ? selected.textContent : 'Choose an option';
+  if (trigger) trigger.disabled = select.disabled;
+}
+
+function enhanceSelect(select) {
+  if (select.dataset.customMenu === '1' || !select.classList.contains('field')) return;
+  select.dataset.customMenu = '1';
+  const wrap = document.createElement('div');
+  wrap.className = 'select-wrap';
+  select.parentNode.insertBefore(wrap, select);
+  wrap.appendChild(select);
+
+  const trigger = document.createElement('button');
+  trigger.type = 'button';
+  trigger.className = 'select-trigger';
+  trigger.setAttribute('aria-haspopup', 'listbox');
+  trigger.setAttribute('aria-expanded', 'false');
+  const value = document.createElement('span');
+  value.className = 'select-value';
+  const chevron = document.createElement('span');
+  chevron.className = 'select-chevron';
+  chevron.setAttribute('aria-hidden', 'true');
+  trigger.append(value, chevron);
+  wrap.appendChild(trigger);
+  trigger.addEventListener('click', () => openCircleMenu(select, trigger));
+  select.addEventListener('change', () => syncSelectTrigger(select));
+  syncSelectTrigger(select);
+}
+
+function openCircleMenu(select, trigger) {
   if (!select || select.disabled) return;
   closeCircleMenu();
   circleMenuSelect = select;
-
   const backdrop = document.createElement('div');
   backdrop.className = 'circle-menu-backdrop';
   backdrop.setAttribute('role', 'presentation');
-
   const menu = document.createElement('div');
   menu.className = 'circle-menu';
   menu.setAttribute('role', 'listbox');
-  menu.setAttribute('aria-label', select.getAttribute('aria-label') ||
-    select.labels?.[0]?.textContent?.trim() || 'Choose an option');
+  menu.setAttribute('aria-label', select.labels?.[0]?.textContent?.trim() || 'Choose an option');
 
   Array.from(select.options).forEach((option, index) => {
     if (option.hidden) return;
@@ -1850,32 +1858,44 @@ function openCircleMenu(select) {
       select.selectedIndex = index;
       select.dispatchEvent(new Event('change', { bubbles: true }));
       select.dispatchEvent(new Event('input', { bubbles: true }));
+      trigger.setAttribute('aria-expanded', 'false');
       closeCircleMenu();
-      select.focus({ preventScroll: true });
+      trigger.focus({ preventScroll: true });
     });
     menu.appendChild(item);
   });
 
   backdrop.appendChild(menu);
   backdrop.addEventListener('click', event => {
-    if (event.target === backdrop) closeCircleMenu();
+    if (event.target === backdrop) {
+      trigger.setAttribute('aria-expanded', 'false');
+      closeCircleMenu();
+    }
   });
   document.body.appendChild(backdrop);
   circleMenuBackdrop = backdrop;
-
-  const selected = menu.querySelector('[aria-selected="true"]');
-  if (selected) selected.scrollIntoView({ block: 'nearest' });
+  trigger.setAttribute('aria-expanded', 'true');
 }
 
-document.addEventListener('pointerdown', event => {
-  const select = event.target.closest('select.field');
-  if (!select) return;
-  event.preventDefault();
-  openCircleMenu(select);
-}, true);
+function enhanceAllSelects(root = document) {
+  root.querySelectorAll('select.field').forEach(enhanceSelect);
+}
+enhanceAllSelects();
+new MutationObserver(records => {
+  for (const record of records) {
+    record.addedNodes.forEach(node => {
+      if (node.nodeType !== 1) return;
+      if (node.matches?.('select.field')) enhanceSelect(node);
+      enhanceAllSelects(node);
+    });
+  }
+}).observe(document.body, { childList: true, subtree: true });
 
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && circleMenuBackdrop) closeCircleMenu();
+  if (event.key === 'Escape' && circleMenuBackdrop) {
+    closeCircleMenu();
+    document.querySelector('.select-trigger[aria-expanded="true"]')?.setAttribute('aria-expanded', 'false');
+  }
 });
 
 renderQs();
