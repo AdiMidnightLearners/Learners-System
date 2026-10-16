@@ -9,7 +9,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
 
-:root{
+:root {
   --bg:#f5f3ed;
   --paper:#fffdf8;
   --ink:#22231f;
@@ -27,264 +27,53 @@
 }
 
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font:14px 'DM Sans',sans-serif;
-}
-
+body{margin:0;background:var(--bg);color:var(--ink);font:14px 'DM Sans',sans-serif}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 button:disabled{opacity:.55;cursor:not-allowed}
-
-.wrap{
-  width:min(1080px,calc(100% - 28px));
-  margin:auto;
-}
-
-header,.row,.head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-header{
-  padding:17px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.brand{
-  font:500 30px 'Playfair Display',serif;
-}
-
+.wrap{width:min(1080px,calc(100% - 28px));margin:auto}
+header,.row,.head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+header{padding:17px 0;border-bottom:1px solid var(--line)}
+.brand{font:500 30px 'Playfair Display',serif}
 .brand span{color:var(--gold)}
-
 .row{justify-content:flex-start}
-
-.btn{
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:11px 15px;
-  background:var(--paper);
-  color:var(--ink);
-  font-size:12px;
-  font-weight:700;
-}
-
-.btn.primary,.btn.active{
-  background:var(--green);
-  border-color:var(--green);
-  color:white;
-}
-
-.badge,.status{
-  display:inline-flex;
-  border-radius:999px;
-  padding:6px 10px;
-  background:var(--greenbg);
-  color:var(--green);
-  font-size:10px;
-  font-weight:700;
-}
-
+.btn{border:1px solid var(--line);border-radius:999px;padding:11px 15px;background:var(--paper);color:var(--ink);font-size:12px;font-weight:700}
+.btn.primary,.btn.active{background:var(--green);border-color:var(--green);color:white}
+.badge,.status{display:inline-flex;border-radius:999px;padding:6px 10px;background:var(--greenbg);color:var(--green);font-size:10px;font-weight:700}
 .intro{padding:32px 0 20px}
-
-.eyebrow{
-  font-size:10px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.17em;
-  color:var(--green);
-}
-
-h1{
-  font:500 clamp(38px,7vw,58px)/1.04 'Playfair Display',serif;
-  letter-spacing:-.04em;
-  margin:10px 0;
-}
-
-h2{
-  font:500 26px 'Playfair Display',serif;
-  margin:0 0 6px;
-}
-
+.eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.17em;color:var(--green)}
+h1{font:500 clamp(38px,7vw,58px)/1.04 'Playfair Display',serif;letter-spacing:-.04em;margin:10px 0}
+h2{font:500 26px 'Playfair Display',serif;margin:0 0 6px}
 h3{margin:10px 0}
-
-.intro p,.sub,.hint{
-  color:var(--muted);
-  line-height:1.7;
-  margin:0;
-}
-
-.panel{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:21px;
-  margin-bottom:16px;
-  box-shadow:0 12px 35px #1e1e1408;
-}
-
-.head{
-  margin-bottom:17px;
-  align-items:flex-start;
-}
-
-.tabs{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin:18px 0;
-}
-
-.stats,.grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
-  margin:18px 0;
-}
-
-.grid{
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  margin:14px 0;
-}
-
-.stat,.card,.question{
-  background:#fffefa;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:16px;
-  min-width:0;
-  overflow-wrap:anywhere;
-}
-
-.stat strong{
-  display:block;
-  font:500 28px 'Playfair Display',serif;
-}
-
-.stat span,.label{
-  font-size:10px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.1em;
-}
-
+.intro p,.sub,.hint{color:var(--muted);line-height:1.7;margin:0}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:21px;margin-bottom:16px;box-shadow:0 12px 35px #1e1e1408}
+.head{margin-bottom:17px;align-items:flex-start}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.stats,.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));margin:14px 0}
+.stat,.card,.question{background:#fffefa;border:1px solid var(--line);border-radius:15px;padding:16px;min-width:0;overflow-wrap:anywhere}
+.stat strong{display:block;font:500 28px 'Playfair Display',serif}
+.stat span,.label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
 .form{display:grid;gap:13px}
-
-.two{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.label{
-  display:block;
-  font-weight:700;
-  margin-bottom:7px;
-}
-
-.field{
-  width:100%;
-  min-width:0;
-  padding:13px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:white;
-  color:var(--ink);
-  outline:0;
-}
-
-.field:focus{
-  border-color:#8b9b8d;
-  box-shadow:0 0 0 3px var(--greenbg);
-}
-
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.label{display:block;font-weight:700;margin-bottom:7px}
+.field{width:100%;min-width:0;padding:13px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);outline:0}
+.field:focus{border-color:#8b9b8d;box-shadow:0 0 0 3px var(--greenbg)}
 textarea.field{min-height:100px;resize:vertical}
-
-.meta{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-  color:var(--muted);
-  font-size:11px;
-  margin:10px 0;
-}
-
-.empty{
-  grid-column:1/-1;
-  border:1px dashed var(--line);
-  border-radius:14px;
-  padding:23px;
-  text-align:center;
-  color:var(--muted);
-  line-height:1.7;
-}
-
+.meta{display:flex;gap:9px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin:10px 0}
+.empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:14px;padding:23px;text-align:center;color:var(--muted);line-height:1.7}
 .hidden{display:none!important}
-
-.question{
-  background:white;
-  margin:12px 0;
-  line-height:1.7;
-}
-
+.question{background:white;margin:12px 0;line-height:1.7}
 .question textarea{min-height:120px}
-
-.status.pending,.markbox.pending{
-  background:var(--bluebg);
-  color:var(--blue);
-}
-
-.status.right,.markbox.right{
-  background:var(--greenbg);
-  color:var(--green);
-}
-
-.status.wrong,.markbox.wrong{
-  background:var(--redbg);
-  color:var(--red);
-}
-
-.status.partial,.markbox.partial{
-  background:var(--amberbg);
-  color:var(--amber);
-}
-
-.markbox{
-  padding:13px;
-  border-radius:12px;
-  margin-top:10px;
-}
-
-.resultitem{
-  padding:16px 0;
-  border-bottom:1px solid var(--line);
-}
-
+.status.pending,.markbox.pending{background:var(--bluebg);color:var(--blue)}
+.status.right,.markbox.right{background:var(--greenbg);color:var(--green)}
+.status.wrong,.markbox.wrong{background:var(--redbg);color:var(--red)}
+.status.partial,.markbox.partial{background:var(--amberbg);color:var(--amber)}
+.markbox{padding:13px;border-radius:12px;margin-top:10px}
+.resultitem{padding:16px 0;border-bottom:1px solid var(--line)}
 .resultitem:last-child{border:0}
-
-.toast{
-  display:none;
-  position:fixed;
-  z-index:99;
-  left:50%;
-  bottom:18px;
-  transform:translateX(-50%);
-  max-width:92%;
-  padding:13px 16px;
-  border-radius:14px;
-  background:var(--green);
-  color:white;
-  box-shadow:0 8px 30px #0002;
-}
-
+.toast{display:none;position:fixed;z-index:99;left:50%;bottom:18px;transform:translateX(-50%);max-width:92%;padding:13px 16px;border-radius:14px;background:var(--green);color:white;box-shadow:0 8px 30px #0002}
 .toast.show{display:block}
-
 @media(max-width:680px){
   .wrap{width:calc(100% - 22px)}
   .panel{padding:16px}
@@ -296,7 +85,6 @@ textarea.field{min-height:100px;resize:vertical}
 
 <body>
 <div class="wrap">
-
 <header>
   <div class="brand">Circle<span>.</span></div>
   <div class="row">
@@ -338,7 +126,6 @@ textarea.field{min-height:100px;resize:vertical}
       <label class="label">Test title</label>
       <input id="title" class="field" required maxlength="140" placeholder="e.g. Python written assessment">
     </div>
-
     <div class="two">
       <div>
         <label class="label">Learning group</label>
@@ -357,7 +144,6 @@ textarea.field{min-height:100px;resize:vertical}
         </select>
       </div>
     </div>
-
     <div class="two">
       <div>
         <label class="label">Number of questions</label>
@@ -368,17 +154,14 @@ textarea.field{min-height:100px;resize:vertical}
         <input id="duration" class="field" type="number" min="1" max="300" value="30">
       </div>
     </div>
-
     <div>
       <label class="label">Student instructions</label>
       <textarea id="instructions" class="field" maxlength="2000" placeholder="Expected answer depth, rules, or guidance."></textarea>
     </div>
-
     <div>
       <label class="label">Topic/source material — mentor only</label>
       <textarea id="source" class="field" maxlength="12000" placeholder="Topic or notes for Gemini."></textarea>
     </div>
-
     <div class="row">
       <button class="btn primary" id="generate" type="button">✦ Generate with Gemini</button>
       <button class="btn" id="addQuestion" type="button">+ Add question</button>
@@ -387,16 +170,12 @@ textarea.field{min-height:100px;resize:vertical}
       <button class="btn hidden" id="cancel" type="button">Cancel editing</button>
     </div>
   </form>
-
   <div id="questions"></div>
 </section>
 
 <section id="library" class="panel hidden">
   <div class="head">
-    <div>
-      <h2>Test library</h2>
-      <p class="sub">Manage drafts and published tests.</p>
-    </div>
+    <div><h2>Test library</h2><p class="sub">Manage drafts and published tests.</p></div>
   </div>
   <div class="row" style="margin-bottom:13px">
     <button class="btn active" data-cfilter="all">All groups</button>
@@ -410,20 +189,14 @@ textarea.field{min-height:100px;resize:vertical}
 
 <section id="student" class="panel hidden">
   <div class="head">
-    <div>
-      <h2>Your tests</h2>
-      <p class="sub">Your results become visible after mentor evaluation.</p>
-    </div>
+    <div><h2>Your tests</h2><p class="sub">Your results become visible after mentor evaluation.</p></div>
   </div>
   <div id="studentList" class="grid"></div>
 </section>
 
 <section id="testPanel" class="panel hidden">
   <div class="head">
-    <div>
-      <h2 id="activeTitle">Test</h2>
-      <p class="sub" id="activeInfo"></p>
-    </div>
+    <div><h2 id="activeTitle">Test</h2><p class="sub" id="activeInfo"></p></div>
     <button class="btn" id="back">Back</button>
   </div>
   <div id="testBody"></div>
@@ -433,10 +206,7 @@ textarea.field{min-height:100px;resize:vertical}
 
 <section id="reviews" class="panel hidden">
   <div class="head">
-    <div>
-      <h2>Evaluate submissions</h2>
-      <p class="sub">Mark answers right, partially right, or wrong.</p>
-    </div>
+    <div><h2>Evaluate submissions</h2><p class="sub">Mark answers right, partially right, or wrong.</p></div>
     <button class="btn" id="refreshReviews">Refresh</button>
   </div>
   <div class="row" style="margin-bottom:13px">
@@ -448,7 +218,6 @@ textarea.field{min-height:100px;resize:vertical}
   <input id="reviewSearch" class="field" placeholder="Search student or test…">
   <div id="reviewList"></div>
 </section>
-
 </div>
 
 <div id="toast" class="toast" role="status"></div>
@@ -456,9 +225,9 @@ textarea.field{min-height:100px;resize:vertical}
 <script>
 'use strict';
 
-/* Circle Supabase configuration */
-const URL = 'https://idnzjzcryvgceryaftop.supabase.co';
-const KEY = 'sb_publishable_HgIwYunyGeB2HHxJvDVczA_4EY-7jc1';
+/* IMPORTANT: use these exact variable names consistently. */
+const SUPABASE_URL = 'https://idnzjzcryvgceryaftop.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_HgIwYunyGeB2HHxJvDVczA_4EY-7jc1';
 
 const $ = id => document.getElementById(id);
 const cohortName = v => ({
@@ -480,50 +249,38 @@ const fmt = v => {
   return v && !isNaN(d) ? d.toLocaleString() : 'Date unavailable';
 };
 
-let db = null;
-let user = null;
-let profile = null;
-let role = '';
-let tests = [];
-let qs = [];
-let active = null;
-let submission = null;
-let submissions = [];
-let students = [];
-let allTests = [];
-let tab = 'library';
-let cf = 'all';
-let rf = 'all';
-let busy = false;
+let db = null, user = null, profile = null, role = '';
+let tests = [], qs = [], active = null, submission = null;
+let submissions = [], students = [], allTests = [];
+let tab = 'library', cf = 'all', rf = 'all', busy = false;
 
-const mentor = () => ['mentor', 'admin'].includes(role);
+const mentor = () => ['mentor','admin'].includes(role);
 
 function toast(message) {
   $('toast').textContent = message;
   $('toast').classList.add('show');
   clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => {
-    $('toast').classList.remove('show');
-  }, 4500);
+  window.toastTimer = setTimeout(() => $('toast').classList.remove('show'), 4500);
 }
 
 function showError(message) {
   $('roleBadge').textContent = 'Error';
   $('error').classList.remove('hidden');
-  $('error').innerHTML = '';
+  $('error').replaceChildren();
+
   const title = document.createElement('strong');
   title.textContent = 'Tests could not load';
+
   const p = document.createElement('p');
   p.className = 'sub';
   p.style.marginTop = '8px';
   p.textContent = message;
-  $('error').append(title, p);
+
+  $('error').append(title,p);
 }
 
 function panel(id) {
-  ['editor', 'library', 'student', 'testPanel', 'reviews'].forEach(x => {
-    $(x).classList.add('hidden');
-  });
+  ['editor','library','student','testPanel','reviews'].forEach(x => $(x).classList.add('hidden'));
   if (id) $(id).classList.remove('hidden');
 }
 
@@ -531,52 +288,44 @@ function withTimeout(promise, ms, message) {
   let timer;
   return Promise.race([
     promise,
-    new Promise((_, reject) => {
-      timer = setTimeout(() => reject(new Error(message)), ms);
+    new Promise((_,reject) => {
+      timer = setTimeout(() => reject(new Error(message)),ms);
     })
   ]).finally(() => clearTimeout(timer));
 }
 
 function openTab(t) {
   if (!mentor()) return;
-
   tab = t;
-  document.querySelectorAll('[data-tab]').forEach(b => {
-    b.classList.toggle('active', b.dataset.tab === t);
-  });
+  document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active',b.dataset.tab === t));
 
-  if (t === 'create') {
-    panel('editor');
-  } else if (t === 'library') {
-    panel('library');
-    renderMentor();
-  } else {
-    panel('reviews');
-    loadReviews();
-  }
+  if (t === 'create') panel('editor');
+  else if (t === 'library') { panel('library'); renderMentor(); }
+  else { panel('reviews'); loadReviews(); }
 }
 
-document.querySelectorAll('[data-tab]').forEach(b => {
-  b.onclick = () => openTab(b.dataset.tab);
-});
+document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => openTab(b.dataset.tab));
 
-/* Initialize Supabase and load the current user. */
 async function init() {
   $('refresh').disabled = true;
   $('roleBadge').textContent = 'Connecting…';
   $('error').classList.add('hidden');
 
   try {
-    if (!window.supabase || !window.supabase.createClient) {
-      throw new Error('Supabase library did not load. Check your internet connection and reload.');
+    if (!window.supabase?.createClient) {
+      throw new Error('Supabase library did not load. Check your internet connection.');
+    }
+
+    if (!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(SUPABASE_URL)) {
+      throw new Error('Supabase URL is invalid. Check SUPABASE_URL.');
     }
 
     if (!db) {
-      db = window.supabase.createClient(URL, KEY, {
-        auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: true
+      db = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{
+        auth:{
+          persistSession:true,
+          autoRefreshToken:true,
+          detectSessionInUrl:true
         }
       });
     }
@@ -584,7 +333,7 @@ async function init() {
     const authResult = await withTimeout(
       db.auth.getUser(),
       10000,
-      'Supabase authentication timed out. Reload the page and sign in again.'
+      'Authentication timed out. Refresh the page and sign in again.'
     );
 
     if (authResult.error) throw authResult.error;
@@ -593,43 +342,36 @@ async function init() {
 
     if (!user) {
       $('roleBadge').textContent = 'Sign-in required';
-      showError('Please sign in to Circle in this browser first, then return to Tests.');
+      showError('Please sign in to Circle in this browser, then return to Tests.');
       return;
     }
 
     const profileResult = await withTimeout(
       db.from('profiles')
         .select('id,role,cohort,full_name')
-        .eq('id', user.id)
+        .eq('id',user.id)
         .maybeSingle(),
       10000,
-      'Profile loading timed out. Check your profiles table and access policies.'
+      'Profile loading timed out. Check profiles table permissions.'
     );
 
     if (profileResult.error) throw profileResult.error;
-
     profile = profileResult.data;
 
-    if (!profile) {
-      throw new Error('No profiles record matches your signed-in user ID.');
-    }
+    if (!profile) throw new Error('No profiles record matches this signed-in user.');
 
     role = profile.role || '';
-
-    if (!['student', 'mentor', 'admin'].includes(role)) {
-      throw new Error('Your profile role is not student, mentor, or admin.');
+    if (!['student','mentor','admin'].includes(role)) {
+      throw new Error('Your profile role must be student, mentor, or admin.');
     }
 
-    $('roleBadge').textContent = mentor()
-      ? 'Mentor workspace'
-      : cohortName(profile.cohort);
-
+    $('roleBadge').textContent = mentor() ? 'Mentor workspace' : cohortName(profile.cohort);
     $('stats').classList.remove('hidden');
 
     await withTimeout(
       loadTests(),
       15000,
-      'Loading tests timed out. Check that circle_tests exists and its RLS policies allow this account to read the tests.'
+      'Loading tests timed out. Check circle_tests table and its read policies.'
     );
 
     if (mentor()) {
@@ -641,7 +383,7 @@ async function init() {
       await studentStats();
     }
   } catch (e) {
-    console.error('Tests initialization failed:', e);
+    console.error('Tests initialization failed:',e);
     showError(e?.message || String(e));
   } finally {
     $('refresh').disabled = false;
@@ -649,24 +391,15 @@ async function init() {
 }
 
 async function loadTests() {
-  let query = db.from('circle_tests')
-    .select('*')
-    .order('created_at', { ascending: false });
+  let query = db.from('circle_tests').select('*').order('created_at',{ascending:false});
 
-  if (!mentor()) {
-    query = query
-      .eq('cohort', profile.cohort)
-      .eq('is_published', true);
-  }
+  if (!mentor()) query = query.eq('cohort',profile.cohort).eq('is_published',true);
 
   const result = await query;
   if (result.error) throw result.error;
 
   tests = result.data || [];
-
-  $('sTests').textContent = String(
-    mentor() ? tests.filter(t => t.is_published).length : tests.length
-  );
+  $('sTests').textContent = String(mentor() ? tests.filter(t => t.is_published).length : tests.length);
 
   if (mentor()) renderMentor();
   else await loadStudentList();
@@ -674,7 +407,6 @@ async function loadTests() {
 
 function renderMentor() {
   if (!mentor()) return;
-
   const search = $('search').value.toLowerCase().trim();
 
   const rows = tests.filter(t =>
@@ -682,36 +414,28 @@ function renderMentor() {
     String(t.title).toLowerCase().includes(search)
   );
 
-  $('mentorList').innerHTML = rows.length
-    ? rows.map(t => `
-      <article class="card">
-        <div class="row">
-          <span class="badge">${esc(cohortName(t.cohort))}</span>
-          <span class="badge">${t.is_published ? 'Published' : 'Draft'}</span>
-        </div>
-        <h3>${esc(t.title)}</h3>
-        <div class="meta">
-          ${(t.questions || []).length} questions ·
-          ${esc(t.difficulty)} ·
-          ${Number(t.duration_minutes || 30)} min
-        </div>
-        <div class="row">
-          <button class="btn" data-edit="${esc(t.id)}">Edit</button>
-          <button class="btn primary" data-pub="${esc(t.id)}" data-state="${t.is_published ? '1' : '0'}">
-            ${t.is_published ? 'Unpublish' : 'Publish'}
-          </button>
-          <button class="btn" data-del="${esc(t.id)}">Delete</button>
-        </div>
-      </article>
-    `).join('')
-    : '<div class="empty">No matching tests.</div>';
+  $('mentorList').innerHTML = rows.length ? rows.map(t => `
+    <article class="card">
+      <div class="row">
+        <span class="badge">${esc(cohortName(t.cohort))}</span>
+        <span class="badge">${t.is_published ? 'Published' : 'Draft'}</span>
+      </div>
+      <h3>${esc(t.title)}</h3>
+      <div class="meta">${(t.questions||[]).length} questions · ${esc(t.difficulty)} · ${Number(t.duration_minutes||30)} min</div>
+      <div class="row">
+        <button class="btn" data-edit="${esc(t.id)}">Edit</button>
+        <button class="btn primary" data-pub="${esc(t.id)}" data-state="${t.is_published?'1':'0'}">${t.is_published?'Unpublish':'Publish'}</button>
+        <button class="btn" data-del="${esc(t.id)}">Delete</button>
+      </div>
+    </article>
+  `).join('') : '<div class="empty">No matching tests.</div>';
 }
 
 async function getSubmission(id) {
   const result = await db.from('circle_test_submissions')
     .select('*')
-    .eq('test_id', id)
-    .eq('student_user_id', user.id)
+    .eq('test_id',id)
+    .eq('student_user_id',user.id)
     .maybeSingle();
 
   if (result.error) throw result.error;
@@ -722,485 +446,343 @@ async function loadStudentList() {
   if (mentor()) return;
 
   if (!tests.length) {
-    $('studentList').innerHTML =
-      '<div class="empty">No published tests for your group yet.</div>';
+    $('studentList').innerHTML = '<div class="empty">No published tests for your group yet.</div>';
     return;
   }
 
-  const results = await Promise.all(tests.map(async t => {
-    try {
-      return { test: t, submission: await getSubmission(t.id) };
-    } catch (e) {
-      console.error('Submission lookup failed:', e);
-      return { test: t, submission: null, error: e.message };
-    }
+  const rows = await Promise.all(tests.map(async t => {
+    try { return {test:t,submission:await getSubmission(t.id)}; }
+    catch(e) { console.error(e); return {test:t,submission:null}; }
   }));
 
-  $('studentList').innerHTML = results.map(({ test: t, submission: s }) => `
+  $('studentList').innerHTML = rows.map(({test:t,submission:s}) => `
     <article class="card">
       <span class="badge">${esc(cohortName(t.cohort))}</span>
       <h3>${esc(t.title)}</h3>
-      <div class="meta">
-        ${(t.questions || []).length} questions ·
-        ${Number(t.duration_minutes || 30)} min
-      </div>
-      ${t.instructions ? `<p class="hint">${esc(t.instructions)}</p>` : ''}
-      ${s ? `
-        <span class="status ${s.status === 'evaluated' ? 'right' : 'pending'}">
-          ${s.status === 'evaluated' ? 'Evaluated' : 'Awaiting review'}
-        </span>
-        <p><button class="btn primary" data-view="${esc(t.id)}">
-          View ${s.status === 'evaluated' ? 'results' : 'status'}
-        </button></p>
-      ` : `
-        <button class="btn primary" data-start="${esc(t.id)}">Start test</button>
-      `}
+      <div class="meta">${(t.questions||[]).length} questions · ${Number(t.duration_minutes||30)} min</div>
+      ${t.instructions?`<p class="hint">${esc(t.instructions)}</p>`:''}
+      ${s?`
+        <span class="status ${s.status==='evaluated'?'right':'pending'}">${s.status==='evaluated'?'Evaluated':'Awaiting review'}</span>
+        <p><button class="btn primary" data-view="${esc(t.id)}">View ${s.status==='evaluated'?'results':'status'}</button></p>
+      `:`<button class="btn primary" data-start="${esc(t.id)}">Start test</button>`}
     </article>
   `).join('');
 }
 
-/* Question editor */
 function renderQs() {
-  $('questions').innerHTML = qs.length
-    ? qs.map((q, i) => `
-      <div class="question">
-        <div class="head">
-          <strong>Question ${i + 1}</strong>
-          <button type="button" class="btn" data-rmq="${i}">Remove</button>
-        </div>
-        <label class="label">Open-ended question</label>
-        <textarea class="field" data-q="${i}" placeholder="Write the question…">${esc(q.prompt)}</textarea>
-        <div class="two" style="margin-top:10px">
-          <div>
-            <label class="label">Maximum points</label>
-            <input class="field" type="number" min="1" max="100" data-p="${i}" value="${Number(q.points || 1)}">
-          </div>
-          <div>
-            <label class="label">Mentor rubric (not shown to students)</label>
-            <input class="field" data-g="${i}" value="${esc(q.guidance || '')}" placeholder="Optional evaluation guidance">
-          </div>
-        </div>
+  $('questions').innerHTML = qs.length ? qs.map((q,i) => `
+    <div class="question">
+      <div class="head"><strong>Question ${i+1}</strong><button type="button" class="btn" data-rmq="${i}">Remove</button></div>
+      <label class="label">Open-ended question</label>
+      <textarea class="field" data-q="${i}" placeholder="Write the question…">${esc(q.prompt)}</textarea>
+      <div class="two" style="margin-top:10px">
+        <div><label class="label">Maximum points</label><input class="field" type="number" min="1" max="100" data-p="${i}" value="${Number(q.points||1)}"></div>
+        <div><label class="label">Mentor rubric (not shown to students)</label><input class="field" data-g="${i}" value="${esc(q.guidance||'')}" placeholder="Optional evaluation guidance"></div>
       </div>
-    `).join('')
-    : '<div class="empty">No questions yet. Generate with Gemini or add a question.</div>';
+    </div>
+  `).join('') : '<div class="empty">No questions yet. Generate with Gemini or add a question.</div>';
 }
 
 function readQs() {
-  qs = qs.map((q, i) => ({
-    prompt: $('questions').querySelector(`[data-q="${i}"]`)?.value.trim() || '',
-    points: Math.max(1, Number($('questions').querySelector(`[data-p="${i}"]`)?.value || 1)),
-    guidance: $('questions').querySelector(`[data-g="${i}"]`)?.value.trim() || ''
+  qs = qs.map((q,i) => ({
+    prompt:$('questions').querySelector(`[data-q="${i}"]`)?.value.trim()||'',
+    points:Math.max(1,Number($('questions').querySelector(`[data-p="${i}"]`)?.value||1)),
+    guidance:$('questions').querySelector(`[data-g="${i}"]`)?.value.trim()||''
   }));
 }
 
-$('questions').addEventListener('input', e => {
+$('questions').addEventListener('input',e => {
   const f = e.target;
   const i = Number(f.dataset.q ?? f.dataset.p ?? f.dataset.g);
   if (!Number.isInteger(i) || !qs[i]) return;
-
-  if (f.dataset.q !== undefined) qs[i].prompt = f.value;
-  if (f.dataset.p !== undefined) qs[i].points = Math.max(1, Number(f.value || 1));
-  if (f.dataset.g !== undefined) qs[i].guidance = f.value;
+  if (f.dataset.q!==undefined) qs[i].prompt=f.value;
+  if (f.dataset.p!==undefined) qs[i].points=Math.max(1,Number(f.value||1));
+  if (f.dataset.g!==undefined) qs[i].guidance=f.value;
 });
 
-$('questions').addEventListener('click', e => {
-  const b = e.target.closest('[data-rmq]');
+$('questions').addEventListener('click',e => {
+  const b=e.target.closest('[data-rmq]');
   if (!b) return;
-
   readQs();
-  qs.splice(Number(b.dataset.rmq), 1);
+  qs.splice(Number(b.dataset.rmq),1);
   renderQs();
 });
 
-$('addQuestion').onclick = () => {
-  readQs();
-  qs.push({ prompt: '', points: 1, guidance: '' });
-  renderQs();
-};
+$('addQuestion').onclick=()=>{readQs();qs.push({prompt:'',points:1,guidance:''});renderQs();};
 
 function resetForm() {
   $('form').reset();
   delete $('form').dataset.editId;
-  $('editorTitle').textContent = 'Create a test';
+  $('editorTitle').textContent='Create a test';
   $('cancel').classList.add('hidden');
-  qs = [];
+  qs=[];
   renderQs();
 }
+$('cancel').onclick=resetForm;
 
-$('cancel').onclick = resetForm;
-
-$('mentorList').addEventListener('click', async e => {
-  const ed = e.target.closest('[data-edit]');
-  const pb = e.target.closest('[data-pub]');
-  const del = e.target.closest('[data-del]');
+$('mentorList').addEventListener('click',async e => {
+  const ed=e.target.closest('[data-edit]');
+  const pb=e.target.closest('[data-pub]');
+  const del=e.target.closest('[data-del]');
 
   try {
-    if (ed) {
-      const t = tests.find(x => x.id === ed.dataset.edit);
-      if (!t) return;
-
-      $('title').value = t.title || '';
-      $('cohort').value = t.cohort || 'existing';
-      $('difficulty').value = t.difficulty || 'Intermediate';
-      $('count').value = (t.questions || []).length || 5;
-      $('duration').value = t.duration_minutes || 30;
-      $('instructions').value = t.instructions || '';
-      $('source').value = t.source_material || '';
-
-      qs = (t.questions || []).map(q => ({
-        prompt: q.prompt || '',
-        points: q.points || 1,
-        guidance: q.guidance || ''
-      }));
-
-      $('form').dataset.editId = t.id;
-      $('editorTitle').textContent = 'Edit test';
+    if(ed) {
+      const t=tests.find(x=>x.id===ed.dataset.edit);
+      if(!t)return;
+      $('title').value=t.title||'';
+      $('cohort').value=t.cohort||'existing';
+      $('difficulty').value=t.difficulty||'Intermediate';
+      $('count').value=(t.questions||[]).length||5;
+      $('duration').value=t.duration_minutes||30;
+      $('instructions').value=t.instructions||'';
+      $('source').value=t.source_material||'';
+      qs=(t.questions||[]).map(q=>({prompt:q.prompt||'',points:q.points||1,guidance:q.guidance||''}));
+      $('form').dataset.editId=t.id;
+      $('editorTitle').textContent='Edit test';
       $('cancel').classList.remove('hidden');
       renderQs();
       openTab('create');
     }
-
-    if (pb) await publishTest(pb.dataset.pub, pb.dataset.state !== '1');
-    if (del) await deleteTest(del.dataset.del);
-  } catch (e) {
-    toast('Action failed: ' + e.message);
-  }
+    if(pb)await publishTest(pb.dataset.pub,pb.dataset.state!=='1');
+    if(del)await deleteTest(del.dataset.del);
+  } catch(e){toast('Action failed: '+e.message);}
 });
 
 async function saveTest(pub) {
-  const b = pub ? $('publish') : $('save');
-  const old = b.textContent;
-
-  if (b.disabled) return;
-
-  b.disabled = true;
-  b.textContent = pub ? 'Publishing…' : 'Saving…';
+  const b=pub?$('publish'):$('save');
+  const old=b.textContent;
+  if(b.disabled)return;
+  b.disabled=true;
+  b.textContent=pub?'Publishing…':'Saving…';
 
   try {
     readQs();
+    const title=$('title').value.trim();
+    if(!title)throw new Error('Enter a test title.');
+    if(!qs.length||qs.some(q=>!q.prompt))throw new Error('Add a prompt for every question.');
 
-    const title = $('title').value.trim();
-
-    if (!title) throw new Error('Enter a test title.');
-    if (!qs.length || qs.some(q => !q.prompt)) {
-      throw new Error('Add a prompt for every question.');
-    }
-
-    const payload = {
+    const payload={
       title,
-      cohort: $('cohort').value,
-      difficulty: $('difficulty').value,
-      duration_minutes: Math.max(1, Number($('duration').value || 30)),
-      instructions: $('instructions').value.trim(),
-      source_material: $('source').value.trim(),
-      questions: qs.map(q => ({
-        prompt: q.prompt,
-        points: q.points,
-        guidance: q.guidance
-      })),
-      is_published: pub
+      cohort:$('cohort').value,
+      difficulty:$('difficulty').value,
+      duration_minutes:Math.max(1,Number($('duration').value||30)),
+      instructions:$('instructions').value.trim(),
+      source_material:$('source').value.trim(),
+      questions:qs.map(q=>({prompt:q.prompt,points:q.points,guidance:q.guidance})),
+      is_published:pub
     };
 
-    const id = $('form').dataset.editId;
+    const id=$('form').dataset.editId;
+    const result=id
+      ?await db.from('circle_tests').update(payload).eq('id',id).select().single()
+      :await db.from('circle_tests').insert({...payload,created_by:user.id}).select().single();
 
-    const result = id
-      ? await db.from('circle_tests').update(payload).eq('id', id).select().single()
-      : await db.from('circle_tests').insert({
-          ...payload,
-          created_by: user.id
-        }).select().single();
-
-    if (result.error) throw result.error;
-    if (!result.data) throw new Error('No test saved. Check your table policies.');
+    if(result.error)throw result.error;
+    if(!result.data)throw new Error('No test saved. Check table policies.');
 
     resetForm();
-    toast(pub ? 'Test published.' : 'Draft saved.');
+    toast(pub?'Test published.':'Draft saved.');
     await loadTests();
     openTab('library');
-  } catch (e) {
+  } catch(e) {
     console.error(e);
-    toast('Could not save: ' + e.message);
+    toast('Could not save: '+e.message);
   } finally {
-    b.disabled = false;
-    b.textContent = old;
+    b.disabled=false;
+    b.textContent=old;
   }
 }
 
-$('save').onclick = () => saveTest(false);
-$('publish').onclick = () => saveTest(true);
+$('save').onclick=()=>saveTest(false);
+$('publish').onclick=()=>saveTest(true);
 
-/* Gemini question generation */
-$('generate').onclick = async () => {
-  const topic = $('source').value.trim();
-  const count = Number($('count').value);
+$('generate').onclick=async()=>{
+  const topic=$('source').value.trim();
+  const count=Number($('count').value);
+  if(!topic)return toast('Enter a topic or source material first.');
+  if(!Number.isInteger(count)||count<1||count>20)return toast('Choose 1–20 questions.');
 
-  if (!topic) return toast('Enter a topic or source material first.');
-  if (!Number.isInteger(count) || count < 1 || count > 20) {
-    return toast('Choose 1–20 questions.');
-  }
-
-  const b = $('generate');
-  b.disabled = true;
-  b.textContent = 'Generating…';
+  const b=$('generate');
+  b.disabled=true;
+  b.textContent='Generating…';
 
   try {
-    const sessionResult = await db.auth.getSession();
-    if (sessionResult.error) throw sessionResult.error;
+    const sr=await db.auth.getSession();
+    if(sr.error)throw sr.error;
+    const session=sr.data.session;
+    if(!session)throw new Error('Sign in again.');
 
-    const session = sessionResult.data.session;
-    if (!session) throw new Error('Sign in again.');
+    const response=await fetch(`${SUPABASE_URL}/functions/v1/generate-tests`,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${session.access_token}`,
+        'apikey':SUPABASE_KEY
+      },
+      body:JSON.stringify({
+        topic,
+        title:$('title').value.trim(),
+        difficulty:$('difficulty').value,
+        count,
+        cohort:$('cohort').value
+      })
+    });
 
-    const response = await fetch(
-      `${URL}/functions/v1/generate-tests`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`,
-          'apikey': KEY
-        },
-        body: JSON.stringify({
-          topic,
-          title: $('title').value.trim(),
-          difficulty: $('difficulty').value,
-          count,
-          cohort: $('cohort').value
-        })
-      }
-    );
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||data.message||'Generation failed.');
 
-    const data = await response.json();
+    const items=data.questions||data.items;
+    if(!Array.isArray(items)||!items.length)throw new Error('Gemini returned no questions.');
 
-    if (!response.ok) {
-      throw new Error(data.error || data.message || 'Generation failed.');
-    }
-
-    const items = data.questions || data.items;
-
-    if (!Array.isArray(items) || !items.length) {
-      throw new Error('Gemini returned no questions.');
-    }
-
-    qs = items.map(q => ({
-      prompt: String(q.prompt || q.question || ''),
-      points: Number(q.points || 1),
-      guidance: String(q.guidance || q.rubric || '')
+    qs=items.map(q=>({
+      prompt:String(q.prompt||q.question||''),
+      points:Number(q.points||1),
+      guidance:String(q.guidance||q.rubric||'')
     }));
-
     renderQs();
     toast(`Generated ${qs.length} questions. Review before saving.`);
-  } catch (e) {
+  } catch(e) {
     console.error(e);
-    toast('Generation failed: ' + e.message);
+    toast('Generation failed: '+e.message);
   } finally {
-    b.disabled = false;
-    b.textContent = '✦ Generate with Gemini';
+    b.disabled=false;
+    b.textContent='✦ Generate with Gemini';
   }
 };
 
-async function publishTest(id, pub) {
-  try {
-    const result = await db.from('circle_tests')
-      .update({ is_published: pub })
-      .eq('id', id)
-      .select()
-      .single();
-
-    if (result.error) throw result.error;
-    if (!result.data) throw new Error('No test updated.');
-
-    toast(pub ? 'Test published.' : 'Test unpublished.');
-    await loadTests();
-  } catch (e) {
-    toast('Could not update: ' + e.message);
-  }
+async function publishTest(id,pub) {
+  const result=await db.from('circle_tests').update({is_published:pub}).eq('id',id).select().single();
+  if(result.error)throw result.error;
+  toast(pub?'Test published.':'Test unpublished.');
+  await loadTests();
 }
 
 async function deleteTest(id) {
-  if (!confirm('Delete this test? Submissions may prevent deletion.')) return;
-
-  try {
-    const result = await db.from('circle_tests').delete().eq('id', id);
-    if (result.error) throw result.error;
-
-    toast('Test deleted.');
-    await loadTests();
-  } catch (e) {
-    toast('Could not delete: ' + e.message);
-  }
+  if(!confirm('Delete this test? Submissions may prevent deletion.'))return;
+  const result=await db.from('circle_tests').delete().eq('id',id);
+  if(result.error)throw result.error;
+  toast('Test deleted.');
+  await loadTests();
 }
 
-/* Student test-taking */
 async function openTest(id) {
-  const t = tests.find(x => x.id === id);
-  if (!t) return;
+  const t=tests.find(x=>x.id===id);
+  if(!t)return;
+  const s=await getSubmission(id);
+  if(s)return showStudentSubmission(t,s);
 
-  const s = await getSubmission(id);
-  if (s) return showStudentSubmission(t, s);
+  active=t;
+  submission=null;
+  $('activeTitle').textContent=t.title;
+  $('activeInfo').textContent=`${(t.questions||[]).length} questions · ${t.duration_minutes||30} minutes · ${t.difficulty||''}`;
+  $('studentResult').innerHTML='';
 
-  active = t;
-  submission = null;
-
-  $('activeTitle').textContent = t.title;
-  $('activeInfo').textContent =
-    `${(t.questions || []).length} questions · ${t.duration_minutes || 30} minutes · ${t.difficulty || ''}`;
-
-  $('studentResult').innerHTML = '';
-
-  $('testBody').innerHTML = `
-    ${t.instructions ? `
-      <div class="card">
-        <strong>Instructions</strong>
-        <p class="hint">${esc(t.instructions)}</p>
-      </div>
-    ` : ''}
-    ${(t.questions || []).map((q, i) => `
+  $('testBody').innerHTML=`
+    ${t.instructions?`<div class="card"><strong>Instructions</strong><p class="hint">${esc(t.instructions)}</p></div>`:''}
+    ${(t.questions||[]).map((q,i)=>`
       <div class="question">
-        <div class="head">
-          <strong>Question ${i + 1}</strong>
-          <span class="badge">${Number(q.points || 1)} point(s)</span>
-        </div>
+        <div class="head"><strong>Question ${i+1}</strong><span class="badge">${Number(q.points||1)} point(s)</span></div>
         <p>${esc(q.prompt)}</p>
         <textarea class="field" data-answer="${i}" maxlength="12000" placeholder="Write your answer in your own words…"></textarea>
       </div>
-    `).join('')}
-  `;
+    `).join('')}`;
 
-  $('submit').disabled = false;
-  $('submit').textContent = 'Submit answers';
+  $('submit').disabled=false;
+  $('submit').textContent='Submit answers';
   panel('testPanel');
 }
 
-$('studentList').addEventListener('click', async e => {
-  const start = e.target.closest('[data-start]');
-  const view = e.target.closest('[data-view]');
-
+$('studentList').addEventListener('click',async e=>{
+  const start=e.target.closest('[data-start]');
+  const view=e.target.closest('[data-view]');
   try {
-    if (start) await openTest(start.dataset.start);
-
-    if (view) {
-      const t = tests.find(x => x.id === view.dataset.view);
-      const s = await getSubmission(view.dataset.view);
-      if (t && s) showStudentSubmission(t, s);
+    if(start)await openTest(start.dataset.start);
+    if(view) {
+      const t=tests.find(x=>x.id===view.dataset.view);
+      const s=await getSubmission(view.dataset.view);
+      if(t&&s)showStudentSubmission(t,s);
     }
-  } catch (e) {
-    toast('Could not open test: ' + e.message);
-  }
+  } catch(e){toast('Could not open test: '+e.message);}
 });
 
-function showStudentSubmission(t, s) {
-  active = t;
-  submission = s;
+function showStudentSubmission(t,s) {
+  active=t;
+  submission=s;
+  $('activeTitle').textContent=t.title;
+  $('activeInfo').textContent=`Submitted ${fmt(s.submitted_at)}`;
+  $('submit').disabled=true;
+  $('submit').textContent='Already submitted';
 
-  $('activeTitle').textContent = t.title;
-  $('activeInfo').textContent = `Submitted ${fmt(s.submitted_at)}`;
-  $('submit').disabled = true;
-  $('submit').textContent = 'Already submitted';
+  const evaluated=s.status==='evaluated';
+  const marks=Array.isArray(s.evaluation)?s.evaluation:[];
 
-  const evaluated = s.status === 'evaluated';
-  const marks = Array.isArray(s.evaluation) ? s.evaluation : [];
-
-  $('testBody').innerHTML = (t.questions || []).map((q, i) => {
-    const m = marks[i] || {};
-    const color = evaluated
-      ? ({ right: 'right', wrong: 'wrong', partial: 'partial' }[m.verdict] || 'pending')
-      : 'pending';
-
+  $('testBody').innerHTML=(t.questions||[]).map((q,i)=>{
+    const m=marks[i]||{};
+    const color=evaluated?({right:'right',wrong:'wrong',partial:'partial'}[m.verdict]||'pending'):'pending';
     return `
       <div class="question">
-        <strong>Question ${i + 1}</strong>
+        <strong>Question ${i+1}</strong>
         <p>${esc(q.prompt)}</p>
         <div class="card">
           <span class="label">Your answer</span>
-          <div style="white-space:pre-wrap;margin-top:7px">${esc((s.answers || [])[i] || 'No answer')}</div>
+          <div style="white-space:pre-wrap;margin-top:7px">${esc((s.answers||[])[i]||'No answer')}</div>
         </div>
         <div class="markbox ${color}">
-          <span class="status ${color}">
-            ${evaluated
-              ? ({ right: 'Right', wrong: 'Wrong', partial: 'Partially right' }[m.verdict] || 'Evaluated')
-              : 'Awaiting mentor evaluation'}
-          </span>
-          ${evaluated ? `
-            <p><strong>Marks:</strong> ${Number(m.marks || 0)} / ${Number(q.points || 1)}</p>
-            ${m.feedback ? `<p><strong>Feedback:</strong> ${esc(m.feedback)}</p>` : ''}
-          ` : '<p>Your mentor has not evaluated this answer yet.</p>'}
+          <span class="status ${color}">${evaluated?({right:'Right',wrong:'Wrong',partial:'Partially right'}[m.verdict]||'Evaluated'):'Awaiting mentor evaluation'}</span>
+          ${evaluated?`<p><strong>Marks:</strong> ${Number(m.marks||0)} / ${Number(q.points||1)}</p>${m.feedback?`<p><strong>Feedback:</strong> ${esc(m.feedback)}</p>`:''}`:'<p>Your mentor has not evaluated this answer yet.</p>'}
         </div>
-      </div>
-    `;
+      </div>`;
   }).join('');
 
-  $('studentResult').innerHTML = evaluated
-    ? `
-      <div class="card">
-        <div class="eyebrow">Final result</div>
-        <h2>${Number(s.total_marks || 0)} / ${Number(s.max_marks || 0)}</h2>
-        <p class="sub">${esc(s.overall_feedback || 'Your mentor has evaluated this test.')}</p>
-      </div>
-    `
-    : `
-      <div class="card">
-        <span class="status pending">Submitted · awaiting evaluation</span>
-        <p class="sub">You cannot edit or resubmit. Check back here after evaluation.</p>
-      </div>
-    `;
+  $('studentResult').innerHTML=evaluated?`
+    <div class="card"><div class="eyebrow">Final result</div><h2>${Number(s.total_marks||0)} / ${Number(s.max_marks||0)}</h2><p class="sub">${esc(s.overall_feedback||'Your mentor has evaluated this test.')}</p></div>
+  `:`
+    <div class="card"><span class="status pending">Submitted · awaiting evaluation</span><p class="sub">Check back after your mentor evaluates the answers.</p></div>
+  `;
 
   panel('testPanel');
 }
 
-$('submit').onclick = async () => {
-  if (busy || !active || !user) return;
-
-  busy = true;
-  $('submit').disabled = true;
-  $('submit').textContent = 'Submitting…';
+$('submit').onclick=async()=>{
+  if(busy||!active||!user)return;
+  busy=true;
+  $('submit').disabled=true;
+  $('submit').textContent='Submitting…';
 
   try {
-    const prior = await getSubmission(active.id);
+    const prior=await getSubmission(active.id);
+    if(prior){showStudentSubmission(active,prior);toast('Already submitted.');return;}
 
-    if (prior) {
-      showStudentSubmission(active, prior);
-      toast('Already submitted.');
-      return;
-    }
+    const answers=(active.questions||[]).map((q,i)=>document.querySelector(`[data-answer="${i}"]`)?.value.trim()||'');
+    if(answers.every(x=>!x))throw new Error('Write at least one answer.');
 
-    const answers = (active.questions || []).map((q, i) =>
-      document.querySelector(`[data-answer="${i}"]`)?.value.trim() || ''
-    );
-
-    if (answers.every(x => !x)) {
-      throw new Error('Write at least one answer.');
-    }
-
-    const result = await db.from('circle_test_submissions').insert({
-      test_id: active.id,
-      student_user_id: user.id,
+    const result=await db.from('circle_test_submissions').insert({
+      test_id:active.id,
+      student_user_id:user.id,
       answers,
-      status: 'submitted',
-      submitted_at: new Date().toISOString()
+      status:'submitted',
+      submitted_at:new Date().toISOString()
     }).select().single();
 
-    if (result.error) throw result.error;
-
-    showStudentSubmission(active, result.data);
+    if(result.error)throw result.error;
+    showStudentSubmission(active,result.data);
     toast('Submitted. Your mentor will evaluate it.');
     await studentStats();
     await loadStudentList();
-  } catch (e) {
+  } catch(e) {
     console.error(e);
-    toast('Submission failed: ' + e.message);
-    $('submit').disabled = false;
-    $('submit').textContent = 'Submit answers';
+    toast('Submission failed: '+e.message);
+    $('submit').disabled=false;
+    $('submit').textContent='Submit answers';
   } finally {
-    busy = false;
+    busy=false;
   }
 };
 
-$('back').onclick = async () => {
-  active = null;
-
-  if (mentor()) {
-    panel('library');
-  } else {
+$('back').onclick=async()=>{
+  active=null;
+  if(mentor())panel('library');
+  else {
     panel('student');
     await loadTests();
     await studentStats();
@@ -1208,279 +790,167 @@ $('back').onclick = async () => {
 };
 
 async function studentStats() {
-  if (mentor() || !user) return;
-
+  if(mentor()||!user)return;
   try {
-    const result = await db.from('circle_test_submissions')
-      .select('id,status')
-      .eq('student_user_id', user.id);
-
-    if (result.error) throw result.error;
-
-    $('sSub').textContent = String((result.data || []).length);
-    $('sEval').textContent = String(
-      (result.data || []).filter(x => x.status === 'evaluated').length
-    );
-  } catch (e) {
-    console.error('Could not load student stats:', e);
-  }
+    const result=await db.from('circle_test_submissions').select('id,status').eq('student_user_id',user.id);
+    if(result.error)throw result.error;
+    $('sSub').textContent=String((result.data||[]).length);
+    $('sEval').textContent=String((result.data||[]).filter(x=>x.status==='evaluated').length);
+  } catch(e){console.error(e);}
 }
 
-/* Mentor evaluation */
 async function loadReviews() {
-  if (!mentor()) return;
-
-  $('reviewList').innerHTML = '<div class="empty">Loading submissions…</div>';
+  if(!mentor())return;
+  $('reviewList').innerHTML='<div class="empty">Loading submissions…</div>';
 
   try {
-    const [subResult, testResult] = await Promise.all([
-      db.from('circle_test_submissions')
-        .select('*')
-        .order('submitted_at', { ascending: false }),
-      db.from('circle_tests')
-        .select('id,title,cohort,questions')
+    const [subResult,testResult]=await Promise.all([
+      db.from('circle_test_submissions').select('*').order('submitted_at',{ascending:false}),
+      db.from('circle_tests').select('id,title,cohort,questions')
     ]);
 
-    if (subResult.error) throw subResult.error;
-    if (testResult.error) throw testResult.error;
+    if(subResult.error)throw subResult.error;
+    if(testResult.error)throw testResult.error;
 
-    submissions = subResult.data || [];
-    allTests = testResult.data || [];
+    submissions=subResult.data||[];
+    allTests=testResult.data||[];
 
-    const ids = [...new Set(
-      submissions.map(s => s.student_user_id).filter(Boolean)
-    )];
+    const ids=[...new Set(submissions.map(s=>s.student_user_id).filter(Boolean))];
 
-    if (ids.length) {
-      const p = await db.from('profiles')
-        .select('id,full_name,cohort')
-        .in('id', ids);
-
-      if (p.error) throw p.error;
-      students = p.data || [];
-    } else {
-      students = [];
-    }
+    if(ids.length) {
+      const p=await db.from('profiles').select('id,full_name,cohort').in('id',ids);
+      if(p.error)throw p.error;
+      students=p.data||[];
+    } else students=[];
 
     renderReviews();
-
-    $('sSub').textContent = String(submissions.length);
-    $('sEval').textContent = String(
-      submissions.filter(s => s.status === 'evaluated').length
-    );
-  } catch (e) {
+    $('sSub').textContent=String(submissions.length);
+    $('sEval').textContent=String(submissions.filter(s=>s.status==='evaluated').length);
+  } catch(e) {
     console.error(e);
-    $('reviewList').innerHTML =
-      `<div class="empty">Could not load submissions: ${esc(e.message)}. Check your RLS policies.</div>`;
+    $('reviewList').innerHTML=`<div class="empty">Could not load submissions: ${esc(e.message)}. Check RLS policies.</div>`;
   }
 }
 
 function renderReviews() {
-  const search = $('reviewSearch').value.toLowerCase().trim();
-  const testMap = new Map(allTests.map(t => [t.id, t]));
-  const profileMap = new Map(students.map(p => [p.id, p]));
+  const search=$('reviewSearch').value.toLowerCase().trim();
+  const testMap=new Map(allTests.map(t=>[t.id,t]));
+  const profileMap=new Map(students.map(p=>[p.id,p]));
 
-  const rows = submissions.filter(s => {
-    const t = testMap.get(s.test_id);
-    const p = profileMap.get(s.student_user_id);
-    const cohort = t?.cohort || p?.cohort || '';
-
-    return (rf === 'all' || cohort === rf) &&
-      `${p?.full_name || 'Student'} ${t?.title || 'Test'}`
-        .toLowerCase().includes(search);
+  const rows=submissions.filter(s=>{
+    const t=testMap.get(s.test_id);
+    const p=profileMap.get(s.student_user_id);
+    const cohort=t?.cohort||p?.cohort||'';
+    return (rf==='all'||cohort===rf)&&`${p?.full_name||'Student'} ${t?.title||'Test'}`.toLowerCase().includes(search);
   });
 
-  $('reviewList').innerHTML = rows.length
-    ? rows.map(s => {
-      const t = testMap.get(s.test_id);
-      const p = profileMap.get(s.student_user_id);
-
-      return `
-        <article class="resultitem">
-          <div class="row">
-            <strong>${esc(p?.full_name || 'Student')}</strong>
-            <span class="status ${s.status === 'evaluated' ? 'right' : 'pending'}">
-              ${s.status === 'evaluated' ? 'Evaluated' : 'Needs evaluation'}
-            </span>
-          </div>
-          <h3>${esc(t?.title || 'Test')}</h3>
-          <div class="meta">
-            ${esc(cohortName(t?.cohort || p?.cohort))} · ${esc(fmt(s.submitted_at))}
-            ${s.status === 'evaluated'
-              ? ` · ${Number(s.total_marks || 0)}/${Number(s.max_marks || 0)} marks`
-              : ''}
-          </div>
-          <button class="btn primary" data-eval="${esc(s.id)}">
-            ${s.status === 'evaluated' ? 'Review / edit evaluation' : 'Evaluate answers'}
-          </button>
-        </article>
-      `;
-    }).join('')
-    : '<div class="empty">No matching submissions.</div>';
+  $('reviewList').innerHTML=rows.length?rows.map(s=>{
+    const t=testMap.get(s.test_id);
+    const p=profileMap.get(s.student_user_id);
+    return `
+      <article class="resultitem">
+        <div class="row"><strong>${esc(p?.full_name||'Student')}</strong><span class="status ${s.status==='evaluated'?'right':'pending'}">${s.status==='evaluated'?'Evaluated':'Needs evaluation'}</span></div>
+        <h3>${esc(t?.title||'Test')}</h3>
+        <div class="meta">${esc(cohortName(t?.cohort||p?.cohort))} · ${esc(fmt(s.submitted_at))}${s.status==='evaluated'?` · ${Number(s.total_marks||0)}/${Number(s.max_marks||0)} marks`:''}</div>
+        <button class="btn primary" data-eval="${esc(s.id)}">${s.status==='evaluated'?'Review / edit evaluation':'Evaluate answers'}</button>
+      </article>`;
+  }).join(''):'<div class="empty">No matching submissions.</div>';
 }
 
-$('reviewList').addEventListener('click', e => {
-  const b = e.target.closest('[data-eval]');
-  if (b) openEvaluation(b.dataset.eval);
+$('reviewList').addEventListener('click',e=>{
+  const b=e.target.closest('[data-eval]');
+  if(b)openEvaluation(b.dataset.eval);
 });
 
 function openEvaluation(id) {
-  const s = submissions.find(x => x.id === id);
-  const t = allTests.find(x => x.id === s?.test_id);
-  const p = students.find(x => x.id === s?.student_user_id);
+  const s=submissions.find(x=>x.id===id);
+  const t=allTests.find(x=>x.id===s?.test_id);
+  const p=students.find(x=>x.id===s?.student_user_id);
+  if(!s||!t)return toast('Submission/test not found.');
 
-  if (!s || !t) return toast('Submission/test not found.');
+  const old=Array.isArray(s.evaluation)?s.evaluation:[];
+  const answers=s.answers||[];
 
-  const old = Array.isArray(s.evaluation) ? s.evaluation : [];
-  const answers = s.answers || [];
-
-  const questionHtml = (t.questions || []).map((q, i) => {
-    const m = old[i] || {};
-    const max = Number(q.points || 1);
-
-    return `
-      <div class="question">
-        <strong>Question ${i + 1} · Max ${max} marks</strong>
-        <p>${esc(q.prompt)}</p>
-
-        ${q.guidance ? `
-          <div class="card">
-            <span class="label">Mentor rubric</span>
-            <p>${esc(q.guidance)}</p>
-          </div>
-        ` : ''}
-
-        <div class="card">
-          <span class="label">Student answer</span>
-          <div style="white-space:pre-wrap;margin-top:7px">${esc(answers[i] || 'No answer provided')}</div>
-        </div>
-
-        <div class="two" style="margin-top:12px">
-          <div>
-            <label class="label">Verdict</label>
-            <select class="field" data-verdict="${i}">
-              <option value="">Choose…</option>
-              <option value="right" ${m.verdict === 'right' ? 'selected' : ''}>Right — green</option>
-              <option value="partial" ${m.verdict === 'partial' ? 'selected' : ''}>Partially right — amber</option>
-              <option value="wrong" ${m.verdict === 'wrong' ? 'selected' : ''}>Wrong — red</option>
-            </select>
-          </div>
-          <div>
-            <label class="label">Marks (0–${max})</label>
-            <input class="field" type="number" min="0" max="${max}" step=".5" data-marks="${i}" value="${Number(m.marks || 0)}">
-          </div>
-        </div>
-
-        <div style="margin-top:10px">
-          <label class="label">Feedback for student</label>
-          <textarea class="field" data-feedback="${i}" placeholder="Explain the result">${esc(m.feedback || '')}</textarea>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  $('reviewList').innerHTML = `
-    <div class="card">
-      <div class="eyebrow">Evaluate submission</div>
-      <h2>${esc(t.title)}</h2>
-      <p class="sub">${esc(p?.full_name || 'Student')} · ${esc(cohortName(t.cohort))} · ${esc(fmt(s.submitted_at))}</p>
-      <p class="hint">Green = right · amber = partially right · red = wrong. Saving releases results to the student.</p>
-    </div>
-
+  $('reviewList').innerHTML=`
+    <div class="card"><div class="eyebrow">Evaluate submission</div><h2>${esc(t.title)}</h2><p class="sub">${esc(p?.full_name||'Student')} · ${esc(cohortName(t.cohort))} · ${esc(fmt(s.submitted_at))}</p><p class="hint">Green = right · amber = partially right · red = wrong. Saving releases results to the student.</p></div>
     <form id="evalForm">
-      ${questionHtml}
-      <div class="question">
-        <label class="label">Overall feedback</label>
-        <textarea id="overall" class="field">${esc(s.overall_feedback || '')}</textarea>
-      </div>
+      ${(t.questions||[]).map((q,i)=>{
+        const m=old[i]||{};
+        const max=Number(q.points||1);
+        return `
+          <div class="question">
+            <strong>Question ${i+1} · Max ${max} marks</strong>
+            <p>${esc(q.prompt)}</p>
+            ${q.guidance?`<div class="card"><span class="label">Mentor rubric</span><p>${esc(q.guidance)}</p></div>`:''}
+            <div class="card"><span class="label">Student answer</span><div style="white-space:pre-wrap;margin-top:7px">${esc(answers[i]||'No answer provided')}</div></div>
+            <div class="two" style="margin-top:12px">
+              <div><label class="label">Verdict</label><select class="field" data-verdict="${i}"><option value="">Choose…</option><option value="right" ${m.verdict==='right'?'selected':''}>Right — green</option><option value="partial" ${m.verdict==='partial'?'selected':''}>Partially right — amber</option><option value="wrong" ${m.verdict==='wrong'?'selected':''}>Wrong — red</option></select></div>
+              <div><label class="label">Marks (0–${max})</label><input class="field" type="number" min="0" max="${max}" step=".5" data-marks="${i}" value="${Number(m.marks||0)}"></div>
+            </div>
+            <div style="margin-top:10px"><label class="label">Feedback for student</label><textarea class="field" data-feedback="${i}">${esc(m.feedback||'')}</textarea></div>
+          </div>`;
+      }).join('')}
+      <div class="question"><label class="label">Overall feedback</label><textarea id="overall" class="field">${esc(s.overall_feedback||'')}</textarea></div>
       <button class="btn primary" type="submit">Save evaluation and release result</button>
       <button class="btn" id="cancelEval" type="button">Back to submissions</button>
-    </form>
-  `;
+    </form>`;
 
-  $('cancelEval').onclick = loadReviews;
+  $('cancelEval').onclick=loadReviews;
 
-  $('evalForm').onsubmit = async e => {
+  $('evalForm').onsubmit=async e=>{
     e.preventDefault();
+    const evaluation=[];
 
-    const evaluation = [];
+    for(let i=0;i<(t.questions||[]).length;i++){
+      const verdict=$('reviewList').querySelector(`[data-verdict="${i}"]`).value;
+      const marks=Number($('reviewList').querySelector(`[data-marks="${i}"]`).value||0);
+      const feedback=$('reviewList').querySelector(`[data-feedback="${i}"]`).value.trim();
+      const max=Number(t.questions[i].points||1);
 
-    for (let i = 0; i < (t.questions || []).length; i++) {
-      const verdict = $('reviewList').querySelector(`[data-verdict="${i}"]`).value;
-      const marks = Number(
-        $('reviewList').querySelector(`[data-marks="${i}"]`).value || 0
-      );
-      const feedback = $('reviewList').querySelector(`[data-feedback="${i}"]`).value.trim();
-      const max = Number(t.questions[i].points || 1);
-
-      if (!verdict) return toast(`Choose a verdict for question ${i + 1}.`);
-      if (marks < 0 || marks > max) {
-        return toast(`Marks for question ${i + 1} must be between 0 and ${max}.`);
-      }
-
-      evaluation.push({ verdict, marks, feedback });
+      if(!verdict)return toast(`Choose a verdict for question ${i+1}.`);
+      if(marks<0||marks>max)return toast(`Marks for question ${i+1} must be between 0 and ${max}.`);
+      evaluation.push({verdict,marks,feedback});
     }
 
-    const maxMarks = (t.questions || []).reduce(
-      (sum, q) => sum + Number(q.points || 1), 0
-    );
-
-    const totalMarks = evaluation.reduce((sum, item) => sum + item.marks, 0);
+    const maxMarks=(t.questions||[]).reduce((sum,q)=>sum+Number(q.points||1),0);
+    const totalMarks=evaluation.reduce((sum,item)=>sum+item.marks,0);
 
     try {
-      const result = await db.from('circle_test_submissions')
-        .update({
-          evaluation,
-          total_marks: totalMarks,
-          max_marks: maxMarks,
-          overall_feedback: $('overall').value.trim(),
-          status: 'evaluated',
-          evaluated_at: new Date().toISOString(),
-          evaluated_by: user.id
-        })
-        .eq('id', s.id)
-        .select()
-        .single();
+      const result=await db.from('circle_test_submissions').update({
+        evaluation,
+        total_marks:totalMarks,
+        max_marks:maxMarks,
+        overall_feedback:$('overall').value.trim(),
+        status:'evaluated',
+        evaluated_at:new Date().toISOString(),
+        evaluated_by:user.id
+      }).eq('id',s.id).select().single();
 
-      if (result.error) throw result.error;
-      if (!result.data) throw new Error('No evaluation saved. Check mentor update policy.');
+      if(result.error)throw result.error;
+      if(!result.data)throw new Error('No evaluation saved. Check mentor update policy.');
 
       toast('Evaluation saved; student results released.');
       await loadReviews();
-    } catch (e) {
-      toast('Could not save evaluation: ' + e.message);
-    }
+    } catch(e){toast('Could not save evaluation: '+e.message);}
   };
 }
 
-/* Filters and refresh buttons */
-document.querySelectorAll('[data-cfilter]').forEach(b => {
-  b.onclick = () => {
-    cf = b.dataset.cfilter;
-    document.querySelectorAll('[data-cfilter]').forEach(x => {
-      x.classList.toggle('active', x === b);
-    });
-    renderMentor();
-  };
+document.querySelectorAll('[data-cfilter]').forEach(b=>b.onclick=()=>{
+  cf=b.dataset.cfilter;
+  document.querySelectorAll('[data-cfilter]').forEach(x=>x.classList.toggle('active',x===b));
+  renderMentor();
 });
 
-document.querySelectorAll('[data-rfilter]').forEach(b => {
-  b.onclick = () => {
-    rf = b.dataset.rfilter;
-    document.querySelectorAll('[data-rfilter]').forEach(x => {
-      x.classList.toggle('active', x === b);
-    });
-    renderReviews();
-  };
+document.querySelectorAll('[data-rfilter]').forEach(b=>b.onclick=()=>{
+  rf=b.dataset.rfilter;
+  document.querySelectorAll('[data-rfilter]').forEach(x=>x.classList.toggle('active',x===b));
+  renderReviews();
 });
 
-$('search').oninput = renderMentor;
-$('reviewSearch').oninput = renderReviews;
-$('refreshReviews').onclick = loadReviews;
-
-$('refresh').onclick = () => {
-  init();
-};
+$('search').oninput=renderMentor;
+$('reviewSearch').oninput=renderReviews;
+$('refreshReviews').onclick=loadReviews;
+$('refresh').onclick=init;
 
 renderQs();
 init();
